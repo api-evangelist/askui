@@ -1,0 +1,36 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/askui-workspace-service-openapi-original.json
+docs: https://docs.askui.com/04-reference/07-workspace-service
+authentication:
+  style: bearer-token
+  header: 'Authorization: Bearer <access-token>'
+  also: Basic apiKey scheme (Authorization header) supported
+  credential: workspace id + access token, created in AskUI Hub
+  see: authentication/askui-authentication.yml
+pagination:
+  style: cursor
+  params: [continuation_token, limit]
+  also: [skip, limit]
+  response_fields: [continuation_token]
+  note: List endpoints (agents, agent-executions, files, runs, usage) page via a
+    continuation_token cursor.
+field_expansion:
+  supported: true
+  param: expand
+  note: Selected read endpoints accept an expand query parameter to inline related
+    resources.
+filtering:
+  params: [status, tags, prefix, delimiter, start_time, end_time, workspace_ids, user_ids]
+idempotency:
+  supported: false
+  note: No Idempotency-Key header/parameter is documented or present in the OpenAPI.
+versioning:
+  style: uri-path
+  current: v1
+  see: lifecycle/askui-lifecycle.yml
+error_envelope:
+  format: 'FastAPI detail body ({"detail": ...}); 422 -> HTTPValidationError'
+  see: errors/askui-problem-types.yml
+rate_limit_signaling:
+  documented: false

@@ -1,0 +1,275 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens schedules API
+  version: 0.2.15
+tags:
+- name: schedules
+paths:
+  /api/v1/workspaces/{workspace_id}/schedules/{schedule_id}/suspend:
+    post:
+      tags:
+      - schedules
+      summary: Suspend Schedule
+      operationId: suspend_schedule_api_v1_workspaces__workspace_id__schedules__schedule_id__suspend_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: schedule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Schedule Id
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/schedules:
+    post:
+      tags:
+      - schedules
+      summary: Create Schedule
+      operationId: create_schedule_api_v1_workspaces__workspace_id__schedules_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScheduleRequestDto'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateScheduleResponseDto'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    RunnerAssignment:
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+          title: Ids
+        host:
+          $ref: '#/components/schemas/RunnerHost'
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+      type: object
+      required:
+      - host
+      title: RunnerAssignment
+    CreateScheduleRequestDto:
+      properties:
+        name:
+          type: string
+          maxLength: 63
+          minLength: 1
+          title: Name
+          default: Unnamed
+        host:
+          $ref: '#/components/schemas/RunnerHost'
+          default: ASKUI
+        runner_ids:
+          items:
+            type: string
+          type: array
+          title: Runner Ids
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+          description: Timestamp after which the schedule starts. If not specified, the schedule starts immediately.
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+        ended_after:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ended After
+          description: Number of runs (more specifically, completions) after which the schedule ends, i.e., no more runs will be scheduled. If both ended_at and ended_after are specified, the schedule will end when either condition is met. If neither is specified, the schedule will run indefinitely.
+        schedule:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Schedule
+          description: Cron expression specifying the schedule. If not specified, the schedule will run once on when started_at is reached which is now by default. end_at and ended_after will be ignored if schedule is not specified.
+        workflows:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Workflows
+          description: List of paths (not starting with '/' but relative to root of workspace) of workflows to be executed. Each string is a syntactically valid s3 object key or prefix. Cannot be empty. Strings starting with '.' will be ignored.
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+          description: Arbitrary data to be stored with the schedule which is made available to the runner when executing AskUI workflows.
+      type: object
+      title: CreateScheduleRequestDto
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    RunnerHost:
+      type: string
+      enum:
+      - SELF
+      - ASKUI
+      title: RunnerHost
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ScheduleStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - SUSPENDED
+      - ENDED
+      title: ScheduleStatus
+    CreateScheduleResponseDto:
+      properties:
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        name:
+          type: string
+          title: Name
+        status:
+          $ref: '#/components/schemas/ScheduleStatus'
+          default: ACTIVE
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+        schedule:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Schedule
+        ended_after:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Ended After
+        run_template:
+          $ref: '#/components/schemas/RunTemplate'
+        runs_count:
+          type: integer
+          title: Runs Count
+          default: 0
+      type: object
+      required:
+      - name
+      - started_at
+      - run_template
+      title: CreateScheduleResponseDto
+    RunTemplate:
+      properties:
+        workspace_id:
+          type: string
+          title: Workspace Id
+        workflows:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Workflows
+        runner_assignment:
+          $ref: '#/components/schemas/RunnerAssignment'
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - workspace_id
+      - runner_assignment
+      title: RunTemplate
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

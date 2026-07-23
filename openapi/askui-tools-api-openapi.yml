@@ -1,0 +1,137 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens tools API
+  version: 0.2.15
+tags:
+- name: tools
+paths:
+  /api/v1/tools/extract-data:
+    post:
+      tags:
+      - tools
+      summary: Extract Data
+      description: Extract data from files using a provided schema. Depending on the number of files, their size and type, and the complexity of the schema, the extraction may fail or take a while (up to multiple minutes) to complete so don't time out too early. Try making the schema less complex and/or passing less and/or smaller files.
+      operationId: extract_data_api_v1_tools_extract_data_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtractDataCommand'
+        required: true
+      responses:
+        '200':
+          description: Data extracted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtractDataResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '409':
+          description: Files not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Invalid input data or schema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+      security:
+      - Bearer: []
+      - Basic: []
+components:
+  schemas:
+    ExtractDataCommand:
+      properties:
+        filePaths:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Filepaths
+          description: 'List of file paths (or file path prefixes to be more specifically) to extract data from. If is no file at the specified paths or no files whose paths have the specified path as a prefix, the path is ignored. Only the following content types are supported: {''message/rfc822'', ''application/pdf'', ''image/webp'', ''image/png'', ''image/jpg'', ''text/plain'', ''image/gif'', ''image/jpeg''}. Files of other content types are ignored. A maximum of 1 000 files can be passed to the extraction. IMPORTANT: A file path may match multiple files so the supported number of file paths may be lower.'
+        dataSchema:
+          $ref: '#/components/schemas/JsonSchema'
+      type: object
+      required:
+      - filePaths
+      - dataSchema
+      title: ExtractDataCommand
+    JsonSchema:
+      properties:
+        title:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]+$
+          title: Title
+          default: DataToExtract
+        description:
+          type: string
+          title: Description
+          default: ''
+        type:
+          type: string
+          const: object
+          title: Type
+          default: object
+        properties:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+          type: object
+          minProperties: 1
+          title: Properties
+        required:
+          items:
+            type: string
+          type: array
+          title: Required
+      type: object
+      required:
+      - properties
+      title: JsonSchema
+    ExtractDataResponse:
+      properties:
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - data
+      title: ExtractDataResponse
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,198 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens dashboard API
+  version: 0.2.15
+tags:
+- name: dashboard
+paths:
+  /api/v1/dashboard/usage:
+    get:
+      tags:
+      - dashboard
+      summary: Aggregate Usage Events
+      description: 'List usage events sorted chronologically by timestamp. Events can be filtered by workspace, user, or access token.
+
+
+        Filter combinations:
+
+        - Multiple filters (e.g. workspace_id & user_id) use AND logic
+
+        - Multiple values for same filter (e.g. workspace_id=123&workspace_id=456) use OR logic
+
+
+        Pagination:
+
+        - Use starting_after with event IDs for cursor-based navigation
+
+        - has_more indicates if more events exist beyond limit
+
+        - total_count (optional) shows total matching events up to 100,000'
+      operationId: aggregate_usage_events_api_v1_dashboard_usage_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_ids
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid4
+          description: Filter by workspace IDs. Must contain at least one ID.
+          title: Workspace Ids
+        description: Filter by workspace IDs. Must contain at least one ID.
+      - name: start_time
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          description: Include events starting from this date (inclusive)
+          title: Start Time
+        description: Include events starting from this date (inclusive)
+      - name: end_time
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          description: Include events until this date (exclusive)
+          title: End Time
+        description: Include events until this date (exclusive)
+      - name: user_ids
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter by user IDs
+          title: User Ids
+        description: Filter by user IDs
+      responses:
+        '200':
+          description: Usage events listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageEventsAggregateResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UsageEventsAggregateResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AggregationResult'
+          type: array
+          title: Data
+          description: Aggregated usage data
+      type: object
+      required:
+      - data
+      title: UsageEventsAggregateResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AggregationResult:
+      properties:
+        workspaceId:
+          type: string
+          title: Workspaceid
+          description: Workspace ID
+        userId:
+          type: string
+          title: Userid
+          description: User ID
+        date:
+          type: string
+          title: Date
+          description: Date in YYYY-MM-DD format
+        count:
+          type: integer
+          title: Count
+          description: Count of events
+        userEmail:
+          type: string
+          format: email
+          title: Useremail
+          description: User's email address
+      type: object
+      required:
+      - workspaceId
+      - userId
+      - date
+      - count
+      - userEmail
+      title: AggregationResult
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

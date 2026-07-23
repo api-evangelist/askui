@@ -1,0 +1,286 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens runner-jobs API
+  version: 0.2.15
+tags:
+- name: runner-jobs
+paths:
+  /api/v1/runner-jobs/lease:
+    post:
+      tags:
+      - runner-jobs
+      summary: Lease
+      operationId: lease_api_v1_runner_jobs_lease_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: runner_host
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/RunnerHost'
+      - name: runner_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Runner Id
+      - name: workspace_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Workspace Id
+      - name: tags
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+          default: []
+          title: Tags
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/LeaseRunnerJobResponseDto'
+                - type: 'null'
+                title: Response Lease Api V1 Runner Jobs Lease Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/runner-jobs/ping:
+    post:
+      tags:
+      - runner-jobs
+      summary: Ping
+      operationId: ping_api_v1_runner_jobs_ping_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: ack
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Ack
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingRunnerJobResponseDto'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/runner-jobs/complete:
+    post:
+      tags:
+      - runner-jobs
+      summary: Complete
+      operationId: complete_api_v1_runner_jobs_complete_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: ack
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Ack
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompleteRunnerJobRequestDto'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LeaseRunnerJobResponseDto:
+      properties:
+        id:
+          type: string
+          title: Id
+        ack:
+          type: string
+          title: Ack
+        status:
+          $ref: '#/components/schemas/RunnerJobStatus'
+        visible:
+          type: string
+          format: date-time
+          title: Visible
+        runner_id:
+          type: string
+          title: Runner Id
+        tries:
+          type: integer
+          title: Tries
+        data:
+          $ref: '#/components/schemas/LeaseRunnerJobResponseDtoData'
+      type: object
+      required:
+      - id
+      - ack
+      - status
+      - visible
+      - runner_id
+      - tries
+      - data
+      title: LeaseRunnerJobResponseDto
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LeaseRunnerJobResponseDtoDataCredentials:
+      properties:
+        workspace_id:
+          type: string
+          title: Workspace Id
+        access_token:
+          type: string
+          title: Access Token
+      type: object
+      required:
+      - workspace_id
+      - access_token
+      title: LeaseRunnerJobResponseDtoDataCredentials
+    RunnerHost:
+      type: string
+      enum:
+      - SELF
+      - ASKUI
+      title: RunnerHost
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PingRunnerJobResponseDto:
+      properties:
+        visible:
+          type: string
+          format: date-time
+          title: Visible
+        cancel_job:
+          type: boolean
+          title: Cancel Job
+      type: object
+      required:
+      - visible
+      - cancel_job
+      title: PingRunnerJobResponseDto
+    RunnerJobStatus:
+      type: string
+      enum:
+      - PENDING
+      - RUNNING
+      - PASSED
+      - FAILED
+      - CANCELED
+      - MAX_RETRIES_EXCEEDED
+      title: RunnerJobStatus
+    LeaseRunnerJobResponseDtoData:
+      properties:
+        credentials:
+          $ref: '#/components/schemas/LeaseRunnerJobResponseDtoDataCredentials'
+        workflows:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Workflows
+        schedule_results_api_url:
+          type: string
+          title: Schedule Results Api Url
+        results_api_url:
+          type: string
+          title: Results Api Url
+        workflows_api_url:
+          type: string
+          title: Workflows Api Url
+        inference_api_url:
+          type: string
+          title: Inference Api Url
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - credentials
+      - workflows
+      - schedule_results_api_url
+      - results_api_url
+      - workflows_api_url
+      - inference_api_url
+      title: LeaseRunnerJobResponseDtoData
+    CompleteRunnerJobRequestDto:
+      properties:
+        status:
+          type: string
+          enum:
+          - CANCELED
+          - FAILED
+          - PASSED
+          title: Status
+      type: object
+      required:
+      - status
+      title: CompleteRunnerJobRequestDto
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

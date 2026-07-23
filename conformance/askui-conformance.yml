@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/askui-workspace-service-openapi-original.json
+standards:
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 securityScheme; API uses Bearer access tokens + Basic apiKey
+- id: openid-connect
+  conforms: partial
+  evidence: AskUI Hub end-user auth is via Auth0 (openid-configuration served under
+    hub.askui.com); the Workspaces API itself is bearer-token authenticated
+- id: bearer-token-auth
+  conforms: true
+  evidence: components.securitySchemes.Bearer (http/bearer)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 4xx/5xx responses use FastAPI HTTPValidationError, not application/problem+json
+- id: cursor-pagination
+  conforms: true
+  evidence: list operations use continuation_token + limit query parameters
+- id: iso27001
+  conforms: true
+  evidence: AskUI GmbH holds ISO/IEC 27001:2022 (askui.com/compliance, trust.askui.com)
+- id: gdpr
+  conforms: true
+  evidence: GDPR-aligned data processing (askui.com/compliance)

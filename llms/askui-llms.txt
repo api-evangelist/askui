@@ -1,0 +1,204 @@
+# Starter Kit
+
+## Docs
+
+- [Installation](https://docs.askui.com/01-tutorials/00-installation.md): Install AskUI and set up your development environment
+- [Your First Desktop Agent](https://docs.askui.com/01-tutorials/01-your-first-agent.md): Build your first desktop automation agent with AskUI
+- [Android Automation](https://docs.askui.com/01-tutorials/02-android-automation.md): Learn to automate Android applications with AskUI's AndroidVisionAgent
+- [Web Automation Patterns](https://docs.askui.com/01-tutorials/03-web-automation-patterns.md): Master common web automation patterns with VisionAgent
+- [Example Automations Overview](https://docs.askui.com/01-tutorials/example-automations/00-overview.md): Explore real-world automation examples showcasing AskUI's capabilities
+- [Online Casino Automation](https://docs.askui.com/01-tutorials/example-automations/01-online-casino.md): Automating complex UI interactions in an online casino application
+- [PLC Water Tank Application](https://docs.askui.com/01-tutorials/example-automations/02-plc-water-tank.md): Automating industrial control systems with drag interactions
+- [Tic Tac Toe Agent](https://docs.askui.com/01-tutorials/example-automations/03-tic-tac-toe.md): Building a game-playing AI agent with complex decision logic
+- [Android Automation](https://docs.askui.com/01-tutorials/example-automations/04-android-automation.md): Automating mobile applications on Android devices
+- [Infotainment System Testing](https://docs.askui.com/01-tutorials/example-automations/05-infotainment-systems.md): Automating automotive infotainment systems and embedded UIs
+- [Web Shopping Assistant](https://docs.askui.com/01-tutorials/example-automations/06-web-shopping.md): Automating e-commerce decisions and purchases on Amazon
+- [Uninstallation](https://docs.askui.com/01-tutorials/install/00-uninstall.md): Uninstall AskUI from your OS
+- [Windows Silent Installation](https://docs.askui.com/01-tutorials/install/01-silent-windows-uninstall.md): Install AskUI Suite silent on Windows
+- [Introduction](https://docs.askui.com/01-tutorials/tutorials-overview.md): Learn AskUI by building your first AI agent
+- [Workspace Management](https://docs.askui.com/02-how-to-guides/01-account-management/01-account-management.md): Learn how to manage your workspaces.
+- [Members Management](https://docs.askui.com/02-how-to-guides/01-account-management/02-members-management.md): Learn how to manage members and their permissions in your AskUI workspace.
+- [Usage & Billing Dashboard](https://docs.askui.com/02-how-to-guides/01-account-management/03-usage-billing-dashboard.md): Learn how to track your AskUI usage and manage billing information in the dashboard.
+- [Access Tokens](https://docs.askui.com/02-how-to-guides/01-account-management/04-tokens.md): Creating and using access tokens
+- [Billing and Invoices](https://docs.askui.com/02-how-to-guides/01-account-management/05-billing.md): Change your subscription and manage invoices
+- [Github Actions](https://docs.askui.com/02-how-to-guides/02-integrations/01-github.md): This page explains how to set up **AskUI with GitHub Actions**, including dependency setup, environment variables, test execution, and optional report generation.
+- [Gitlab CI/CD](https://docs.askui.com/02-how-to-guides/02-integrations/02-gitlab.md): This page explains how to set up and run **AskUI workflows in a CI/CD pipeline**, including dependencies, environment variables, and optional report generation, with a full example on **GitLab**.
+- [Azure DevOps](https://docs.askui.com/02-how-to-guides/02-integrations/03-azure.md): This page explains how to set up and run **AskUI workflows in Azure DevOps**, including pipeline configuration, environment variables, Docker setup, and report generation, with a full example on **GitHub**.
+- [Reporters](https://docs.askui.com/02-how-to-guides/02-integrations/06-reporters.md): This page covers **AskUI Reporters**, a package for tracking automation steps. It explains **installation, available reporters, combining multiple reporters**, and how to create custom reporters using the AskUI **Reporter interface**.
+- [Troubleshooting](https://docs.askui.com/02-how-to-guides/04-troubleshooting/00-troubleshooting-overview.md): Please use the links provided below for more information.
+- [Installation and Setup Issues](https://docs.askui.com/02-how-to-guides/04-troubleshooting/01-installation-and-setup-issues.md): Solutions for common installation and setup problems
+- [Network and Connectivity Issues](https://docs.askui.com/02-how-to-guides/04-troubleshooting/02-network-and-connectivity.md): Solutions for proxy, firewall, and network-related problems
+- [Element Detection and OCR Issues](https://docs.askui.com/02-how-to-guides/04-troubleshooting/03-element-detection-and-ocr.md): Solutions for element selection, text recognition, and detection problems
+- [Runtime and Environment Errors](https://docs.askui.com/02-how-to-guides/04-troubleshooting/05-runtime-and-environment-errors.md): Solutions for runtime errors and environment configuration issues
+- [Reporting Bugs and Getting Help](https://docs.askui.com/02-how-to-guides/04-troubleshooting/06-reporting-bugs-and-getting-help.md): How to report issues, generate error reports, and get support
+- [Current Known Issues](https://docs.askui.com/02-how-to-guides/04-troubleshooting/08-known-issues.md): Active issues and limitations in AskUI products
+- [Overview](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/00-build-ai-agents-overview.md): Learn how to build AI agents with AskUI's core capabilities
+- [Act towards goal](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/01-act-towards-goal.md): Use the act() command to accomplish tasks with natural language
+- [Select UI Elements](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/02-select-elements.md): How to select and interact with UI elements using AskUI
+- [Interact with Elements](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/06-interact-with-elements.md): Learn how to interact with UI elements using AskUI's powerful tools and actions
+- [Cards & Tiles](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/cards.md): Extract data from card layouts and tile grids
+- [Lists & Navigation](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/lists-navigation.md): Extract sidebar items, menu options, and hierarchical navigation structures
+- [Extracting Numbers](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/numbers.md): Get numeric values like counts, prices, and metrics from UI
+- [Extract Data from UI Overview](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/overview.md): Learn how to extract various types of data from UI elements using AskUI's get() method
+- [Table Data Extraction](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/tables.md): Extract structured data from tables in your UI
+- [Tab Information](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/tabs.md): Extract tab data and manage tab-based navigation
+- [Text Extraction](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/text-extraction.md): Extract text content from UI elements
+- [Yes/No Questions](https://docs.askui.com/02-how-to-guides/05-build-ai-agents/extract-data-from-ui/yes-no-questions.md): Get boolean answers about UI state and conditions
+- [Configure Different Models](https://docs.askui.com/02-how-to-guides/06-configure-different-models.md): Step-by-step guide to configure and use different AI models with AskUI
+- [Overview](https://docs.askui.com/02-how-to-guides/how-to-overview.md): Practical solutions for common AskUI tasks
+- [Agent Types](https://docs.askui.com/03-explanation/01-foundations/agent-types.md): Understand AskUI's specialized agent types for different platforms
+- [Agents](https://docs.askui.com/03-explanation/01-foundations/agents.md): Understand the foundational concept of agents in AskUI
+- [AI Model Architecture](https://docs.askui.com/03-explanation/01-foundations/ai-models.md): Understanding AskUI's multi-layered AI system and how different models work together
+- [Automation Paradigms](https://docs.askui.com/03-explanation/01-foundations/automation-paradigms/01-overview.md): Understand AskUI's single-step commands and agentic instruction approaches
+- [Agentic Instructions](https://docs.askui.com/03-explanation/01-foundations/automation-paradigms/02-agentic-instructions.md): The recommended approach for most automation tasks
+- [Single-Step Commands](https://docs.askui.com/03-explanation/01-foundations/automation-paradigms/03-single-step-commands.md): Use explicit commands when agentic instructions aren't reliable enough
+- [Platform Overview](https://docs.askui.com/03-explanation/01-foundations/foundations-overview.md): AskUI capabilities, features, and comparison with other AI automation solutions
+- [Workspace Architecture](https://docs.askui.com/03-explanation/01-foundations/workspace-architecture.md): Understand the data model, entities, and role-based access control behind AskUI workspaces
+- [Element Selection](https://docs.askui.com/03-explanation/02-best-practices/01-element-selection/01-element-selection.md): Best practices for finding and selecting UI elements with AskUI
+- [Interactions](https://docs.askui.com/03-explanation/02-best-practices/03-interactions.md): Best practices for interacting with UI elements in AskUI
+- [Effective Agentic Instructions](https://docs.askui.com/03-explanation/02-best-practices/04-effective-agentic-instructions.md): Best practices for using goal-based automation with AskUI
+- [Reporting and Logging](https://docs.askui.com/03-explanation/02-best-practices/05-reporting-logging.md): Learn how to monitor and debug your AskUI automation workflows
+- [Improve Model Performance](https://docs.askui.com/03-explanation/02-best-practices/06-improve-model-performance.md): Learn about re-teaching vs training and how to improve model performance for your specific needs.
+- [Frequently Asked Questions](https://docs.askui.com/03-explanation/04-faq/faq.md): Common questions about AskUI
+- [Glossary](https://docs.askui.com/03-explanation/05-glossary.md): This page provides a glossary of key AskUI terms and definitions to help you understand the core concepts and components of the platform.
+- [Overview](https://docs.askui.com/03-explanation/explanation-overview.md): Learn the concepts behind AI-powered UI automation
+- [Agent](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/agent.md)
+- [Android Vision Agent](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/android-vision-agent.md)
+- [Locators](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/locators.md)
+- [Reporting](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/reporting.md)
+- [Retry](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/retry.md)
+- [Tools](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/tools.md)
+- [Types](https://docs.askui.com/04-reference/01-agent-frameworks/02-python/02-vision-agent-api/types.md)
+- [AskUI-AddProjectSettingsIfNotExist](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-AddProjectSettingsIfNotExist.md)
+- [AskUI-BuildErrorReport](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-BuildErrorReport.md)
+- [AskUI-CompressErrorReport](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-CompressErrorReport.md)
+- [AskUI-NewErrorReport](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-NewErrorReport.md)
+- [AskUI-ShowProcess](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-ShowProcess.md)
+- [AskUI-StopProcess](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-StopProcess.md)
+- [AskUI-SubmitErrorReport](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Debug/AskUI-SubmitErrorReport.md)
+- [AskUI-AddPlugin](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-AddPlugin.md)
+- [AskUI-ImportDebugCommands](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-ImportDebugCommands.md)
+- [AskUI-ImportExperimentalCommands](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-ImportExperimentalCommands.md)
+- [AskUI-NewProject](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-NewProject.md)
+- [AskUI-RemovePlugin](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-RemovePlugin.md)
+- [AskUI-RemoveSettings](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-RemoveSettings.md)
+- [AskUI-RunProject](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-RunProject.md)
+- [AskUI-SetSettings](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-SetSettings.md)
+- [AskUI-ShowAvailableCommands](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-ShowAvailableCommands.md)
+- [AskUI-ShowPlugins](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-ShowPlugins.md)
+- [AskUI-ShowSettings](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-ShowSettings.md)
+- [AskUI-ShowVersions](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-ShowVersions.md)
+- [AskUI-TestConnection](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/ADE/Public/AskUI-TestConnection.md)
+- [AskUI-AddAgentOSService](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUICoreService/Experimental/AskUI-AddAgentOSService.md)
+- [AskUI-RemoveAgentOSService](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUICoreService/Experimental/AskUI-RemoveAgentOSService.md)
+- [AskUI-StartOCRTeaching](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIOCRTeaching/Public/AskUI-StartOCRTeaching.md)
+- [AskUI-StartRemoteDeviceSetupTool](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIRemoteDeviceSetupTool/Experimental/AskUI-StartRemoteDeviceSetupTool.md)
+- [AskUI-NewAIElement](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIRemoteDeviceSnippingTool/Public/AskUI-NewAIElement.md)
+- [AskUI-NewAnnotationsForTraining](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIRemoteDeviceSnippingTool/Public/AskUI-NewAnnotationsForTraining.md)
+- [AskUI-OpenAIElement](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIRemoteDeviceSnippingTool/Public/AskUI-OpenAIElement.md)
+- [AskUI-RemoveAIElement](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIRemoteDeviceSnippingTool/Public/AskUI-RemoveAIElement.md)
+- [AskUI-ShowAIElement](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIRemoteDeviceSnippingTool/Public/AskUI-ShowAIElement.md)
+- [AskUI-DisableScreensaver](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIWindowsTools/Public/AskUI-DisableScreensaver.md)
+- [AskUI-EnableLongPath](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIWindowsTools/Public/AskUI-EnableLongPath.md)
+- [AskUI-SetAsSystemInstallation](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIWindowsTools/Public/AskUI-SetAsSystemInstallation.md)
+- [AskUI-TestLongPathSupport](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/AskUIWindowsTools/Public/AskUI-TestLongPathSupport.md)
+- [AskUI-RemoveLocalProxySettings](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/PxProxy/Public/AskUI-RemoveLocalProxySettings.md)
+- [AskUI-SetLocalProxySettings](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/PxProxy/Public/AskUI-SetLocalProxySettings.md)
+- [AskUI-StartLocalProxy](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/PxProxy/Public/AskUI-StartLocalProxy.md)
+- [AskUI-StopLocalProxy](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/PxProxy/Public/AskUI-StopLocalProxy.md)
+- [AskUI-EnablePythonEnvironment](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/Python/Public/AskUI-EnablePythonEnvironment.md)
+- [AskUI-NewPythonEnvironment](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/Python/Public/AskUI-NewPythonEnvironment.md)
+- [AskUI-RemovePythonEnvironment](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/Python/Public/AskUI-RemovePythonEnvironment.md)
+- [AskUI-ShowInstalledPythonPackageVersion](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/Python/Public/AskUI-ShowInstalledPythonPackageVersion.md)
+- [AskUI-ShowPythonEnvironments](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/Python/Public/AskUI-ShowPythonEnvironments.md)
+- [AskUI-ShowControllers](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/UIController/Public/AskUI-ShowControllers.md)
+- [AskUI-StartController](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/UIController/Public/AskUI-StartController.md)
+- [AskUI-StopControllers](https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite/UIController/Public/AskUI-StopControllers.md)
+- [Create Access Token](https://docs.askui.com/04-reference/07-workspace-service/access-tokens/create-access-token.md)
+- [Delete Access Token](https://docs.askui.com/04-reference/07-workspace-service/access-tokens/delete-access-token.md)
+- [List Access Tokens](https://docs.askui.com/04-reference/07-workspace-service/access-tokens/list-access-tokens.md)
+- [Lookup Global Access Token ID](https://docs.askui.com/04-reference/07-workspace-service/access-tokens/lookup-global-access-token-id.md): Converts a sensitive global-level access token into its stable identifier (access_token_id). The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token o…
+- [Lookup Workspace Access Token ID](https://docs.askui.com/04-reference/07-workspace-service/access-tokens/lookup-workspace-access-token-id.md): Converts a sensitive workspace-level access token into its stable identifier (access_token_id) within the specified workspace. The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g.,…
+- [Create Agent Execution](https://docs.askui.com/04-reference/07-workspace-service/agent-executions/create-agent-execution.md)
+- [List Agent Executions](https://docs.askui.com/04-reference/07-workspace-service/agent-executions/list-agent-executions.md): List all agent executions matching the query parameters sorted anti-chronologically by when they were last updated (`updated_at`).
+- [Update Agent Execution](https://docs.askui.com/04-reference/07-workspace-service/agent-executions/update-agent-execution.md)
+- [Create Agent](https://docs.askui.com/04-reference/07-workspace-service/agents/create-agent.md)
+- [List Agents](https://docs.askui.com/04-reference/07-workspace-service/agents/list-agents.md): List all agents matching the query parameters sorted anti-chronologically by when they were last updated (`updated_at`).
+- [Update Agent](https://docs.askui.com/04-reference/07-workspace-service/agents/update-agent.md)
+- [Create Customer Portal Session](https://docs.askui.com/04-reference/07-workspace-service/billing/create-customer-portal-session.md)
+- [Get workspace subscription details](https://docs.askui.com/04-reference/07-workspace-service/billing/get-workspace-subscription.md): Retrieves the subscription details for the workspace, including Stripe product information.
+- [Delete File](https://docs.askui.com/04-reference/07-workspace-service/files/delete-file.md): Delete a file at the specified path.
+- [List Files](https://docs.askui.com/04-reference/07-workspace-service/files/list-files.md): List files.
+- [Set Signed Cookies](https://docs.askui.com/04-reference/07-workspace-service/files/set-signed-cookies.md): Set http-only, secure (signed) cookies for accessing (only READ access) files via AWS CloudFront across all accessible workspaces. If no workspace id is provided, no cookies will be set.
+- [Upload File](https://docs.askui.com/04-reference/07-workspace-service/files/upload-file.md): Upload a file (max. 5 GB) to the specified path.
+- [Complete](https://docs.askui.com/04-reference/07-workspace-service/runner-jobs/complete.md)
+- [Lease](https://docs.askui.com/04-reference/07-workspace-service/runner-jobs/lease.md)
+- [Ping](https://docs.askui.com/04-reference/07-workspace-service/runner-jobs/ping.md)
+- [List Runs](https://docs.askui.com/04-reference/07-workspace-service/runs/list-runs.md)
+- [Create Schedule](https://docs.askui.com/04-reference/07-workspace-service/schedules/create-schedule.md)
+- [Suspend Schedule](https://docs.askui.com/04-reference/07-workspace-service/schedules/suspend-schedule.md)
+- [List usage events](https://docs.askui.com/04-reference/07-workspace-service/usage/list-usage-events.md)
+- [Create Workspace Membership](https://docs.askui.com/04-reference/07-workspace-service/workspace-memberships/create-workspace-membership.md)
+- [Delete Workspace Membership](https://docs.askui.com/04-reference/07-workspace-service/workspace-memberships/delete-workspace-membership.md)
+- [List Workspace Memberships](https://docs.askui.com/04-reference/07-workspace-service/workspace-memberships/list-workspace-memberships.md)
+- [Create Workspace](https://docs.askui.com/04-reference/07-workspace-service/workspaces/create-workspace.md)
+- [Delete Workspace](https://docs.askui.com/04-reference/07-workspace-service/workspaces/delete-workspace.md)
+- [Update Workspace Name](https://docs.askui.com/04-reference/07-workspace-service/workspaces/update-workspace-name.md)
+- [AI Models](https://docs.askui.com/04-reference/ai-models.md): Reference guide for available AI models and their specifications
+- [Environment Variables](https://docs.askui.com/04-reference/environment-variables.md): These are the environment variables for AskUI
+- [Network Requirements](https://docs.askui.com/04-reference/network-requirements.md): Network configuration and connectivity requirements for AskUI
+- [System Requirements](https://docs.askui.com/04-reference/system-requirements.md): Hardware and software requirements for running AskUI
+- [Agentic Instructions Example](https://docs.askui.com/05-additional-resources/agentic-instructions-example.md): Example of using the agentic approach for Android UI testing
+- [AskUI Suite 25.10.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-10-1-release-notes.md): Release notes for AskUI Suite version 25.10.1
+- [AskUI Suite 25.11.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-11-1-release-notes.md): Release notes for AskUI Suite version 25.11.1
+- [AskUI Suite 25.2.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-2-1-release-notes.md): Release notes for AskUI Suite version 25.2.1
+- [AskUI Suite 25.3.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-3-1-release-notes.md): Release notes for AskUI Suite version 25.3.1
+- [AskUI Suite 25.4.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-4-1-release-notes.md): Release notes for AskUI Suite version 25.4.1
+- [AskUI Suite 25.6.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-6-1-release-notes.md): Release notes for AskUI Suite version 25.6.1
+- [AskUI Suite 25.6.2](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-6-2-release-notes.md): Release notes for AskUI Suite version 25.6.2
+- [AskUI Suite 25.6.3](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-6-3-release-notes.md): Release notes for AskUI Suite version 25.6.3
+- [AskUI Suite 25.7.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-7-1-release-notes.md): Release notes for AskUI Suite version 25.7.1
+- [AskUI Suite 25.7.2](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-7-2-release-notes.md): Release notes for AskUI Suite version 25.7.2
+- [AskUI Suite 25.8.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-8-1-release-notes.md): Release notes for AskUI Suite version 25.8.1
+- [AskUI Suite 25.8.2](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-8-2-release-notes.md): Release notes for AskUI Suite version 25.8.2
+- [AskUI Suite 25.9.2](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-25-9-2-release-notes.md): Release notes for AskUI Suite version 25.9.2
+- [AskUI Suite 26.1.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-26-1-1-release-notes.md): Release notes for AskUI Suite version 26.1.1
+- [AskUI Suite 26.2.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-26-2-1-release-notes.md): Release notes for AskUI Suite version 26.2.1
+- [AskUI Suite 26.3.1](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-26-3-1-release-notes.md): Release notes for AskUI Suite version 26.3.1
+- [Old Release Notes (AskUI Suite < 24.9.1)](https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite/askui-suite-old-release-notes.md)
+- [Python SDK](https://docs.askui.com/05-additional-resources/release-notes/02-agent-frameworks/python-vision-agent-release-notes.md)
+- [Typescript SDK](https://docs.askui.com/05-additional-resources/release-notes/02-agent-frameworks/typescirpt-adk-release-notes.md)
+- [Status Page](https://docs.askui.com/05-additional-resources/status-page.md)
+- [Trust Center](https://docs.askui.com/05-additional-resources/trust-center.md)
+- [CI/CD Integration](https://docs.askui.com/06-agent-os/how-to-guides/deployment-ci.md): Run AgentOS unattended in pipelines, on VMs, or with connected devices.
+- [Local Development](https://docs.askui.com/06-agent-os/how-to-guides/deployment-local.md): Deploy AgentOS on your own machine for desktop, mobile, or hardware-based automation.
+- [Multi-Device Setups](https://docs.askui.com/06-agent-os/how-to-guides/deployment-multi-device.md): Control multiple targets from a single agent or pipeline.
+- [Overview](https://docs.askui.com/06-agent-os/how-to-guides/deployment-scenarios.md): Find the right AgentOS deployment for your target — local dev, CI/CD, or multi-device.
+- [Troubleshooting](https://docs.askui.com/06-agent-os/how-to-guides/troubleshooting.md): Diagnose and fix common AgentOS issues.
+- [Overview](https://docs.askui.com/06-agent-os/index.md): What is AgentOS, why it exists, and the key concepts you need to know.
+- [OS Service (exe)](https://docs.askui.com/06-agent-os/installation/service.md): Install AgentOS as a Windows system service for enterprise and CI/CD.
+- [Silent (exe)](https://docs.askui.com/06-agent-os/installation/silent.md): Silent installation parameters and runtime configuration for the AgentOS Windows service.
+- [Standalone (pip)](https://docs.askui.com/06-agent-os/installation/standalone.md): Install AgentOS in standalone mode via pip.
+- [Enterprise Features](https://docs.askui.com/06-agent-os/reference/enterprise.md): Security, compliance, and enterprise-grade capabilities for AgentOS.
+- [System Requirements](https://docs.askui.com/06-agent-os/reference/system-requirements.md): Hardware, software, and platform requirements for AgentOS.
+- [PyPI Release History](https://docs.askui.com/06-agent-os/release-notes/pypi-history.md)
+- [Release Notes](https://docs.askui.com/06-agent-os/release-notes/release-notes.md): AgentOS versioning scheme and release notes.
+- [Capabilities](https://docs.askui.com/06-agent-os/understanding/capabilities.md): A unified overview of all AgentOS capabilities across control modes and runtime modes.
+- [AgentOS vs Automation Libraries](https://docs.askui.com/06-agent-os/understanding/comparison/vs-automation-libs.md): How AgentOS differs from PyAutoGUI, RobotJS, xdotool, and other open-source automation tools.
+- [AgentOS vs Remote Control Software](https://docs.askui.com/06-agent-os/understanding/comparison/vs-remote-control.md): How AgentOS differs from RDP, TeamViewer, UltraVNC, RustDesk, and other remote control tools.
+- [Concepts](https://docs.askui.com/06-agent-os/understanding/concepts.md): The key concepts behind AgentOS — how control modes, runtime modes, and capabilities fit together.
+- [Control Modes](https://docs.askui.com/06-agent-os/understanding/control-modes.md): How AgentOS connects to and controls target machines — Host Mode vs Companion Mode.
+- [Runtime Modes](https://docs.askui.com/06-agent-os/understanding/runtime-modes.md): Standalone vs OS Service — choose the right AgentOS runtime mode.
+- [Welcome to AskUI](https://docs.askui.com/index.md): Build AI agents that control desktop and mobile devices
+
+## OpenAPI Specs
+
+- [openapi](https://workspaces.askui.com/openapi.json)
+- [package](https://docs.askui.com/package.json)
+- [package-lock](https://docs.askui.com/package-lock.json)
+
+## Optional
+
+- [TypeScript Docs](https://docs-ts.askui.com)
+- [Status Page](https://status.askui.com)
+- [Trust Center](https://trust.askui.com)

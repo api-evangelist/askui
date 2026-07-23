@@ -1,0 +1,19 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/askui-workspace-service-openapi-original.json
+skills:
+- file: askui-provision-workspace-and-token.md
+  name: Provision a workspace and mint an access token
+  api: openapi/askui-workspace-service-openapi-original.json
+  operations:
+  - create_workspace_api_v1_workspaces_post
+  - create_access_token_api_v1_workspaces__workspace_id__access_tokens_post
+  - create_workspace_membership_api_v1_workspace_memberships_post
+- file: askui-run-agent-execution.md
+  name: Create an agent and run an execution
+  api: openapi/askui-workspace-service-openapi-original.json
+  operations:
+  - create_agent_api_v1_agents_post
+  - create_agent_execution_api_v1_agent_executions_post
+  - list_agent_executions_api_v1_agent_executions_get
+  - update_agent_execution_api_v1_agent_executions__agent_execution_id__patch

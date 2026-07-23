@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite
+scheme: calver
+current: '26.3.1'
+product: AskUI Suite
+entries:
+- version: '26.3.1'
+  highlights:
+  - Windows support broadened to Windows 10 version 1511 and newer (previously 22H2+)
+  - AgentOS now supports Windows Server 2016/2019
+  - Core upgraded to 26.2.2; NodeJS 22.17.0; Python 3.13.1
+  - TypeScript ADK 0.31.0; Python Vision Agent 0.23.0
+  breaking: false
+- version: '26.2.1'
+  breaking: false
+- version: '26.1.1'
+  breaking: false
+- version: '25.11.1'
+  breaking: false
+- version: '25.10.1'
+  breaking: false
+note: AskUI Suite ships on a CalVer train; AgentOS keeps a separate release-notes
+  stream at https://docs.askui.com/06-agent-os/release-notes/release-notes. The
+  Workspaces API is versioned by uri-path (v1) independently of the Suite.

@@ -1,0 +1,627 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens API
+  version: 0.2.15
+tags:
+- name: access-tokens
+paths:
+  /api/v1/access-tokens:
+    post:
+      tags:
+      - access-tokens
+      summary: Create Access Token
+      operationId: create_access_token_api_v1_access_tokens_post
+      security:
+      - Bearer: []
+      - Basic: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubjectAccessTokenCommand'
+      responses:
+        '201':
+          description: Access token created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSubjectAccessTokenResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - access-tokens
+      summary: List Access Tokens
+      operationId: list_access_tokens_api_v1_access_tokens_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: subject_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subject Id
+      - name: skip
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Skip
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 100
+          title: Limit
+      responses:
+        '200':
+          description: Access tokens fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSubjectAccessTokensResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/access-tokens/{token_id}:
+    delete:
+      tags:
+      - access-tokens
+      summary: Delete Access Token
+      operationId: delete_access_token_api_v1_access_tokens__token_id__delete
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: token_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Token Id
+      responses:
+        '204':
+          description: Access token deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '404':
+          description: Access token not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/access-tokens/lookup:
+    post:
+      tags:
+      - access-tokens
+      summary: Lookup Global Access Token ID
+      description: Converts a sensitive global-level access token into its stable identifier (access_token_id). The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token or retrieve usage for the token.
+      operationId: lookup_access_token_api_v1_access_tokens_lookup_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupAccessTokenCommand'
+        required: true
+      responses:
+        '200':
+          description: Access token ID lookup successful. Returns a stable, non-sensitive identifier for the provided access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupAccessTokenResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '404':
+          description: Access token not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - Bearer: []
+      - Basic: []
+  /api/v1/workspaces/{workspace_id}/access-tokens:
+    post:
+      tags:
+      - access-tokens
+      summary: Create Access Token
+      operationId: create_access_token_api_v1_workspaces__workspace_id__access_tokens_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceAccessTokenRequestDto'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceAccessTokenResponseDto'
+        '404':
+          description: Workspace membership not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Workspace membership not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - access-tokens
+      summary: List Access Tokens
+      operationId: list_access_tokens_api_v1_workspaces__workspace_id__access_tokens_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListAccessTokenResponseDto'
+                title: Response List Access Tokens Api V1 Workspaces  Workspace Id  Access Tokens Get
+        '404':
+          description: Workspace membership not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Workspace membership not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/access-tokens/{token_id}:
+    delete:
+      tags:
+      - access-tokens
+      summary: Delete Access Token
+      operationId: delete_access_token_api_v1_workspaces__workspace_id__access_tokens__token_id__delete
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      - name: token_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Token Id
+      responses:
+        '204':
+          description: Successful Response
+        '404':
+          description: Workspace membership not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Workspace membership not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/access-tokens/lookup:
+    post:
+      tags:
+      - access-tokens
+      summary: Lookup Workspace Access Token ID
+      description: Converts a sensitive workspace-level access token into its stable identifier (access_token_id) within the specified workspace. The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token or retrieve usage for the token.
+      operationId: lookup_workspace_access_token_api_v1_workspaces__workspace_id__access_tokens_lookup_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupWorkspaceAccessTokenCommand'
+      responses:
+        '200':
+          description: Access token ID lookup successful. Returns a stable, non-sensitive identifier for the provided workspace access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupWorkspaceAccessTokenResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '404':
+          description: Access token not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    LookupWorkspaceAccessTokenResponseDto:
+      properties:
+        accessTokenId:
+          type: string
+          format: uuid4
+          title: Accesstokenid
+      type: object
+      required:
+      - accessTokenId
+      title: LookupWorkspaceAccessTokenResponseDto
+    CreateWorkspaceAccessTokenRequestDto:
+      properties:
+        name:
+          type: string
+          maxLength: 128
+          minLength: 1
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - name
+      title: CreateWorkspaceAccessTokenRequestDto
+    CreateSubjectAccessTokenCommand:
+      properties:
+        name:
+          type: string
+          maxLength: 128
+          minLength: 1
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - name
+      title: CreateSubjectAccessTokenCommand
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LookupAccessTokenResponseDto:
+      properties:
+        accessTokenId:
+          type: string
+          format: uuid4
+          title: Accesstokenid
+      type: object
+      required:
+      - accessTokenId
+      title: LookupAccessTokenResponseDto
+    AccessTokenResponseDto:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - id
+      - name
+      title: AccessTokenResponseDto
+    ListAccessTokenResponseDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - id
+      - name
+      - createdAt
+      title: ListAccessTokenResponseDto
+    LookupWorkspaceAccessTokenCommand:
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+          title: Accesstoken
+      type: object
+      required:
+      - accessToken
+      title: LookupWorkspaceAccessTokenCommand
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateWorkspaceAccessTokenResponseDto:
+      properties:
+        privateToken:
+          $ref: '#/components/schemas/AccessTokenResponseDto'
+        tokenString:
+          type: string
+          title: Tokenstring
+      type: object
+      required:
+      - privateToken
+      - tokenString
+      title: CreateWorkspaceAccessTokenResponseDto
+    LookupAccessTokenCommand:
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+          title: Accesstoken
+      type: object
+      required:
+      - accessToken
+      title: LookupAccessTokenCommand
+    SubjectAccessTokenResponseDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        name:
+          type: string
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+        creatorId:
+          type: string
+          title: Creatorid
+      type: object
+      required:
+      - name
+      - expiresAt
+      - creatorId
+      title: SubjectAccessTokenResponseDto
+    CreateSubjectAccessTokenResponseDto:
+      properties:
+        token:
+          $ref: '#/components/schemas/SubjectAccessTokenResponseDto'
+        tokenString:
+          type: string
+          title: Tokenstring
+      type: object
+      required:
+      - token
+      - tokenString
+      title: CreateSubjectAccessTokenResponseDto
+    ListSubjectAccessTokensResponseDto:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SubjectAccessTokenResponseDto'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ListSubjectAccessTokensResponseDto
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

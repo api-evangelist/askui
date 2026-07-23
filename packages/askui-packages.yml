@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/askui
+packages:
+- language: python
+  registry: pypi
+  name: askui
+  url: https://pypi.org/project/askui/
+  install: pip install askui
+  version: 0.39.0
+  summary: Automate computer tasks in Python (AskUI Vision Agent)
+  repository: https://github.com/askui/python-sdk
+  official: true
+- language: javascript
+  registry: npm
+  name: askui
+  url: https://www.npmjs.com/package/askui
+  install: npm install askui
+  version: 0.33.0
+  summary: Reliable, automated end-to-end testing based on what is shown on screen
+  repository: https://github.com/askui/askui
+  official: true
+- language: python
+  registry: pypi
+  name: idb-mcp
+  url: https://pypi.org/project/idb-mcp/
+  install: pip install idb-mcp
+  version: 0.1.2
+  summary: MCP server + Python module wrapping Facebook IDB to control iOS simulators
+  repository: https://github.com/askui/idb-mcp
+  official: true

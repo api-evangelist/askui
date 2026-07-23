@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/askui-workspace-service-openapi-original.json
+format: http-status
+envelope: 'FastAPI error envelope — {"detail": ...}; 422 uses HTTPValidationError with
+  detail[] of {loc, msg, type}'
+note: The AskUI Workspaces API does not emit application/problem+json (RFC 9457); errors
+  are standard HTTP status codes with a FastAPI detail body.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: Malformed request (3 operations)
+- status: 401
+  title: Unauthorized
+  meaning: Missing or invalid access token (11 operations)
+- status: 403
+  title: Forbidden
+  meaning: Access token lacks permission for the workspace/resource (8 operations)
+- status: 404
+  title: Not Found
+  meaning: Referenced resource (agent, workspace, token, file, membership) does not
+    exist (13 operations)
+- status: 409
+  title: Conflict
+  meaning: State conflict (e.g. duplicate membership/workspace) (5 operations)
+- status: 413
+  title: Payload Too Large
+  meaning: Upload exceeds the file size limit (upload_file)
+- status: 422
+  title: Unprocessable Entity
+  meaning: 'Request validation failed; body is HTTPValidationError with detail[] of
+    {loc, msg, type} (44 operations)'
+- status: 500
+  title: Internal Server Error
+  meaning: Unexpected server error (15 operations)

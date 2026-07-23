@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: searched
+probe: true
+source: https://www.askui.com/compliance
+url: https://trust.askui.com
+compliance_page: https://www.askui.com/compliance
+certifications:
+- ISO/IEC 27001:2022
+- GDPR
+evidence:
+- source: https://www.askui.com:443/compliance
+  keywords:
+  - iso 27001
+  - iso/iec 27001
+  - trust center
+  - gdpr

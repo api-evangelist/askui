@@ -1,0 +1,341 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens billing API
+  version: 0.2.15
+tags:
+- name: billing
+paths:
+  /api/v1/workspaces/{workspace_id}/billing/customer-portal-session:
+    post:
+      tags:
+      - billing
+      summary: Create Customer Portal Session
+      operationId: create_customer_portal_session_api_v1_workspaces__workspace_id__billing_customer_portal_session_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomerPortalSessionRequestDto'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomerPortalSessionResponseDto'
+        '404':
+          description: Billing details not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Billing details not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/billing/subscription:
+    get:
+      tags:
+      - billing
+      summary: Get workspace subscription details
+      description: Retrieves the subscription details for the workspace, including Stripe product information.
+      operationId: get_workspace_subscription_api_v1_workspaces__workspace_id__billing_subscription_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSubscriptionResponseDto'
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Subscription not found
+        '500':
+          description: Internal server error when retrieving subscription data
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/billing/prices:
+    get:
+      tags:
+      - billing
+      summary: List available subscription prices
+      description: Returns the list of prices configured for checkout, fetched from Stripe.
+      operationId: list_prices_api_v1_workspaces__workspace_id__billing_prices_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPricesResponseDto'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/billing/checkout:
+    post:
+      tags:
+      - billing
+      summary: Create a Stripe Checkout Session
+      description: Creates a Checkout Session for a trial-only workspace to purchase a subscription plan. The workspace must not already have an active Stripe subscription.
+      operationId: create_checkout_session_api_v1_workspaces__workspace_id__billing_checkout_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCheckoutSessionCommand'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCheckoutSessionResponseDto'
+        '404':
+          description: Billing details not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Billing details not found
+        '409':
+          description: Workspace already has an active Stripe subscription
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    PriceItemDto:
+      properties:
+        id:
+          type: string
+          title: Id
+        productName:
+          type: string
+          title: Productname
+        unitAmount:
+          type: integer
+          title: Unitamount
+        currency:
+          type: string
+          title: Currency
+        recurringInterval:
+          type: string
+          title: Recurringinterval
+        recurringIntervalCount:
+          type: integer
+          title: Recurringintervalcount
+        productAllowedUsage:
+          type: integer
+          title: Productallowedusage
+      type: object
+      required:
+      - id
+      - productName
+      - unitAmount
+      - currency
+      - recurringInterval
+      - recurringIntervalCount
+      - productAllowedUsage
+      title: PriceItemDto
+      description: Single price entry returned to the frontend.
+    SubscriptionItemDto:
+      properties:
+        productAllowedUsage:
+          type: integer
+          title: Productallowedusage
+      type: object
+      required:
+      - productAllowedUsage
+      title: SubscriptionItemDto
+      description: Subscription item with only the requested fields
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CreateCustomerPortalSessionRequestDto:
+      properties:
+        returnUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Returnurl
+      type: object
+      required:
+      - returnUrl
+      title: CreateCustomerPortalSessionRequestDto
+    CreateCheckoutSessionResponseDto:
+      properties:
+        sessionUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Sessionurl
+      type: object
+      required:
+      - sessionUrl
+      title: CreateCheckoutSessionResponseDto
+    CreateCheckoutSessionCommand:
+      properties:
+        priceId:
+          type: string
+          title: Priceid
+        returnUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Returnurl
+      type: object
+      required:
+      - priceId
+      - returnUrl
+      title: CreateCheckoutSessionCommand
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GetSubscriptionResponseDto:
+      properties:
+        currentPeriodStart:
+          type: string
+          format: date-time
+          title: Currentperiodstart
+        currentPeriodEnd:
+          type: string
+          format: date-time
+          title: Currentperiodend
+        items:
+          items:
+            $ref: '#/components/schemas/SubscriptionItemDto'
+          type: array
+          title: Items
+          default: []
+        isTrial:
+          type: boolean
+          title: Istrial
+          default: false
+      type: object
+      required:
+      - currentPeriodStart
+      - currentPeriodEnd
+      title: GetSubscriptionResponseDto
+      description: Simplified response DTO with only the requested fields
+    CreateCustomerPortalSessionResponseDto:
+      properties:
+        sessionUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Sessionurl
+      type: object
+      required:
+      - sessionUrl
+      title: CreateCustomerPortalSessionResponseDto
+    ListPricesResponseDto:
+      properties:
+        prices:
+          items:
+            $ref: '#/components/schemas/PriceItemDto'
+          type: array
+          title: Prices
+      type: object
+      required:
+      - prices
+      title: ListPricesResponseDto
+      description: Response containing all available prices.
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

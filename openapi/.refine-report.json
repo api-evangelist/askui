@@ -1,0 +1,42 @@
+{
+  "provider": "askui",
+  "sources": [
+    "askui-access-tokens-api-openapi.yml",
+    "askui-agent-executions-api-openapi.yml",
+    "askui-agents-api-openapi.yml",
+    "askui-analytics-api-openapi.yml",
+    "askui-auth-api-openapi.yml",
+    "askui-billing-api-openapi.yml",
+    "askui-dashboard-api-openapi.yml",
+    "askui-files-api-openapi.yml",
+    "askui-invites-api-openapi.yml",
+    "askui-runner-jobs-api-openapi.yml",
+    "askui-runs-api-openapi.yml",
+    "askui-schedules-api-openapi.yml",
+    "askui-tools-api-openapi.yml",
+    "askui-workspace-memberships-api-openapi.yml",
+    "askui-workspaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "askui-access-tokens-api-openapi.yml",
+    "askui-agent-executions-api-openapi.yml",
+    "askui-agents-api-openapi.yml",
+    "askui-analytics-api-openapi.yml",
+    "askui-auth-api-openapi.yml",
+    "askui-billing-api-openapi.yml",
+    "askui-dashboard-api-openapi.yml",
+    "askui-files-api-openapi.yml",
+    "askui-invites-api-openapi.yml",
+    "askui-runner-jobs-api-openapi.yml",
+    "askui-runs-api-openapi.yml",
+    "askui-schedules-api-openapi.yml",
+    "askui-tools-api-openapi.yml",
+    "askui-workspace-memberships-api-openapi.yml",
+    "askui-workspaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

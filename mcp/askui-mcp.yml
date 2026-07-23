@@ -1,0 +1,55 @@
+generated: '2026-07-18'
+method: searched
+status: published
+source: https://github.com/askui/idb-mcp
+servers:
+- name: idb-mcp
+  description: Open-source AskUI MCP server + Python library wrapping Facebook IDB
+    to control iOS simulators (device management, tap/swipe/type, screenshots).
+  transport: [stdio, http, sse]
+  runtime: fastmcp
+  install: pip install idb-mcp
+  package: https://pypi.org/project/idb-mcp/
+  repository: https://github.com/askui/idb-mcp
+  platform: macOS only (iOS simulators)
+  tools:
+  - list_devices
+  - select_device
+  - boot_device
+  - shutdown_device
+  - screenshot
+  - tap
+  - swipe
+  - type_text
+  - tap_key
+  - tap_button
+  - screen_size
+  - describe_view
+# Candidate tools derived from the AskUI Workspaces API (not an official MCP server
+# for this API — one tool per OpenAPI operation, for reference only).
+candidate:
+  method: derived
+  status: candidate
+  source: openapi/askui-workspace-service-openapi-original.json
+  server:
+    name: askui-workspaces
+    transport: http
+  tools:
+  - name: create_agent
+    source_operation: openapi/askui-workspace-service-openapi-original.json#create_agent_api_v1_agents_post
+  - name: list_agents
+    source_operation: openapi/askui-workspace-service-openapi-original.json#list_agents_api_v1_agents_get
+  - name: create_agent_execution
+    source_operation: openapi/askui-workspace-service-openapi-original.json#create_agent_execution_api_v1_agent_executions_post
+  - name: list_agent_executions
+    source_operation: openapi/askui-workspace-service-openapi-original.json#list_agent_executions_api_v1_agent_executions_get
+  - name: create_workspace
+    source_operation: openapi/askui-workspace-service-openapi-original.json#create_workspace_api_v1_workspaces_post
+  - name: create_access_token
+    source_operation: openapi/askui-workspace-service-openapi-original.json#create_access_token_api_v1_access_tokens_post
+  - name: extract_data
+    source_operation: openapi/askui-workspace-service-openapi-original.json#extract_data_api_v1_tools_extract_data_post
+  - name: create_schedule
+    source_operation: openapi/askui-workspace-service-openapi-original.json#create_schedule_api_v1_workspaces__workspace_id__schedules_post
+  - name: list_runs
+    source_operation: openapi/askui-workspace-service-openapi-original.json#list_runs_api_v1_workspaces__workspace_id__runs_get

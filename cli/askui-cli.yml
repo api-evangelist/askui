@@ -1,0 +1,33 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.askui.com/04-reference/02-askui-suite
+clis:
+- name: AskUI Development Environment (ADE)
+  kind: PowerShell command surface
+  docs: https://docs.askui.com/04-reference/02-askui-suite/02-askui-suite
+  install: AskUI Suite installer (Windows/macOS/Linux)
+  command_groups:
+  - group: ADE
+    commands: [AskUI-NewProject, AskUI-RunProject, AskUI-SetSettings, AskUI-ShowSettings,
+      AskUI-RemoveSettings, AskUI-AddPlugin, AskUI-RemovePlugin, AskUI-ShowPlugins,
+      AskUI-ShowVersions, AskUI-ShowAvailableCommands, AskUI-TestConnection]
+  - group: UIController
+    commands: [AskUI-StartController, AskUI-StopControllers, AskUI-ShowControllers]
+  - group: Python
+    commands: [AskUI-NewPythonEnvironment, AskUI-EnablePythonEnvironment, AskUI-RemovePythonEnvironment,
+      AskUI-ShowPythonEnvironments, AskUI-ShowInstalledPythonPackageVersion]
+  - group: SnippingTool
+    commands: [AskUI-NewAIElement, AskUI-OpenAIElement, AskUI-ShowAIElement, AskUI-RemoveAIElement,
+      AskUI-NewAnnotationsForTraining]
+  - group: Debug
+    commands: [AskUI-NewErrorReport, AskUI-BuildErrorReport, AskUI-SubmitErrorReport,
+      AskUI-ShowProcess, AskUI-StopProcess]
+  - group: PxProxy
+    commands: [AskUI-StartLocalProxy, AskUI-StopLocalProxy, AskUI-SetLocalProxySettings,
+      AskUI-RemoveLocalProxySettings]
+- name: askui-connection-debugger
+  kind: standalone CLI
+  language: C#
+  repository: https://github.com/askui/askui-connection-debugger
+  description: Diagnoses AskUI Controller connectivity across DNS, TCP, proxy, and
+    gRPC layers.

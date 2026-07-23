@@ -1,0 +1,70 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/askui-workspace-service-openapi-original.json
+entities:
+- name: Workspace
+  operations: [create_workspace, update_workspace_name, delete_workspace, list_runs]
+- name: WorkspaceMembership
+  operations: [create_workspace_membership, list_workspace_memberships, delete_workspace_membership]
+- name: Invite
+  operations: [create_invite, list_invites, process_invite, revoke_invite, list_user_invites]
+- name: AccessToken
+  operations: [create_access_token, list_access_tokens, delete_access_token, lookup_access_token]
+- name: Agent
+  operations: [create_agent, list_agents, update_agent, list_agent_templates]
+- name: AgentExecution
+  operations: [create_agent_execution, list_agent_executions, update_agent_execution]
+- name: Schedule
+  operations: [create_schedule, suspend_schedule]
+- name: Run
+  operations: [list_runs]
+- name: RunnerJob
+  operations: [lease, ping, complete]
+- name: File
+  operations: [list_files, upload_file, delete_file, set_signed_cookies]
+- name: UsageEvent
+  operations: [aggregate_usage_events]
+- name: Subscription
+  operations: [get_workspace_subscription, create_customer_portal_session, list_prices,
+    create_checkout_session]
+relationships:
+- from: WorkspaceMembership
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: Invite
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: AccessToken
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: Agent
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: AgentExecution
+  to: Agent
+  type: belongs_to
+  via: agent_id
+- from: Schedule
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: Run
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: Subscription
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: Workspace
+  to: Agent
+  type: has_many
+  via: workspace_id
+- from: Agent
+  to: AgentExecution
+  type: has_many
+  via: agent_id

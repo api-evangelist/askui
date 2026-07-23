@@ -1,0 +1,322 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens invites API
+  version: 0.2.15
+tags:
+- name: invites
+paths:
+  /api/v1/invites:
+    get:
+      tags:
+      - invites
+      summary: List User Invites
+      description: Get all valid invites for the authenticated user
+      operationId: list_user_invites_api_v1_invites_get
+      responses:
+        '200':
+          description: List of invites for the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUserInvitesResponse'
+        '500':
+          description: Internal server error
+      security:
+      - Bearer: []
+      - Basic: []
+  /api/v1/workspaces/{workspace_id}/invites:
+    post:
+      tags:
+      - invites
+      summary: Create Invite
+      operationId: create_invite_api_v1_workspaces__workspace_id__invites_post
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInviteCommand'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InviteResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - invites
+      summary: List Invites
+      operationId: list_invites_api_v1_workspaces__workspace_id__invites_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInvitesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/workspaces/{workspace_id}/invites/{invitation_id}:
+    put:
+      tags:
+      - invites
+      summary: Process Invite
+      operationId: process_invite_api_v1_workspaces__workspace_id__invites__invitation_id__put
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      - name: invitation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Invitation Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessWorkspaceInviteCommand'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InviteResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - invites
+      summary: Revoke Invite
+      operationId: revoke_invite_api_v1_workspaces__workspace_id__invites__invitation_id__delete
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      - name: invitation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Invitation Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InviteResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    InviteStatus:
+      type: string
+      enum:
+      - pending
+      - accepted
+      - declined
+      - revoked
+      - expired
+      title: InviteStatus
+    WorkspacePrivilege:
+      type: string
+      enum:
+      - ROLE_WORKSPACE_OWNER
+      - ROLE_WORKSPACE_ADMIN
+      - ROLE_WORKSPACE_MEMBER
+      title: WorkspacePrivilege
+    InviteActionEnum:
+      type: string
+      enum:
+      - accept
+      - decline
+      title: InviteActionEnum
+    ListInvitesResponse:
+      properties:
+        invites:
+          items:
+            $ref: '#/components/schemas/InviteResponse'
+          type: array
+          title: Invites
+      type: object
+      required:
+      - invites
+      title: ListInvitesResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InviteResponse:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        email:
+          type: string
+          format: email
+          title: Email
+        workspaceId:
+          type: string
+          format: uuid4
+          title: Workspaceid
+        inviterId:
+          type: string
+          title: Inviterid
+        privileges:
+          items:
+            $ref: '#/components/schemas/WorkspacePrivilege'
+          type: array
+          title: Privileges
+        status:
+          $ref: '#/components/schemas/InviteStatus'
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        expiresAt:
+          type: string
+          format: date-time
+          title: Expiresat
+        workspaceName:
+          type: string
+          title: Workspacename
+      type: object
+      required:
+      - id
+      - email
+      - workspaceId
+      - inviterId
+      - privileges
+      - status
+      - updatedAt
+      - expiresAt
+      - workspaceName
+      title: InviteResponse
+    CreateInviteCommand:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        privilege:
+          $ref: '#/components/schemas/WorkspacePrivilege'
+      type: object
+      required:
+      - email
+      - privilege
+      title: CreateInviteCommand
+    ListUserInvitesResponse:
+      properties:
+        invites:
+          items:
+            $ref: '#/components/schemas/InviteResponse'
+          type: array
+          title: Invites
+      type: object
+      required:
+      - invites
+      title: ListUserInvitesResponse
+    ProcessWorkspaceInviteCommand:
+      properties:
+        action:
+          $ref: '#/components/schemas/InviteActionEnum'
+      type: object
+      required:
+      - action
+      title: ProcessWorkspaceInviteCommand
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

@@ -1,0 +1,439 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens files API
+  version: 0.2.15
+tags:
+- name: files
+paths:
+  /api/v1/files:
+    get:
+      tags:
+      - files
+      summary: List Files
+      description: 'List files.
+
+
+        - To list files within a workspace, the `prefix` (query parameter) must start with `workspaces/{workspace_id}/`
+
+        - Cannot list files across multiple workspaces, i.e., if the `prefix` does not start with `workspaces/{workspace_id}/`, it will return an empty list.'
+      operationId: list_files_api_v1_files_get
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: prefix
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Prefix (path) to filter the files by. For folders it should end with `/`. Note that it is currently not possible to list files across workspaces but only within one workspace, i.e., which means that the prefix should start with `workspaces/{workspace_id}/`.
+          default: ''
+          title: Prefix
+        description: Prefix (path) to filter the files by. For folders it should end with `/`. Note that it is currently not possible to list files across workspaces but only within one workspace, i.e., which means that the prefix should start with `workspaces/{workspace_id}/`.
+      - name: delimiter
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Delimiter to group keys, e.g., `/` to group by folders, i.e., get files of the root folder or the folder identified by the prefix. If not provided, no folders are included in the response.
+          title: Delimiter
+        description: Delimiter to group keys, e.g., `/` to group by folders, i.e., get files of the root folder or the folder identified by the prefix. If not provided, no folders are included in the response.
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 1000
+          minimum: 1
+          description: Maximum number of files to return per page
+          default: 10
+          title: Limit
+        description: Maximum number of files to return per page
+      - name: continuation_token
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Continuation token to get the next page of results (cursor-based pagination)
+          title: Continuation Token
+        description: Continuation token to get the next page of results (cursor-based pagination)
+      - name: expand
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            uniqueItems: true
+            items:
+              const: url
+              type: string
+          - type: 'null'
+          description: Expand the response with the signed URL to the file
+          title: Expand
+        description: Expand the response with the signed URL to the file
+      responses:
+        '200':
+          description: Files listed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilesListResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{file_path}:
+    put:
+      tags:
+      - files
+      summary: Upload File
+      description: 'Upload a file (max. 5 GB) to the specified path.
+
+
+        - Specify the `Content-Type` header for accurate file type handling.
+
+        - If `Content-Type` is omitted, the system will attempt to infer it.
+
+        - For workspace-specific uploads, use path: `workspaces/{workspace_id}/...`
+
+        - If a file with the same file path already exists, it will be overwritten.
+
+        - If there are unsupported characters in the file path, they will be removed or replaced.
+
+        - If the file path is longer than `1024` characters, the file path will be shortened starting from the end.
+
+        - Set `strict=true` to fail the request if the file path would be modified during sanitization (e.g., if the file path contains unsupported characters or is too long).'
+      operationId: upload_file_api_v1_files__file_path__put
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: file_path
+        in: path
+        required: true
+        schema:
+          type: string
+          title: File Path
+      - name: strict
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Strict
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_file_api_v1_files__file_path__put'
+      responses:
+        '201':
+          description: File uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadFileResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '413':
+          description: File too large (max. 5 GB)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: File path contains invalid characters or exceeds maximum length
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+    delete:
+      tags:
+      - files
+      summary: Delete File
+      description: 'Delete a file at the specified path.
+
+
+        - Deletes only one file with the given file path. Not bulk deletion.
+
+        - If there is no file at the specified path, the operation will be a no-op, i.e., it will still return a 204 status code.'
+      operationId: delete_file_api_v1_files__file_path__delete
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: file_path
+        in: path
+        required: true
+        schema:
+          type: string
+          title: File Path
+      responses:
+        '204':
+          description: File deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '404':
+          description: File not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/signed-cookies:
+    post:
+      tags:
+      - files
+      summary: Set Signed Cookies
+      description: Set http-only, secure (signed) cookies for accessing (only READ access) files via AWS CloudFront across all accessible workspaces. If no workspace id is provided, no cookies will be set.
+      operationId: set_signed_cookies_api_v1_files_signed_cookies_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateSignedCookiesCommand'
+        required: true
+      responses:
+        '200':
+          description: Signed cookies set successfully
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '403':
+          description: Permission denied, e.g., if user has no access to workspace in the body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StringErrorResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - Bearer: []
+      - Basic: []
+components:
+  schemas:
+    FileDto:
+      properties:
+        type:
+          type: string
+          const: file
+          title: Type
+          default: file
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+          description: Path to the file starting
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: Signed URL to the file with a 1 hour TTL
+        size:
+          type: integer
+          title: Size
+          description: Size of the file in bytes
+        lastModified:
+          type: string
+          format: date-time
+          title: Lastmodified
+      type: object
+      required:
+      - name
+      - path
+      - size
+      - lastModified
+      title: FileDto
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    FolderDto:
+      properties:
+        type:
+          type: string
+          const: folder
+          title: Type
+          default: folder
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+      type: object
+      required:
+      - name
+      - path
+      title: FolderDto
+    UploadFileResponse:
+      properties:
+        filePath:
+          type: string
+          title: Filepath
+        contentType:
+          type: string
+          title: Contenttype
+      type: object
+      required:
+      - filePath
+      - contentType
+      title: UploadFileResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FilesListResponseDto:
+      properties:
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FileDto'
+            - $ref: '#/components/schemas/FolderDto'
+            discriminator:
+              propertyName: type
+              mapping:
+                file: '#/components/schemas/FileDto'
+                folder: '#/components/schemas/FolderDto'
+          type: array
+          title: Data
+        nextContinuationToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nextcontinuationtoken
+      type: object
+      required:
+      - data
+      title: FilesListResponseDto
+    GenerateSignedCookiesCommand:
+      properties:
+        workspaceId:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Workspaceid
+          description: Must be set to access files within workspace
+      type: object
+      required:
+      - workspaceId
+      title: GenerateSignedCookiesCommand
+    Body_upload_file_api_v1_files__file_path__put:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_v1_files__file_path__put
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

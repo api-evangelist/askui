@@ -1,0 +1,90 @@
+openapi: 3.1.0
+info:
+  title: AskUI Workspaces access-tokens analytics API
+  version: 0.2.15
+tags:
+- name: analytics
+paths:
+  /api/v1/analytics/identify:
+    post:
+      tags:
+      - analytics
+      summary: Identify
+      operationId: identify_api_v1_analytics_identify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentifyCommand'
+        required: true
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - Bearer: []
+      - Basic: []
+components:
+  schemas:
+    IdentifyCommand:
+      properties:
+        anonymousId:
+          type: string
+          format: uuid4
+          title: Anonymousid
+        traits:
+          $ref: '#/components/schemas/UserTraits'
+      type: object
+      required:
+      - anonymousId
+      - traits
+      title: IdentifyCommand
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserTraits:
+      properties: {}
+      additionalProperties: true
+      type: object
+      title: UserTraits
+      description: Type for user traits sent to Segment.
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization

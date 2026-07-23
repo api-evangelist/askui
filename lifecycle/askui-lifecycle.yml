@@ -1,0 +1,20 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.askui.com/05-additional-resources/release-notes
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.askui.com/04-reference/07-workspace-service
+  note: Workspaces API paths are prefixed /api/v1; AskUI Suite/AgentOS follow a CalVer
+    train (e.g. 26.3.1).
+status_page: https://status.askui.com
+release_notes:
+- https://docs.askui.com/05-additional-resources/release-notes/01-askui-suite
+- https://docs.askui.com/06-agent-os/release-notes/release-notes
+trust: https://trust.askui.com
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: No public deprecation policy or RFC 8594 Sunset/Deprecation header support
+    documented.
+deprecated_operations: []

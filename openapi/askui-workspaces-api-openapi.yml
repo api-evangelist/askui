@@ -1,0 +1,345 @@
+openapi: 3.1.0
+info:
+  title: AskUI access-tokens workspaces API
+  version: 0.2.15
+tags:
+- name: workspaces
+paths:
+  /api/v1/workspaces:
+    post:
+      tags:
+      - workspaces
+      summary: Create Workspace
+      operationId: create_workspace_api_v1_workspaces_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceRequestDto'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceResponseDto'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - Bearer: []
+      - Basic: []
+  /api/v1/workspaces/{workspace_id}:
+    patch:
+      tags:
+      - workspaces
+      summary: Update Workspace Name
+      operationId: update_workspace_name_api_v1_workspaces__workspace_id__patch
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      - name: expand
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - const: workspaceMemberships
+            type: string
+          - type: 'null'
+          title: Expand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkspaceNameRequestDto'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorkspaceNameResponseDto'
+        '404':
+          description: Workspace not found
+          content:
+            application/json:
+              example:
+                detail:
+                - msg: Workspace not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - workspaces
+      summary: Delete Workspace
+      operationId: delete_workspace_api_v1_workspaces__workspace_id__delete
+      security:
+      - Bearer: []
+      - Basic: []
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid4
+          title: Workspace Id
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    WorkspacePrivilege:
+      type: string
+      enum:
+      - ROLE_WORKSPACE_OWNER
+      - ROLE_WORKSPACE_ADMIN
+      - ROLE_WORKSPACE_MEMBER
+      title: WorkspacePrivilege
+    UpdateWorkspaceNameRequestDto:
+      properties:
+        name:
+          type: string
+          maxLength: 128
+          minLength: 1
+          title: Name
+      type: object
+      required:
+      - name
+      title: UpdateWorkspaceNameRequestDto
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    CreateWorkspaceResponseDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        name:
+          type: string
+          title: Name
+        memberships:
+          items:
+            $ref: '#/components/schemas/workspaces__entrypoints__http__routers__workspaces__main__CreateWorkspaceResponseDto__WorkspaceMembershipDto'
+          type: array
+          title: Memberships
+      type: object
+      required:
+      - name
+      - memberships
+      title: CreateWorkspaceResponseDto
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UpdateWorkspaceNameResponseDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        name:
+          type: string
+          title: Name
+        memberships:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/workspaces__entrypoints__http__routers__workspaces__main__UpdateWorkspaceNameResponseDto__WorkspaceMembershipDto'
+            type: array
+          - type: 'null'
+          title: Memberships
+      type: object
+      required:
+      - name
+      - memberships
+      title: UpdateWorkspaceNameResponseDto
+    workspaces__entrypoints__http__routers__workspaces__main__CreateWorkspaceResponseDto__WorkspaceMembershipDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        userId:
+          type: string
+          title: Userid
+        workspaceId:
+          type: string
+          format: uuid4
+          title: Workspaceid
+        privileges:
+          items:
+            $ref: '#/components/schemas/WorkspacePrivilege'
+          type: array
+          title: Privileges
+        accessTokens:
+          items:
+            $ref: '#/components/schemas/WorkspaceAccessToken'
+          type: array
+          title: Accesstokens
+          default: []
+      type: object
+      required:
+      - userId
+      - workspaceId
+      - privileges
+      title: WorkspaceMembershipDto
+    workspaces__entrypoints__http__routers__workspaces__main__UpdateWorkspaceNameResponseDto__WorkspaceMembershipDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        userId:
+          type: string
+          title: Userid
+        workspaceId:
+          type: string
+          format: uuid4
+          title: Workspaceid
+        privileges:
+          items:
+            $ref: '#/components/schemas/WorkspacePrivilege'
+          type: array
+          title: Privileges
+      type: object
+      required:
+      - userId
+      - workspaceId
+      - privileges
+      title: WorkspaceMembershipDto
+    WorkspaceAccessToken:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        name:
+          type: string
+          title: Name
+        hash:
+          type: string
+          title: Hash
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+      type: object
+      required:
+      - name
+      - hash
+      - expires_at
+      title: WorkspaceAccessToken
+    CreateWorkspaceRequestDto:
+      properties:
+        name:
+          type: string
+          maxLength: 128
+          minLength: 1
+          title: Name
+        firstMemberId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Firstmemberid
+        billingAccountEmail:
+          type: string
+          format: email
+          title: Billingaccountemail
+      type: object
+      required:
+      - name
+      - billingAccountEmail
+      title: CreateWorkspaceRequestDto
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+    Basic:
+      type: apiKey
+      in: header
+      name: Authorization
