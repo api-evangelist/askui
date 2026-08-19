@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens schedules API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schedules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Suspend Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/schedules/:schedule_id/suspend",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Suspend Schedule"
+        },
+        {
+          "info": {
+            "name": "Create Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/schedules",
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Schedule"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens tools API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Extract Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/tools/extract-data",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extract data from files using a provided schema. Depending on the number of files, their size and type, and the complexity of the schema, the extraction may fail or take a while (up to multiple minutes) to complete so don't time out too early. Try making the schema less complex and/or passing less and/or smaller files."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "access-tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Access Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/access-tokens",
+            "params": [
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Access Tokens"
+        },
+        {
+          "info": {
+            "name": "Create Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/access-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Access Token"
+        },
+        {
+          "info": {
+            "name": "Delete Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/access-tokens/:token_id",
+            "params": [
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Access Token"
+        },
+        {
+          "info": {
+            "name": "Lookup Global Access Token ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/access-tokens/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Converts a sensitive global-level access token into its stable identifier (access_token_id). The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token or retrieve usage for the token."
+        },
+        {
+          "info": {
+            "name": "List Access Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/access-tokens",
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Access Tokens"
+        },
+        {
+          "info": {
+            "name": "Create Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/access-tokens",
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Access Token"
+        },
+        {
+          "info": {
+            "name": "Delete Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/access-tokens/:token_id",
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "token_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Access Token"
+        },
+        {
+          "info": {
+            "name": "Lookup Workspace Access Token ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/access-tokens/lookup",
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Converts a sensitive workspace-level access token into its stable identifier (access_token_id) within the specified workspace. The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token or retrieve usage for the token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

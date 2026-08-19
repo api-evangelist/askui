@@ -4,9 +4,12 @@ status: published
 source: https://github.com/askui/idb-mcp
 servers:
 - name: idb-mcp
-  description: Open-source AskUI MCP server + Python library wrapping Facebook IDB
-    to control iOS simulators (device management, tap/swipe/type, screenshots).
-  transport: [stdio, http, sse]
+  description: Open-source AskUI MCP server + Python library wrapping Facebook IDB to control iOS simulators
+    (device management, tap/swipe/type, screenshots).
+  transport:
+  - stdio
+  - http
+  - sse
   runtime: fastmcp
   install: pip install idb-mcp
   package: https://pypi.org/project/idb-mcp/
@@ -25,8 +28,6 @@ servers:
   - tap_button
   - screen_size
   - describe_view
-# Candidate tools derived from the AskUI Workspaces API (not an official MCP server
-# for this API — one tool per OpenAPI operation, for reference only).
 candidate:
   method: derived
   status: candidate
@@ -53,3 +54,8 @@ candidate:
     source_operation: openapi/askui-workspace-service-openapi-original.json#create_schedule_api_v1_workspaces__workspace_id__schedules_post
   - name: list_runs
     source_operation: openapi/askui-workspace-service-openapi-original.json#list_runs_api_v1_workspaces__workspace_id__runs_get
+deployment:
+  mode: local-stdio
+  verified: searched
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,793 @@
+{
+  "item": [
+    {
+      "id": "5193eb97-58ca-433b-ab2e-eb656c1eb4fc",
+      "name": "workspace-memberships",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c5eeed32-9533-41a6-bcc7-4ea47aee03a1",
+          "name": "List Workspace Membership",
+          "request": {
+            "name": "List Workspace Membership",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "users",
+                ":user_id",
+                "workspace-memberships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "84cf16eb-5aa1-41b5-ba81-7574b3c87812",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "workspace-memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"privileges\": [\n      \"ROLE_WORKSPACE_OWNER\",\n      \"ROLE_WORKSPACE_MEMBER\"\n    ],\n    \"userId\": \"string\",\n    \"workspaceId\": \"string\",\n    \"id\": \"string\",\n    \"createdAt\": \"1966-12-13T01:53:19.154Z\",\n    \"updatedAt\": \"1993-01-07T02:22:38.316Z\",\n    \"user\": {\n      \"id\": \"string\",\n      \"email\": \"wYZM9BtVPZbI@GsYfJrMbztQbiWneqGgSIuAmEN.mll\",\n      \"name\": \"string\",\n      \"picture\": \"http://muhwfvjlgdVAkDek.rmHdYqlZrtTNCWoIdpKal,spWRNbZ3IiDrztYigJEVPaCWnmr\",\n      \"updatedAt\": \"1992-01-23T19:45:31.767Z\",\n      \"createdAt\": \"2024-09-28T11:52:27.299Z\",\n      \"emailVerified\": false\n    },\n    \"workspace\": {\n      \"name\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"2018-08-16T12:12:26.850Z\",\n      \"updatedAt\": \"1983-02-20T22:37:56.557Z\"\n    }\n  },\n  {\n    \"privileges\": [\n      \"ROLE_WORKSPACE_MEMBER\",\n      \"ROLE_WORKSPACE_ADMIN\"\n    ],\n    \"userId\": \"string\",\n    \"workspaceId\": \"string\",\n    \"id\": \"string\",\n    \"createdAt\": \"1952-12-28T17:16:31.696Z\",\n    \"updatedAt\": \"1990-01-22T13:38:00.766Z\",\n    \"user\": {\n      \"id\": \"string\",\n      \"email\": \"WCrd1aJVLF@xBgLNpFUPjwrwuoNKlzTjhzJtxXNDptWt.jyp\",\n      \"name\": \"string\",\n      \"picture\": \"http://kYBvQqKXZsNy.bodaTjEpl4D8utT83EjA61e8leafRnf9iSKkDI5gItgM.yqQYWa7W9\",\n      \"updatedAt\": \"2024-02-15T10:50:21.850Z\",\n      \"createdAt\": \"2013-06-01T03:06:22.982Z\",\n      \"emailVerified\": false\n    },\n    \"workspace\": {\n      \"name\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"1950-08-12T14:57:43.482Z\",\n      \"updatedAt\": \"2003-05-30T06:23:08.273Z\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22304fc6-81e8-4452-a8db-3b0334d8c645",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "users",
+                    ":user_id",
+                    "workspace-memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a30de1e-74a6-44cc-9cbd-b18e8bdc3aee",
+          "name": "Create Workspace Membership",
+          "request": {
+            "name": "Create Workspace Membership",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspace-memberships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"privileges\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea215a5c-8de3-49e8-9501-1cd72ea1b846",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"privileges\": [\n    \"ROLE_WORKSPACE_ADMIN\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"userId\": \"string\",\n  \"workspaceId\": \"string\",\n  \"privileges\": [\n    \"ROLE_WORKSPACE_ADMIN\",\n    \"ROLE_WORKSPACE_ADMIN\"\n  ],\n  \"id\": \"string\",\n  \"createdAt\": \"2024-04-29T03:17:14.124Z\",\n  \"updatedAt\": \"1984-06-10T13:53:25.332Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac73587c-e565-45fb-b497-e714a71158e4",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"privileges\": [\n    \"ROLE_WORKSPACE_ADMIN\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fced2e34-2d8f-467c-9727-7cbd729be607",
+          "name": "List Workspace Memberships",
+          "request": {
+            "name": "List Workspace Memberships",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspace-memberships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "47352c14-5a1d-43d5-a89f-41fd74e146c3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"privileges\": [\n        \"ROLE_WORKSPACE_ADMIN\",\n        \"ROLE_WORKSPACE_MEMBER\"\n      ],\n      \"userId\": \"string\",\n      \"workspaceId\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"2025-11-30T08:28:22.695Z\",\n      \"updatedAt\": \"2016-01-20T08:37:59.490Z\",\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"PK7@ZTONlxcUKwllhNNMwbpDfNkkhfSXWLp.jf\",\n        \"name\": \"string\",\n        \"picture\": \"https://fJFCqZWidyCvRMI.aqityoia7d1MIlcY3TLYaUyEJsFCitJ1LzGkUKjqLFaIm\",\n        \"updatedAt\": \"1952-12-07T14:17:10.560Z\",\n        \"createdAt\": \"1951-04-09T13:38:42.977Z\",\n        \"emailVerified\": false\n      },\n      \"workspace\": {\n        \"name\": \"string\",\n        \"id\": \"string\",\n        \"createdAt\": \"2021-04-09T17:14:27.837Z\",\n        \"updatedAt\": \"1984-12-08T09:20:55.754Z\"\n      }\n    },\n    {\n      \"privileges\": [\n        \"ROLE_WORKSPACE_ADMIN\",\n        \"ROLE_WORKSPACE_OWNER\"\n      ],\n      \"userId\": \"string\",\n      \"workspaceId\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"1976-12-18T09:02:00.101Z\",\n      \"updatedAt\": \"1947-12-24T12:31:25.642Z\",\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"amtDI@RnKYvPzWigqiMcatxGA.bm\",\n        \"name\": \"string\",\n        \"picture\": \"http://mCzUijKcyTYtaV.pxvdLV8MLLVUGJrX,7OTmCqRNHC,7TRWN5vYF+NWt7jtkc\",\n        \"updatedAt\": \"1974-12-16T21:41:07.607Z\",\n        \"createdAt\": \"1986-10-04T06:46:24.330Z\",\n        \"emailVerified\": false\n      },\n      \"workspace\": {\n        \"name\": \"string\",\n        \"id\": \"string\",\n        \"createdAt\": \"1977-12-09T21:35:54.929Z\",\n        \"updatedAt\": \"1998-03-07T03:56:08.008Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb1be5e3-4f05-4029-b921-67b18908f248",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9067d7b7-4080-4a01-9b48-66f8f564b94c",
+          "name": "Delete Workspace Membership",
+          "request": {
+            "name": "Delete Workspace Membership",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspace-memberships",
+                ":workspace_membership_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid4>",
+                  "key": "workspace_membership_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a84857f-e204-4a14-b816-55a292bff175",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships",
+                    ":workspace_membership_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "workspace_membership_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae83dedc-e8bc-42d8-ba0c-069466c7e5de",
+              "name": "Orphaned Workspace Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships",
+                    ":workspace_membership_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "workspace_membership_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"msg\": \"Cannot delete the last ROLE_WORKSPACE_OWNER of the workspace. Please, delete the workspace instead.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f453a935-358d-4d23-935c-0249545f2b17",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspace-memberships",
+                    ":workspace_membership_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "workspace_membership_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8f590201-5f73-4024-95f0-d1f2987bdec1",
+    "name": "AskUI Workspaces access-tokens workspace-memberships API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

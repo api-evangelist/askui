@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens runs API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/workspaces/:workspace_id/runs",
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Runs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

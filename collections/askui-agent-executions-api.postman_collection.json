@@ -1,0 +1,876 @@
+{
+  "item": [
+    {
+      "id": "79fc00f6-7645-483f-9a67-381f6daa24da",
+      "name": "agent-executions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8151f272-7b5e-44af-9c14-00bd27178307",
+          "name": "Create Agent Execution",
+          "request": {
+            "name": "Create Agent Execution",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agent-executions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<uuid4>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "input_files",
+                  "value": "[\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) Files to extract data from. Supported file extensions: {'.jpeg', '.txt', '.jpg', '.webp', '.pdf', '.png', '.gif', '.eml'}. Maximum total size: 100 MiB. We process the .eml files as text files, i.e., we don't process non-textual attachments and content properly. For that, extract them from the .eml files separating them into different files."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0cc8582a-90bf-48f0-b239-7dc3742fd0e8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Files to extract data from. Supported file extensions: {'.jpeg', '.txt', '.jpg', '.webp', '.pdf', '.png', '.gif', '.eml'}. Maximum total size: 100 MiB. We process the .eml files as text files, i.e., we don't process non-textual attachments and content properly. For that, extract them from the .eml files separating them into different files.",
+                        "type": "text/plain"
+                      },
+                      "key": "input_files",
+                      "value": "[\"<binary>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"agentId\": \"string\",\n  \"workspaceId\": \"string\",\n  \"state\": {\n    \"status\": \"PENDING_INPUTS\"\n  },\n  \"id\": \"string\",\n  \"createdAt\": \"2000-09-05T21:28:34.653Z\",\n  \"updatedAt\": \"1992-03-28T04:31:16.157Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "319e16d9-d3e8-477d-b18e-857b4e4bc612",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Files to extract data from. Supported file extensions: {'.jpeg', '.txt', '.jpg', '.webp', '.pdf', '.png', '.gif', '.eml'}. Maximum total size: 100 MiB. We process the .eml files as text files, i.e., we don't process non-textual attachments and content properly. For that, extract them from the .eml files separating them into different files.",
+                        "type": "text/plain"
+                      },
+                      "key": "input_files",
+                      "value": "[\"<binary>\"]",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "734efbda-0512-41bd-8ce6-6867c2a5c912",
+          "name": "List Agent Executions",
+          "request": {
+            "name": "List Agent Executions",
+            "description": {
+              "content": "List all agent executions matching the query parameters sorted anti-chronologically by when they were last updated (`updated_at`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agent-executions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agent_execution_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "agent_execution_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "total_count: Include the total number of agent executions that match the query, only accurate up to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "total_count: Include the total number of agent executions that match the query, only accurate up to 100."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b1b191ca-a373-4670-b272-1274c501cd52",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_execution_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_execution_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"agentId\": \"string\",\n      \"workspaceId\": \"string\",\n      \"state\": {\n        \"status\": \"PENDING_INPUTS\"\n      },\n      \"id\": \"string\",\n      \"createdAt\": \"1974-02-22T13:26:19.850Z\",\n      \"updatedAt\": \"1971-10-22T00:32:56.150Z\"\n    },\n    {\n      \"agentId\": \"string\",\n      \"workspaceId\": \"string\",\n      \"state\": {\n        \"status\": \"PENDING_INPUTS\"\n      },\n      \"id\": \"string\",\n      \"createdAt\": \"2015-10-03T21:34:27.668Z\",\n      \"updatedAt\": \"1961-08-07T06:56:09.782Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"totalCount\": 5762\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dd64053-4008-44f4-ae2a-73d54a09d686",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_execution_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_execution_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d5b79ae-c3a0-4c75-ac69-0cf40fcdc774",
+          "name": "Update Agent Execution",
+          "request": {
+            "name": "Update Agent Execution",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agent-executions",
+                ":agent_execution_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid4>",
+                  "key": "agent_execution_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": {\n    \"dataExtracted\": {\n      \"key_0\": 9862.496166525785,\n      \"key_1\": \"string\"\n    },\n    \"status\": \"PENDING_REVIEW\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d800be29-ec8a-49c6-a3b2-35caf701d01b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions",
+                    ":agent_execution_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"dataExtracted\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8641.351083628564,\n      \"key_2\": \"string\",\n      \"key_3\": 1178.845286741035\n    },\n    \"status\": \"PENDING_REVIEW\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"agentId\": \"string\",\n  \"workspaceId\": \"string\",\n  \"state\": {\n    \"status\": \"PENDING_INPUTS\"\n  },\n  \"id\": \"string\",\n  \"createdAt\": \"2000-09-05T21:28:34.653Z\",\n  \"updatedAt\": \"1992-03-28T04:31:16.157Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10ae219a-fc36-41af-9235-46192987c621",
+              "name": "Could not deliver data to destination",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions",
+                    ":agent_execution_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"dataExtracted\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8641.351083628564,\n      \"key_2\": \"string\",\n      \"key_3\": 1178.845286741035\n    },\n    \"status\": \"PENDING_REVIEW\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e88a9074-c59a-47b0-8063-49635937a4dc",
+              "name": "Agent execution not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions",
+                    ":agent_execution_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"dataExtracted\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8641.351083628564,\n      \"key_2\": \"string\",\n      \"key_3\": 1178.845286741035\n    },\n    \"status\": \"PENDING_REVIEW\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "780971f3-3307-4bc6-b131-1e4527fc4ba8",
+              "name": "Agent schema not set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions",
+                    ":agent_execution_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"dataExtracted\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8641.351083628564,\n      \"key_2\": \"string\",\n      \"key_3\": 1178.845286741035\n    },\n    \"status\": \"PENDING_REVIEW\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd4f097b-9dfe-4654-83dc-6580e24d9f15",
+              "name": "Schema validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agent-executions",
+                    ":agent_execution_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_execution_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": {\n    \"dataExtracted\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8641.351083628564,\n      \"key_2\": \"string\",\n      \"key_3\": 1178.845286741035\n    },\n    \"status\": \"PENDING_REVIEW\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "588866ce-b1c8-488b-9a60-74cb429bb41b",
+    "name": "AskUI Workspaces access-tokens agent-executions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "item": [
+    {
+      "id": "d80346a3-48d1-4a84-8c8a-d9018fe4513c",
+      "name": "runs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bc7ac6f-c6cb-467f-99b5-a70d115c423c",
+          "name": "List Runs",
+          "request": {
+            "name": "List Runs",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "workspaces",
+                ":workspace_id",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid4>",
+                  "key": "workspace_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1733a64d-6bc3-4728-94ff-eb9b0c85433a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace_id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "workspace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"string\",\n      \"to_be_started_at\": \"2016-08-17T07:59:25.726Z\",\n      \"schedule_id\": \"string\",\n      \"template\": {\n        \"workspace_id\": \"string\",\n        \"runner_assignment\": {\n          \"host\": \"SELF\",\n          \"ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"workflows\": [\n          \"string\",\n          \"string\"\n        ],\n        \"data\": {\n          \"key_0\": 248.88889164370374,\n          \"key_1\": 5030.3825748383415,\n          \"key_2\": 5391\n        }\n      },\n      \"no\": 8156,\n      \"schedule\": {\n        \"name\": \"string\",\n        \"started_at\": \"1965-11-28T11:28:50.274Z\",\n        \"run_template\": {\n          \"workspace_id\": \"string\",\n          \"runner_assignment\": {\n            \"host\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"workflows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"data\": {\n            \"key_0\": 3476,\n            \"key_1\": false,\n            \"key_2\": false\n          }\n        },\n        \"version\": \"string\",\n        \"id\": \"string\",\n        \"created_at\": \"1950-11-03T18:00:39.042Z\",\n        \"status\": \"ACTIVE\",\n        \"ended_at\": \"2025-12-07T00:37:27.807Z\",\n        \"schedule\": \"string\",\n        \"ended_after\": 5140,\n        \"runs_count\": 0,\n        \"next_run_to_be_started_at\": \"1963-11-22T10:53:58.481Z\"\n      },\n      \"version\": \"string\",\n      \"id\": \"string\",\n      \"created_at\": \"2023-11-13T04:13:01.342Z\",\n      \"status\": \"UPCOMING\",\n      \"started_at\": \"1996-05-07T13:32:13.970Z\",\n      \"ended_at\": \"1968-02-08T06:18:34.101Z\"\n    },\n    {\n      \"name\": \"string\",\n      \"to_be_started_at\": \"2023-08-22T14:54:46.143Z\",\n      \"schedule_id\": \"string\",\n      \"template\": {\n        \"workspace_id\": \"string\",\n        \"runner_assignment\": {\n          \"host\": \"SELF\",\n          \"ids\": [\n            \"string\",\n            \"string\"\n          ],\n          \"tags\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"workflows\": [\n          \"string\",\n          \"string\"\n        ],\n        \"data\": {\n          \"key_0\": 3878.070801509779,\n          \"key_1\": 9661,\n          \"key_2\": 9686.04333294902\n        }\n      },\n      \"no\": 7809,\n      \"schedule\": {\n        \"name\": \"string\",\n        \"started_at\": \"1993-08-11T15:18:08.430Z\",\n        \"run_template\": {\n          \"workspace_id\": \"string\",\n          \"runner_assignment\": {\n            \"host\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"workflows\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"data\": {\n            \"key_0\": 5845.825686494347\n          }\n        },\n        \"version\": \"string\",\n        \"id\": \"string\",\n        \"created_at\": \"1971-10-08T19:04:02.827Z\",\n        \"status\": \"ACTIVE\",\n        \"ended_at\": \"1960-02-19T06:56:25.977Z\",\n        \"schedule\": \"string\",\n        \"ended_after\": 7630,\n        \"runs_count\": 0,\n        \"next_run_to_be_started_at\": \"1958-02-24T16:26:10.417Z\"\n      },\n      \"version\": \"string\",\n      \"id\": \"string\",\n      \"created_at\": \"1982-08-29T15:01:20.751Z\",\n      \"status\": \"UPCOMING\",\n      \"started_at\": \"1982-04-15T20:40:51.646Z\",\n      \"ended_at\": \"1950-03-22T20:16:20.519Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08d74a2b-a6e9-492f-8cdc-f0f21f2a8c5f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "workspaces",
+                    ":workspace_id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "workspace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c8e470bf-bccb-46df-8e01-a4462138041c",
+    "name": "AskUI Workspaces access-tokens runs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens files API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/files",
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query",
+                "description": "Prefix (path) to filter the files by. For folders it should end with `/`. Note that it is currently not possible to list files across workspaces but only within one workspace, i.e., which means that the prefix should start with `workspaces/{workspace_id}/`."
+              },
+              {
+                "name": "delimiter",
+                "value": "",
+                "type": "query",
+                "description": "Delimiter to group keys, e.g., `/` to group by folders, i.e., get files of the root folder or the folder identified by the prefix. If not provided, no folders are included in the response."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of files to return per page"
+              },
+              {
+                "name": "continuation_token",
+                "value": "",
+                "type": "query",
+                "description": "Continuation token to get the next page of results (cursor-based pagination)"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand the response with the signed URL to the file"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List files.\n\n- To list files within a workspace, the `prefix` (query parameter) must start with `workspaces/{workspace_id}/`\n- Cannot list files across multiple workspaces, i.e., if the `prefix` does not start with `workspaces/{workspace_id}/`, it will return an empty list."
+        },
+        {
+          "info": {
+            "name": "Upload File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/files/:file_path",
+            "params": [
+              {
+                "name": "file_path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "strict",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upload a file (max. 5 GB) to the specified path.\n\n- Specify the `Content-Type` header for accurate file type handling.\n- If `Content-Type` is omitted, the system will attempt to infer it.\n- For workspace-specific uploads, use path: `workspaces/{workspace_id}/...`\n- If a file with the same file path already exists, it will be overwritten.\n- If there are unsupported characters in the file path, they will be removed or replaced.\n- If the file path is longer than `1024` characters, the file path wil"
+        },
+        {
+          "info": {
+            "name": "Delete File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/files/:file_path",
+            "params": [
+              {
+                "name": "file_path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a file at the specified path.\n\n- Deletes only one file with the given file path. Not bulk deletion.\n- If there is no file at the specified path, the operation will be a no-op, i.e., it will still return a 204 status code."
+        },
+        {
+          "info": {
+            "name": "Set Signed Cookies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/files/signed-cookies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set http-only, secure (signed) cookies for accessing (only READ access) files via AWS CloudFront across all accessible workspaces. If no workspace id is provided, no cookies will be set."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

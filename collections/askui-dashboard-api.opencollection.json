@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens dashboard API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dashboard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Aggregate Usage Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/dashboard/usage",
+            "params": [
+              {
+                "name": "workspace_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by workspace IDs. Must contain at least one ID."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Include events starting from this date (inclusive)"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Include events until this date (exclusive)"
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user IDs"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List usage events sorted chronologically by timestamp. Events can be filtered by workspace, user, or access token.\n\nFilter combinations:\n- Multiple filters (e.g. workspace_id & user_id) use AND logic\n- Multiple values for same filter (e.g. workspace_id=123&workspace_id=456) use OR logic\n\nPagination:\n- Use starting_after with event IDs for cursor-based navigation\n- has_more indicates if more events exist beyond limit\n- total_count (optional) shows total matching events up to 100,000"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

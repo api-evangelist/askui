@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens agent-executions API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agent-executions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Agent Executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/agent-executions",
+            "params": [
+              {
+                "name": "agent_execution_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "total_count: Include the total number of agent executions that match the query, only accurate up to 100."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all agent executions matching the query parameters sorted anti-chronologically by when they were last updated (`updated_at`)."
+        },
+        {
+          "info": {
+            "name": "Create Agent Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/agent-executions",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Agent Execution"
+        },
+        {
+          "info": {
+            "name": "Update Agent Execution",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/agent-executions/:agent_execution_id",
+            "params": [
+              {
+                "name": "agent_execution_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Agent Execution"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

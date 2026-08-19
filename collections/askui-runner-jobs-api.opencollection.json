@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AskUI Workspaces access-tokens runner-jobs API",
+    "version": "0.2.15"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "runner-jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lease",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/runner-jobs/lease",
+            "params": [
+              {
+                "name": "runner_host",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runner_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lease"
+        },
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/runner-jobs/ping",
+            "params": [
+              {
+                "name": "ack",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Ping"
+        },
+        {
+          "info": {
+            "name": "Complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/runner-jobs/complete",
+            "params": [
+              {
+                "name": "ack",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Complete"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

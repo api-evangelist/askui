@@ -1,0 +1,883 @@
+{
+  "item": [
+    {
+      "id": "e168e941-b7cc-4c5a-908a-ccbdfa69a94b",
+      "name": "agents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "15fef13e-4939-4d01-9c39-a5017ac219fd",
+          "name": "List Agents",
+          "request": {
+            "name": "List Agents",
+            "description": {
+              "content": "List all agents matching the query parameters sorted anti-chronologically by when they were last updated (`updated_at`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "agent_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace_id",
+                  "value": "<uuid4>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "total_count: Include the total number of agents that match the query, only accurate up to 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "total_count: Include the total number of agents that match the query, only accurate up to 100."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cc26f6d5-1350-42f7-90a4-dd54bfab225d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"WQtAHovNL-CA.Pqcw7t6iXi8Lbq_bR_1KIPLYrqyhGA\",\n      \"status\": \"ACTIVE\",\n      \"autoConfirm\": true,\n      \"emailTrigger\": {\n        \"email\": \"hE0LF@i&p,GP\",\n        \"active\": true,\n        \"allowedSenders\": [\n          \"string\"\n        ]\n      },\n      \"dataDestinations\": [\n        {\n          \"host\": \"ASKUI\",\n          \"runnerTags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"workflows\": [\n            \"string\"\n          ],\n          \"type\": \"ASKUI_WORKFLOW\"\n        },\n        {\n          \"host\": \"SELF\",\n          \"runnerTags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"workflows\": [\n            \"string\"\n          ],\n          \"type\": \"ASKUI_WORKFLOW\"\n        }\n      ],\n      \"workspaceId\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"2009-12-18T10:05:32.826Z\",\n      \"updatedAt\": \"1966-07-28T06:52:41.027Z\",\n      \"description\": \"\",\n      \"dataSchema\": {\n        \"properties\": {\n          \"key_0\": {\n            \"key_0\": \"string\"\n          },\n          \"key_1\": {\n            \"key_0\": 5931\n          },\n          \"key_2\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": true\n          }\n        },\n        \"title\": \"DataToExtract\",\n        \"description\": \"\",\n        \"type\": \"object\",\n        \"required\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"folderPath\": \"string\"\n    },\n    {\n      \"name\": \"Jl3vxd-WzgJmqCqi5A1zjGQ3vcOVKTI0WUOR.HKRQM-5.qjCqx4bkFXdIvYzaOp\",\n      \"status\": \"ACTIVE\",\n      \"autoConfirm\": false,\n      \"emailTrigger\": {\n        \"email\": \"PSrc@])49\",\n        \"active\": true,\n        \"allowedSenders\": [\n          \"string\"\n        ]\n      },\n      \"dataDestinations\": [\n        {\n          \"host\": \"ASKUI\",\n          \"runnerTags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"workflows\": [\n            \"string\"\n          ],\n          \"type\": \"ASKUI_WORKFLOW\"\n        },\n        {\n          \"host\": \"ASKUI\",\n          \"runnerTags\": [\n            \"string\",\n            \"string\"\n          ],\n          \"workflows\": [\n            \"string\"\n          ],\n          \"type\": \"ASKUI_WORKFLOW\"\n        }\n      ],\n      \"workspaceId\": \"string\",\n      \"id\": \"string\",\n      \"createdAt\": \"2006-11-14T02:02:56.693Z\",\n      \"updatedAt\": \"1978-07-18T13:31:39.338Z\",\n      \"description\": \"\",\n      \"dataSchema\": {\n        \"properties\": {\n          \"key_0\": {\n            \"key_0\": false\n          },\n          \"key_1\": {\n            \"key_0\": 5219.738179396734,\n            \"key_1\": 9980.73170514761\n          },\n          \"key_2\": {\n            \"key_0\": true,\n            \"key_1\": false\n          },\n          \"key_3\": {\n            \"key_0\": \"string\",\n            \"key_1\": 7230.149752466508\n          }\n        },\n        \"title\": \"DataToExtract\",\n        \"description\": \"\",\n        \"type\": \"object\",\n        \"required\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"folderPath\": \"string\"\n    }\n  ],\n  \"hasMore\": false,\n  \"totalCount\": 8447\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8097dc7-3b97-4e28-81df-213baa3d50ea",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "agent_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "workspace_id",
+                      "value": "<uuid4>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3b1725e-c632-48f4-a27b-8cf7f603ba79",
+          "name": "Create Agent",
+          "request": {
+            "name": "Create Agent",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"templateId\": \"<string>\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": false\n      },\n      \"key_1\": {\n        \"key_0\": false,\n        \"key_1\": \"string\"\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"autoConfirm\": false,\n  \"dataDestinations\": [\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workflows\": [\n        \"<string>\"\n      ]\n    },\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workflows\": [\n        \"<string>\"\n      ]\n    }\n  ],\n  \"parentId\": \"<uuid4>\",\n  \"emailTrigger\": {\n    \"active\": true,\n    \"allowedSenders\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"localPart\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "59d71633-27a4-4f78-90d0-cd007696c76d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"templateId\": \"<string>\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5166.864654966417,\n        \"key_2\": 6969.674957137599,\n        \"key_3\": 3354\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"autoConfirm\": false,\n  \"dataDestinations\": [\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"parentId\": \"<uuid4>\",\n  \"emailTrigger\": {\n    \"active\": true,\n    \"allowedSenders\": [\n      \"string\"\n    ],\n    \"localPart\": \"Oc4Lf1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"9\",\n  \"status\": \"ARCHIVED\",\n  \"autoConfirm\": true,\n  \"emailTrigger\": {\n    \"email\": \"8F4MU8RZKM@37<Bm`9lCy\",\n    \"active\": true,\n    \"allowedSenders\": [\n      \"string\"\n    ]\n  },\n  \"dataDestinations\": [\n    {\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ],\n      \"type\": \"ASKUI_WORKFLOW\"\n    },\n    {\n      \"host\": \"SELF\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ],\n      \"type\": \"ASKUI_WORKFLOW\"\n    }\n  ],\n  \"workspaceId\": \"string\",\n  \"id\": \"string\",\n  \"createdAt\": \"1960-12-03T10:19:46.353Z\",\n  \"updatedAt\": \"2009-03-15T02:40:06.205Z\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"folderPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a9769d1-0988-4912-8a90-32562178be4b",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"templateId\": \"<string>\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5166.864654966417,\n        \"key_2\": 6969.674957137599,\n        \"key_3\": 3354\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"autoConfirm\": false,\n  \"dataDestinations\": [\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"parentId\": \"<uuid4>\",\n  \"emailTrigger\": {\n    \"active\": true,\n    \"allowedSenders\": [\n      \"string\"\n    ],\n    \"localPart\": \"Oc4Lf1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0db4b22d-c1cb-4713-a85f-9d84804ebdcd",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"templateId\": \"<string>\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5166.864654966417,\n        \"key_2\": 6969.674957137599,\n        \"key_3\": 3354\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"autoConfirm\": false,\n  \"dataDestinations\": [\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"parentId\": \"<uuid4>\",\n  \"emailTrigger\": {\n    \"active\": true,\n    \"allowedSenders\": [\n      \"string\"\n    ],\n    \"localPart\": \"Oc4Lf1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90e31dab-f85c-40ca-8742-f3dc875734f7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"workspaceId\": \"<uuid4>\",\n  \"templateId\": \"<string>\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5166.864654966417,\n        \"key_2\": 6969.674957137599,\n        \"key_3\": 3354\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"autoConfirm\": false,\n  \"dataDestinations\": [\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    },\n    {\n      \"type\": \"ASKUI_WORKFLOW\",\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"parentId\": \"<uuid4>\",\n  \"emailTrigger\": {\n    \"active\": true,\n    \"allowedSenders\": [\n      \"string\"\n    ],\n    \"localPart\": \"Oc4Lf1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3ffcca9-f60a-4792-ad97-891469c4a355",
+          "name": "Update Agent",
+          "request": {
+            "name": "Update Agent",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agents",
+                ":agent_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid4>",
+                  "key": "agent_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"\",\n  \"status\": \"<string>\",\n  \"emailTrigger\": {\n    \"active\": \"<boolean>\",\n    \"allowedSenders\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"localPart\": \"<string>\"\n  },\n  \"autoConfirm\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5ea1f44-93a3-44d2-ba44-1e0f561852c4",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"\",\n  \"status\": \"<string>\",\n  \"emailTrigger\": {\n    \"active\": false,\n    \"allowedSenders\": [\n      \"string\"\n    ],\n    \"localPart\": \"ppJXUR5fR\"\n  },\n  \"autoConfirm\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"9\",\n  \"status\": \"ARCHIVED\",\n  \"autoConfirm\": true,\n  \"emailTrigger\": {\n    \"email\": \"8F4MU8RZKM@37<Bm`9lCy\",\n    \"active\": true,\n    \"allowedSenders\": [\n      \"string\"\n    ]\n  },\n  \"dataDestinations\": [\n    {\n      \"host\": \"ASKUI\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ],\n      \"type\": \"ASKUI_WORKFLOW\"\n    },\n    {\n      \"host\": \"SELF\",\n      \"runnerTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workflows\": [\n        \"string\"\n      ],\n      \"type\": \"ASKUI_WORKFLOW\"\n    }\n  ],\n  \"workspaceId\": \"string\",\n  \"id\": \"string\",\n  \"createdAt\": \"1960-12-03T10:19:46.353Z\",\n  \"updatedAt\": \"2009-03-15T02:40:06.205Z\",\n  \"description\": \"\",\n  \"dataSchema\": {\n    \"properties\": {\n      \"key_0\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      }\n    },\n    \"title\": \"DataToExtract\",\n    \"description\": \"\",\n    \"type\": \"object\",\n    \"required\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"folderPath\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ecf938a-7cab-42a3-8554-a9198d72c336",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents",
+                    ":agent_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid4>",
+                      "key": "agent_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"\",\n  \"status\": \"<string>\",\n  \"emailTrigger\": {\n    \"active\": false,\n    \"allowedSenders\": [\n      \"string\"\n    ],\n    \"localPart\": \"ppJXUR5fR\"\n  },\n  \"autoConfirm\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a939b53d-7b06-4ff1-9ea1-97ad3845c259",
+          "name": "List Agent Templates",
+          "request": {
+            "name": "List Agent Templates",
+            "description": {
+              "content": "List all available agent templates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "agents",
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e835369b-1b57-4118-af32-1b97bdcaae4a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"_DGcEU-Qfxux5dV4O5501DLPreTEWPqDwfeFc\",\n      \"name\": \"oSvu0tZs-r.UkmARUyTKwYmyarbE\",\n      \"url\": \"https://OXnKxkgwSKCbgTEXBQcWYrtngrVev.yiMFd8nVz56HwifCGGtCXbYZgevoeNQNAT2GjJtTcGONJO7DydPZn9rI6OAKm4.f-N,\",\n      \"lastModified\": \"1956-08-02T08:03:33.679Z\",\n      \"description\": \"\"\n    },\n    {\n      \"id\": \"P18rKFn9ga9VxT\",\n      \"name\": \"w\",\n      \"url\": \"https://nedFqHDwljsxVw.wcFmh2GP5ZtqskdvZdEy6wF0c\",\n      \"lastModified\": \"1962-06-25T06:24:34.289Z\",\n      \"description\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10b8a0af-8ee8-404b-b6ed-4b1f7bf741af",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "agents",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eb935c74-831b-4f45-9703-ec2f586436d2",
+    "name": "AskUI Workspaces access-tokens agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
