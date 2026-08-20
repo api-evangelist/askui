@@ -58,6 +58,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Access Tokens
+  tags_raw:
   - access-tokens
   properties:
   - type: OpenAPI
@@ -74,6 +76,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Agent Executions
+  tags_raw:
   - agent-executions
   properties:
   - type: OpenAPI
@@ -90,6 +94,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Agents
+  tags_raw:
   - agents
   properties:
   - type: OpenAPI
@@ -106,6 +112,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Analytics
+  tags_raw:
   - analytics
   properties:
   - type: OpenAPI
@@ -122,6 +130,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -138,6 +148,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Billing
+  tags_raw:
   - billing
   properties:
   - type: OpenAPI
@@ -154,6 +166,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Dashboard
+  tags_raw:
   - dashboard
   properties:
   - type: OpenAPI
@@ -170,6 +184,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - File
+  tags_raw:
   - files
   properties:
   - type: OpenAPI
@@ -186,6 +202,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Invites
+  tags_raw:
   - invites
   properties:
   - type: OpenAPI
@@ -202,6 +220,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Runner Jobs
+  tags_raw:
   - runner-jobs
   properties:
   - type: OpenAPI
@@ -218,6 +238,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Runs
+  tags_raw:
   - runs
   properties:
   - type: OpenAPI
@@ -234,6 +256,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Schedules
+  tags_raw:
   - schedules
   properties:
   - type: OpenAPI
@@ -250,6 +274,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Tools
+  tags_raw:
   - tools
   properties:
   - type: OpenAPI
@@ -266,6 +292,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Workspace Memberships
+  tags_raw:
   - workspace-memberships
   properties:
   - type: OpenAPI
@@ -282,6 +310,8 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
+  - Workspaces
+  tags_raw:
   - workspaces
   properties:
   - type: OpenAPI
