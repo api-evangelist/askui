@@ -70,7 +70,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Access Tokens
+  - access-tokens
   tags_raw:
   - access-tokens
   properties:
@@ -88,7 +88,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Agent Executions
+  - agent-executions
   tags_raw:
   - agent-executions
   properties:
@@ -232,7 +232,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Runner Jobs
+  - runner-jobs
   tags_raw:
   - runner-jobs
   properties:
@@ -250,7 +250,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Runs
+  - runs
   tags_raw:
   - runs
   properties:
@@ -304,7 +304,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Workspace Memberships
+  - workspace-memberships
   tags_raw:
   - workspace-memberships
   properties:
