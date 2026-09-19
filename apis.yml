@@ -179,7 +179,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Dashboard
+  - Dashboards
   tags_raw:
   - dashboard
   properties:
@@ -269,7 +269,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Schedules
+  - Schedule
   tags_raw:
   - schedules
   properties:
@@ -323,7 +323,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - Workspaces
+  - Workspace
   tags_raw:
   - workspaces
   properties:
