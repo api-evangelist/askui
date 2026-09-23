@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens runner-jobs API
+  title: AskUI Workspaces Runner Jobs API
   version: 0.2.15
 tags:
-- name: runner-jobs
+- name: Runner Jobs
 paths:
   /api/v1/runner-jobs/lease:
     post:
       tags:
-      - runner-jobs
+      - Runner Jobs
       summary: Lease
       operationId: lease_api_v1_runner_jobs_lease_post
       security:
@@ -63,7 +63,7 @@ paths:
   /api/v1/runner-jobs/ping:
     post:
       tags:
-      - runner-jobs
+      - Runner Jobs
       summary: Ping
       operationId: ping_api_v1_runner_jobs_ping_post
       security:
@@ -92,7 +92,7 @@ paths:
   /api/v1/runner-jobs/complete:
     post:
       tags:
-      - runner-jobs
+      - Runner Jobs
       summary: Complete
       operationId: complete_api_v1_runner_jobs_complete_post
       security:
@@ -122,38 +122,26 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    LeaseRunnerJobResponseDto:
+    RunnerHost:
+      type: string
+      enum:
+      - SELF
+      - ASKUI
+      title: RunnerHost
+    PingRunnerJobResponseDto:
       properties:
-        id:
-          type: string
-          title: Id
-        ack:
-          type: string
-          title: Ack
-        status:
-          $ref: '#/components/schemas/RunnerJobStatus'
         visible:
           type: string
           format: date-time
           title: Visible
-        runner_id:
-          type: string
-          title: Runner Id
-        tries:
-          type: integer
-          title: Tries
-        data:
-          $ref: '#/components/schemas/LeaseRunnerJobResponseDtoData'
+        cancel_job:
+          type: boolean
+          title: Cancel Job
       type: object
       required:
-      - id
-      - ack
-      - status
       - visible
-      - runner_id
-      - tries
-      - data
-      title: LeaseRunnerJobResponseDto
+      - cancel_job
+      title: PingRunnerJobResponseDto
     ValidationError:
       properties:
         loc:
@@ -175,25 +163,6 @@ components:
       - msg
       - type
       title: ValidationError
-    LeaseRunnerJobResponseDtoDataCredentials:
-      properties:
-        workspace_id:
-          type: string
-          title: Workspace Id
-        access_token:
-          type: string
-          title: Access Token
-      type: object
-      required:
-      - workspace_id
-      - access_token
-      title: LeaseRunnerJobResponseDtoDataCredentials
-    RunnerHost:
-      type: string
-      enum:
-      - SELF
-      - ASKUI
-      title: RunnerHost
     HTTPValidationError:
       properties:
         detail:
@@ -203,30 +172,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    PingRunnerJobResponseDto:
-      properties:
-        visible:
-          type: string
-          format: date-time
-          title: Visible
-        cancel_job:
-          type: boolean
-          title: Cancel Job
-      type: object
-      required:
-      - visible
-      - cancel_job
-      title: PingRunnerJobResponseDto
-    RunnerJobStatus:
-      type: string
-      enum:
-      - PENDING
-      - RUNNING
-      - PASSED
-      - FAILED
-      - CANCELED
-      - MAX_RETRIES_EXCEEDED
-      title: RunnerJobStatus
     LeaseRunnerJobResponseDtoData:
       properties:
         credentials:
@@ -276,6 +221,61 @@ components:
       required:
       - status
       title: CompleteRunnerJobRequestDto
+    RunnerJobStatus:
+      type: string
+      enum:
+      - PENDING
+      - RUNNING
+      - PASSED
+      - FAILED
+      - CANCELED
+      - MAX_RETRIES_EXCEEDED
+      title: RunnerJobStatus
+    LeaseRunnerJobResponseDto:
+      properties:
+        id:
+          type: string
+          title: Id
+        ack:
+          type: string
+          title: Ack
+        status:
+          $ref: '#/components/schemas/RunnerJobStatus'
+        visible:
+          type: string
+          format: date-time
+          title: Visible
+        runner_id:
+          type: string
+          title: Runner Id
+        tries:
+          type: integer
+          title: Tries
+        data:
+          $ref: '#/components/schemas/LeaseRunnerJobResponseDtoData'
+      type: object
+      required:
+      - id
+      - ack
+      - status
+      - visible
+      - runner_id
+      - tries
+      - data
+      title: LeaseRunnerJobResponseDto
+    LeaseRunnerJobResponseDtoDataCredentials:
+      properties:
+        workspace_id:
+          type: string
+          title: Workspace Id
+        access_token:
+          type: string
+          title: Access Token
+      type: object
+      required:
+      - workspace_id
+      - access_token
+      title: LeaseRunnerJobResponseDtoDataCredentials
   securitySchemes:
     Bearer:
       type: http

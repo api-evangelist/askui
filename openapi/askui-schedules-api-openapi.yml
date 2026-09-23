@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens schedules API
+  title: AskUI Workspaces Schedules API
   version: 0.2.15
 tags:
-- name: schedules
+- name: Schedules
 paths:
   /api/v1/workspaces/{workspace_id}/schedules/{schedule_id}/suspend:
     post:
       tags:
-      - schedules
+      - Schedules
       summary: Suspend Schedule
       operationId: suspend_schedule_api_v1_workspaces__workspace_id__schedules__schedule_id__suspend_post
       security:
@@ -40,7 +40,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/schedules:
     post:
       tags:
-      - schedules
+      - Schedules
       summary: Create Schedule
       operationId: create_schedule_api_v1_workspaces__workspace_id__schedules_post
       security:
@@ -75,24 +75,12 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    RunnerAssignment:
-      properties:
-        ids:
-          items:
-            type: string
-          type: array
-          title: Ids
-        host:
-          $ref: '#/components/schemas/RunnerHost'
-        tags:
-          items:
-            type: string
-          type: array
-          title: Tags
-      type: object
-      required:
-      - host
-      title: RunnerAssignment
+    RunnerHost:
+      type: string
+      enum:
+      - SELF
+      - ASKUI
+      title: RunnerHost
     CreateScheduleRequestDto:
       properties:
         name:
@@ -173,12 +161,29 @@ components:
       - msg
       - type
       title: ValidationError
-    RunnerHost:
-      type: string
-      enum:
-      - SELF
-      - ASKUI
-      title: RunnerHost
+    RunTemplate:
+      properties:
+        workspace_id:
+          type: string
+          title: Workspace Id
+        workflows:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Workflows
+        runner_assignment:
+          $ref: '#/components/schemas/RunnerAssignment'
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - workspace_id
+      - runner_assignment
+      title: RunTemplate
     HTTPValidationError:
       properties:
         detail:
@@ -188,13 +193,24 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ScheduleStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - SUSPENDED
-      - ENDED
-      title: ScheduleStatus
+    RunnerAssignment:
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+          title: Ids
+        host:
+          $ref: '#/components/schemas/RunnerHost'
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+      type: object
+      required:
+      - host
+      title: RunnerAssignment
     CreateScheduleResponseDto:
       properties:
         id:
@@ -242,29 +258,13 @@ components:
       - started_at
       - run_template
       title: CreateScheduleResponseDto
-    RunTemplate:
-      properties:
-        workspace_id:
-          type: string
-          title: Workspace Id
-        workflows:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Workflows
-        runner_assignment:
-          $ref: '#/components/schemas/RunnerAssignment'
-        data:
-          additionalProperties: true
-          type: object
-          title: Data
-      type: object
-      required:
-      - workspace_id
-      - runner_assignment
-      title: RunTemplate
+    ScheduleStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - SUSPENDED
+      - ENDED
+      title: ScheduleStatus
   securitySchemes:
     Bearer:
       type: http

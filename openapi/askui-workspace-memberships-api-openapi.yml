@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens workspace-memberships API
+  title: AskUI Workspaces Workspace Memberships API
   version: 0.2.15
 tags:
-- name: workspace-memberships
+- name: Workspace Memberships
 paths:
   /api/v1/users/{user_id}/workspace-memberships:
     get:
       tags:
-      - workspace-memberships
+      - Workspace Memberships
       summary: List Workspace Membership
       operationId: list_workspace_membership_api_v1_users__user_id__workspace_memberships_get
       deprecated: true
@@ -50,7 +50,7 @@ paths:
   /api/v1/workspace-memberships:
     post:
       tags:
-      - workspace-memberships
+      - Workspace Memberships
       summary: Create Workspace Membership
       operationId: create_workspace_membership_api_v1_workspace_memberships_post
       security:
@@ -77,7 +77,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - workspace-memberships
+      - Workspace Memberships
       summary: List Workspace Memberships
       operationId: list_workspace_memberships_api_v1_workspace_memberships_get
       security:
@@ -134,7 +134,7 @@ paths:
   /api/v1/workspace-memberships/{workspace_membership_id}:
     delete:
       tags:
-      - workspace-memberships
+      - Workspace Memberships
       summary: Delete Workspace Membership
       operationId: delete_workspace_membership_api_v1_workspace_memberships__workspace_membership_id__delete
       security:
@@ -173,104 +173,6 @@ components:
       - ROLE_WORKSPACE_ADMIN
       - ROLE_WORKSPACE_MEMBER
       title: WorkspacePrivilege
-    workspaces__use_cases__workspace_memberships__list_workspace_memberships__WorkspaceMembershipDto:
-      properties:
-        id:
-          type: string
-          format: uuid4
-          title: Id
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        updatedAt:
-          type: string
-          format: date-time
-          title: Updatedat
-        privileges:
-          items:
-            $ref: '#/components/schemas/WorkspacePrivilege'
-          type: array
-          title: Privileges
-        user:
-          anyOf:
-          - $ref: '#/components/schemas/UserDto'
-          - type: 'null'
-        userId:
-          type: string
-          title: Userid
-        workspace:
-          anyOf:
-          - $ref: '#/components/schemas/WorkspaceDto'
-          - type: 'null'
-        workspaceId:
-          type: string
-          format: uuid4
-          title: Workspaceid
-      type: object
-      required:
-      - privileges
-      - userId
-      - workspaceId
-      title: WorkspaceMembershipDto
-    CreateWorkspaceMembershipRequestDto:
-      properties:
-        userId:
-          type: string
-          title: Userid
-        workspaceId:
-          type: string
-          format: uuid4
-          title: Workspaceid
-        privileges:
-          items:
-            $ref: '#/components/schemas/WorkspacePrivilege'
-          type: array
-          maxItems: 1
-          title: Privileges
-      type: object
-      required:
-      - userId
-      - workspaceId
-      title: CreateWorkspaceMembershipRequestDto
-    UserDto:
-      properties:
-        id:
-          type: string
-          title: Id
-        email:
-          type: string
-          format: email
-          title: Email
-        name:
-          type: string
-          title: Name
-        picture:
-          type: string
-          minLength: 1
-          format: uri
-          title: Picture
-        updatedAt:
-          type: string
-          format: date-time
-          title: Updatedat
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        emailVerified:
-          type: boolean
-          title: Emailverified
-      type: object
-      required:
-      - id
-      - email
-      - name
-      - picture
-      - updatedAt
-      - createdAt
-      - emailVerified
-      title: UserDto
     ValidationError:
       properties:
         loc:
@@ -339,6 +241,77 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    WorkspaceMembershipsListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/workspaces__use_cases__workspace_memberships__list_workspace_memberships__WorkspaceMembershipDto'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: WorkspaceMembershipsListResponse
+    workspaces__use_cases__workspace_memberships__list_workspace_memberships__WorkspaceMembershipDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        privileges:
+          items:
+            $ref: '#/components/schemas/WorkspacePrivilege'
+          type: array
+          title: Privileges
+        user:
+          anyOf:
+          - $ref: '#/components/schemas/UserDto'
+          - type: 'null'
+        userId:
+          type: string
+          title: Userid
+        workspace:
+          anyOf:
+          - $ref: '#/components/schemas/WorkspaceDto'
+          - type: 'null'
+        workspaceId:
+          type: string
+          format: uuid4
+          title: Workspaceid
+      type: object
+      required:
+      - privileges
+      - userId
+      - workspaceId
+      title: WorkspaceMembershipDto
+    CreateWorkspaceMembershipRequestDto:
+      properties:
+        userId:
+          type: string
+          title: Userid
+        workspaceId:
+          type: string
+          format: uuid4
+          title: Workspaceid
+        privileges:
+          items:
+            $ref: '#/components/schemas/WorkspacePrivilege'
+          type: array
+          maxItems: 1
+          title: Privileges
+      type: object
+      required:
+      - userId
+      - workspaceId
+      title: CreateWorkspaceMembershipRequestDto
     WorkspaceAccessToken:
       properties:
         id:
@@ -367,17 +340,6 @@ components:
       - hash
       - expires_at
       title: WorkspaceAccessToken
-    WorkspaceMembershipsListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/workspaces__use_cases__workspace_memberships__list_workspace_memberships__WorkspaceMembershipDto'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: WorkspaceMembershipsListResponse
     WorkspaceDto:
       properties:
         id:
@@ -399,6 +361,44 @@ components:
       required:
       - name
       title: WorkspaceDto
+    UserDto:
+      properties:
+        id:
+          type: string
+          title: Id
+        email:
+          type: string
+          format: email
+          title: Email
+        name:
+          type: string
+          title: Name
+        picture:
+          type: string
+          minLength: 1
+          format: uri
+          title: Picture
+        updatedAt:
+          type: string
+          format: date-time
+          title: Updatedat
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        emailVerified:
+          type: boolean
+          title: Emailverified
+      type: object
+      required:
+      - id
+      - email
+      - name
+      - picture
+      - updatedAt
+      - createdAt
+      - emailVerified
+      title: UserDto
   securitySchemes:
     Bearer:
       type: http

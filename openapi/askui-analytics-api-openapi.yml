@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens analytics API
+  title: AskUI Workspaces Analytics API
   version: 0.2.15
 tags:
-- name: analytics
+- name: Analytics
 paths:
   /api/v1/analytics/identify:
     post:
       tags:
-      - analytics
+      - Analytics
       summary: Identify
       operationId: identify_api_v1_analytics_identify_post
       requestBody:
@@ -31,28 +31,6 @@ paths:
       - Basic: []
 components:
   schemas:
-    IdentifyCommand:
-      properties:
-        anonymousId:
-          type: string
-          format: uuid4
-          title: Anonymousid
-        traits:
-          $ref: '#/components/schemas/UserTraits'
-      type: object
-      required:
-      - anonymousId
-      - traits
-      title: IdentifyCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -74,12 +52,34 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     UserTraits:
       properties: {}
       additionalProperties: true
       type: object
       title: UserTraits
       description: Type for user traits sent to Segment.
+    IdentifyCommand:
+      properties:
+        anonymousId:
+          type: string
+          format: uuid4
+          title: Anonymousid
+        traits:
+          $ref: '#/components/schemas/UserTraits'
+      type: object
+      required:
+      - anonymousId
+      - traits
+      title: IdentifyCommand
   securitySchemes:
     Bearer:
       type: http

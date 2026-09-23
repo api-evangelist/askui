@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens API
+  title: AskUI Workspaces Access Tokens API
   version: 0.2.15
 tags:
-- name: access-tokens
+- name: Access Tokens
 paths:
   /api/v1/access-tokens:
     post:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: Create Access Token
       operationId: create_access_token_api_v1_access_tokens_post
       security:
@@ -53,7 +53,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: List Access Tokens
       operationId: list_access_tokens_api_v1_access_tokens_get
       security:
@@ -113,7 +113,7 @@ paths:
   /api/v1/access-tokens/{token_id}:
     delete:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: Delete Access Token
       operationId: delete_access_token_api_v1_access_tokens__token_id__delete
       security:
@@ -163,7 +163,7 @@ paths:
   /api/v1/access-tokens/lookup:
     post:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: Lookup Global Access Token ID
       description: Converts a sensitive global-level access token into its stable identifier (access_token_id). The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token or retrieve usage for the token.
       operationId: lookup_access_token_api_v1_access_tokens_lookup_post
@@ -210,7 +210,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/access-tokens:
     post:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: Create Access Token
       operationId: create_access_token_api_v1_workspaces__workspace_id__access_tokens_post
       security:
@@ -252,7 +252,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: List Access Tokens
       operationId: list_access_tokens_api_v1_workspaces__workspace_id__access_tokens_get
       security:
@@ -292,7 +292,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/access-tokens/{token_id}:
     delete:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: Delete Access Token
       operationId: delete_access_token_api_v1_workspaces__workspace_id__access_tokens__token_id__delete
       security:
@@ -332,7 +332,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/access-tokens/lookup:
     post:
       tags:
-      - access-tokens
+      - Access Tokens
       summary: Lookup Workspace Access Token ID
       description: Converts a sensitive workspace-level access token into its stable identifier (access_token_id) within the specified workspace. The access token can be base64 encoded (similar to Authorization header) or passed raw. This enables clients to reference tokens without transmitting sensitive values, e.g., when trying to delete the token or retrieve usage for the token.
       operationId: lookup_workspace_access_token_api_v1_workspaces__workspace_id__access_tokens_lookup_post
@@ -392,16 +392,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    LookupWorkspaceAccessTokenResponseDto:
-      properties:
-        accessTokenId:
-          type: string
-          format: uuid4
-          title: Accesstokenid
-      type: object
-      required:
-      - accessTokenId
-      title: LookupWorkspaceAccessTokenResponseDto
     CreateWorkspaceAccessTokenRequestDto:
       properties:
         name:
@@ -419,122 +409,6 @@ components:
       required:
       - name
       title: CreateWorkspaceAccessTokenRequestDto
-    CreateSubjectAccessTokenCommand:
-      properties:
-        name:
-          type: string
-          maxLength: 128
-          minLength: 1
-          title: Name
-        expiresAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expiresat
-      type: object
-      required:
-      - name
-      title: CreateSubjectAccessTokenCommand
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    LookupAccessTokenResponseDto:
-      properties:
-        accessTokenId:
-          type: string
-          format: uuid4
-          title: Accesstokenid
-      type: object
-      required:
-      - accessTokenId
-      title: LookupAccessTokenResponseDto
-    AccessTokenResponseDto:
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        id:
-          type: string
-          format: uuid4
-          title: Id
-        name:
-          type: string
-          title: Name
-        expiresAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expiresat
-      type: object
-      required:
-      - id
-      - name
-      title: AccessTokenResponseDto
-    ListAccessTokenResponseDto:
-      properties:
-        id:
-          type: string
-          format: uuid4
-          title: Id
-        name:
-          type: string
-          title: Name
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        expiresAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expiresat
-      type: object
-      required:
-      - id
-      - name
-      - createdAt
-      title: ListAccessTokenResponseDto
-    LookupWorkspaceAccessTokenCommand:
-      properties:
-        accessToken:
-          type: string
-          minLength: 1
-          title: Accesstoken
-      type: object
-      required:
-      - accessToken
-      title: LookupWorkspaceAccessTokenCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     CreateWorkspaceAccessTokenResponseDto:
       properties:
         privateToken:
@@ -557,6 +431,27 @@ components:
       required:
       - accessToken
       title: LookupAccessTokenCommand
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     SubjectAccessTokenResponseDto:
       properties:
         id:
@@ -597,6 +492,79 @@ components:
       - token
       - tokenString
       title: CreateSubjectAccessTokenResponseDto
+    LookupWorkspaceAccessTokenResponseDto:
+      properties:
+        accessTokenId:
+          type: string
+          format: uuid4
+          title: Accesstokenid
+      type: object
+      required:
+      - accessTokenId
+      title: LookupWorkspaceAccessTokenResponseDto
+    ListAccessTokenResponseDto:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - id
+      - name
+      - createdAt
+      title: ListAccessTokenResponseDto
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LookupAccessTokenResponseDto:
+      properties:
+        accessTokenId:
+          type: string
+          format: uuid4
+          title: Accesstokenid
+      type: object
+      required:
+      - accessTokenId
+      title: LookupAccessTokenResponseDto
+    LookupWorkspaceAccessTokenCommand:
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+          title: Accesstoken
+      type: object
+      required:
+      - accessToken
+      title: LookupWorkspaceAccessTokenCommand
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
     ListSubjectAccessTokensResponseDto:
       properties:
         data:
@@ -608,15 +576,47 @@ components:
       required:
       - data
       title: ListSubjectAccessTokensResponseDto
-    StringErrorResponse:
+    AccessTokenResponseDto:
       properties:
-        detail:
+        createdAt:
           type: string
-          title: Detail
+          format: date-time
+          title: Createdat
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
       type: object
       required:
-      - detail
-      title: StringErrorResponse
+      - id
+      - name
+      title: AccessTokenResponseDto
+    CreateSubjectAccessTokenCommand:
+      properties:
+        name:
+          type: string
+          maxLength: 128
+          minLength: 1
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - name
+      title: CreateSubjectAccessTokenCommand
   securitySchemes:
     Bearer:
       type: http

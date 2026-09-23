@@ -1,21 +1,7 @@
 {
   "provider": "askui",
   "sources": [
-    "askui-access-tokens-api-openapi.yml",
-    "askui-agent-executions-api-openapi.yml",
-    "askui-agents-api-openapi.yml",
-    "askui-analytics-api-openapi.yml",
-    "askui-auth-api-openapi.yml",
-    "askui-billing-api-openapi.yml",
-    "askui-dashboard-api-openapi.yml",
-    "askui-files-api-openapi.yml",
-    "askui-invites-api-openapi.yml",
-    "askui-runner-jobs-api-openapi.yml",
-    "askui-runs-api-openapi.yml",
-    "askui-schedules-api-openapi.yml",
-    "askui-tools-api-openapi.yml",
-    "askui-workspace-memberships-api-openapi.yml",
-    "askui-workspaces-api-openapi.yml"
+    "_original/askui-workspace-service-openapi-original.json"
   ],
   "outputs": [
     "askui-access-tokens-api-openapi.yml",
@@ -37,6 +23,41 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "askui-workspace-service-openapi-original.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "askui-workspace-service-openapi-original.json: declared missing tag: access-tokens",
+    "askui-workspace-service-openapi-original.json: declared missing tag: agent-executions",
+    "askui-workspace-service-openapi-original.json: declared missing tag: agents",
+    "askui-workspace-service-openapi-original.json: declared missing tag: analytics",
+    "askui-workspace-service-openapi-original.json: declared missing tag: auth",
+    "askui-workspace-service-openapi-original.json: declared missing tag: billing",
+    "askui-workspace-service-openapi-original.json: declared missing tag: dashboard",
+    "askui-workspace-service-openapi-original.json: declared missing tag: files",
+    "askui-workspace-service-openapi-original.json: declared missing tag: invites",
+    "askui-workspace-service-openapi-original.json: declared missing tag: runner-jobs",
+    "askui-workspace-service-openapi-original.json: declared missing tag: runs",
+    "askui-workspace-service-openapi-original.json: declared missing tag: schedules",
+    "askui-workspace-service-openapi-original.json: declared missing tag: tools",
+    "askui-workspace-service-openapi-original.json: declared missing tag: workspace-memberships",
+    "askui-workspace-service-openapi-original.json: declared missing tag: workspaces",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "askui-access-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-agent-executions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-billing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-dashboard-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-invites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-runner-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-schedules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-tools-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-workspace-memberships-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "askui-workspaces-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

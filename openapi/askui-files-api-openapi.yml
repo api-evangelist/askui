@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens files API
+  title: AskUI Workspaces Files API
   version: 0.2.15
 tags:
-- name: files
+- name: Files
 paths:
   /api/v1/files:
     get:
       tags:
-      - files
+      - Files
       summary: List Files
       description: 'List files.
 
@@ -103,7 +103,7 @@ paths:
   /api/v1/files/{file_path}:
     put:
       tags:
-      - files
+      - Files
       summary: Upload File
       description: 'Upload a file (max. 5 GB) to the specified path.
 
@@ -184,7 +184,7 @@ paths:
                 $ref: '#/components/schemas/StringErrorResponse'
     delete:
       tags:
-      - files
+      - Files
       summary: Delete File
       description: 'Delete a file at the specified path.
 
@@ -239,7 +239,7 @@ paths:
   /api/v1/files/signed-cookies:
     post:
       tags:
-      - files
+      - Files
       summary: Set Signed Cookies
       description: Set http-only, secure (signed) cookies for accessing (only READ access) files via AWS CloudFront across all accessible workspaces. If no workspace id is provided, no cookies will be set.
       operationId: set_signed_cookies_api_v1_files_signed_cookies_post
@@ -313,6 +313,24 @@ components:
       - size
       - lastModified
       title: FileDto
+    FolderDto:
+      properties:
+        type:
+          type: string
+          const: folder
+          title: Type
+          default: folder
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+      type: object
+      required:
+      - name
+      - path
+      title: FolderDto
     ValidationError:
       properties:
         loc:
@@ -334,37 +352,6 @@ components:
       - msg
       - type
       title: ValidationError
-    FolderDto:
-      properties:
-        type:
-          type: string
-          const: folder
-          title: Type
-          default: folder
-        name:
-          type: string
-          title: Name
-        path:
-          type: string
-          title: Path
-      type: object
-      required:
-      - name
-      - path
-      title: FolderDto
-    UploadFileResponse:
-      properties:
-        filePath:
-          type: string
-          title: Filepath
-        contentType:
-          type: string
-          title: Contenttype
-      type: object
-      required:
-      - filePath
-      - contentType
-      title: UploadFileResponse
     HTTPValidationError:
       properties:
         detail:
@@ -429,6 +416,19 @@ components:
       required:
       - detail
       title: StringErrorResponse
+    UploadFileResponse:
+      properties:
+        filePath:
+          type: string
+          title: Filepath
+        contentType:
+          type: string
+          title: Contenttype
+      type: object
+      required:
+      - filePath
+      - contentType
+      title: UploadFileResponse
   securitySchemes:
     Bearer:
       type: http

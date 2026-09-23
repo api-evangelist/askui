@@ -1,14 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AskUI Workspaces access-tokens billing API
+  title: AskUI Workspaces Billing API
   version: 0.2.15
 tags:
-- name: billing
+- name: Billing
 paths:
   /api/v1/workspaces/{workspace_id}/billing/customer-portal-session:
     post:
       tags:
-      - billing
+      - Billing
       summary: Create Customer Portal Session
       operationId: create_customer_portal_session_api_v1_workspaces__workspace_id__billing_customer_portal_session_post
       security:
@@ -51,7 +51,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/billing/subscription:
     get:
       tags:
-      - billing
+      - Billing
       summary: Get workspace subscription details
       description: Retrieves the subscription details for the workspace, including Stripe product information.
       operationId: get_workspace_subscription_api_v1_workspaces__workspace_id__billing_subscription_get
@@ -91,7 +91,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/billing/prices:
     get:
       tags:
-      - billing
+      - Billing
       summary: List available subscription prices
       description: Returns the list of prices configured for checkout, fetched from Stripe.
       operationId: list_prices_api_v1_workspaces__workspace_id__billing_prices_get
@@ -122,7 +122,7 @@ paths:
   /api/v1/workspaces/{workspace_id}/billing/checkout:
     post:
       tags:
-      - billing
+      - Billing
       summary: Create a Stripe Checkout Session
       description: Creates a Checkout Session for a trial-only workspace to purchase a subscription plan. The workspace must not already have an active Stripe subscription.
       operationId: create_checkout_session_api_v1_workspaces__workspace_id__billing_checkout_post
@@ -167,6 +167,30 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ListPricesResponseDto:
+      properties:
+        prices:
+          items:
+            $ref: '#/components/schemas/PriceItemDto'
+          type: array
+          title: Prices
+      type: object
+      required:
+      - prices
+      title: ListPricesResponseDto
+      description: Response containing all available prices.
+    CreateCheckoutSessionResponseDto:
+      properties:
+        sessionUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Sessionurl
+      type: object
+      required:
+      - sessionUrl
+      title: CreateCheckoutSessionResponseDto
     PriceItemDto:
       properties:
         id:
@@ -201,16 +225,6 @@ components:
       - productAllowedUsage
       title: PriceItemDto
       description: Single price entry returned to the frontend.
-    SubscriptionItemDto:
-      properties:
-        productAllowedUsage:
-          type: integer
-          title: Productallowedusage
-      type: object
-      required:
-      - productAllowedUsage
-      title: SubscriptionItemDto
-      description: Subscription item with only the requested fields
     ValidationError:
       properties:
         loc:
@@ -244,7 +258,7 @@ components:
       required:
       - returnUrl
       title: CreateCustomerPortalSessionRequestDto
-    CreateCheckoutSessionResponseDto:
+    CreateCustomerPortalSessionResponseDto:
       properties:
         sessionUrl:
           type: string
@@ -255,7 +269,26 @@ components:
       type: object
       required:
       - sessionUrl
-      title: CreateCheckoutSessionResponseDto
+      title: CreateCustomerPortalSessionResponseDto
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SubscriptionItemDto:
+      properties:
+        productAllowedUsage:
+          type: integer
+          title: Productallowedusage
+      type: object
+      required:
+      - productAllowedUsage
+      title: SubscriptionItemDto
+      description: Subscription item with only the requested fields
     CreateCheckoutSessionCommand:
       properties:
         priceId:
@@ -272,15 +305,6 @@ components:
       - priceId
       - returnUrl
       title: CreateCheckoutSessionCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     GetSubscriptionResponseDto:
       properties:
         currentPeriodStart:
@@ -307,30 +331,6 @@ components:
       - currentPeriodEnd
       title: GetSubscriptionResponseDto
       description: Simplified response DTO with only the requested fields
-    CreateCustomerPortalSessionResponseDto:
-      properties:
-        sessionUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Sessionurl
-      type: object
-      required:
-      - sessionUrl
-      title: CreateCustomerPortalSessionResponseDto
-    ListPricesResponseDto:
-      properties:
-        prices:
-          items:
-            $ref: '#/components/schemas/PriceItemDto'
-          type: array
-          title: Prices
-      type: object
-      required:
-      - prices
-      title: ListPricesResponseDto
-      description: Response containing all available prices.
   securitySchemes:
     Bearer:
       type: http
