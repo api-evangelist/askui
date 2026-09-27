@@ -76,15 +76,6 @@ components:
       - filePaths
       - dataSchema
       title: ExtractDataCommand
-    StringErrorResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: StringErrorResponse
     JsonSchema:
       properties:
         title:
@@ -117,6 +108,15 @@ components:
       required:
       - properties
       title: JsonSchema
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
     ExtractDataResponse:
       properties:
         data:

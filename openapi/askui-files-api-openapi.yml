@@ -278,6 +278,122 @@ paths:
       - Basic: []
 components:
   schemas:
+    GenerateSignedCookiesCommand:
+      properties:
+        workspaceId:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Workspaceid
+          description: Must be set to access files within workspace
+      type: object
+      required:
+      - workspaceId
+      title: GenerateSignedCookiesCommand
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_upload_file_api_v1_files__file_path__put:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_v1_files__file_path__put
+    FolderDto:
+      properties:
+        type:
+          type: string
+          const: folder
+          title: Type
+          default: folder
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
+      type: object
+      required:
+      - name
+      - path
+      title: FolderDto
+    UploadFileResponse:
+      properties:
+        filePath:
+          type: string
+          title: Filepath
+        contentType:
+          type: string
+          title: Contenttype
+      type: object
+      required:
+      - filePath
+      - contentType
+      title: UploadFileResponse
+    FilesListResponseDto:
+      properties:
+        data:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FileDto'
+            - $ref: '#/components/schemas/FolderDto'
+            discriminator:
+              propertyName: type
+              mapping:
+                file: '#/components/schemas/FileDto'
+                folder: '#/components/schemas/FolderDto'
+          type: array
+          title: Data
+        nextContinuationToken:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Nextcontinuationtoken
+      type: object
+      required:
+      - data
+      title: FilesListResponseDto
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
     FileDto:
       properties:
         type:
@@ -313,122 +429,6 @@ components:
       - size
       - lastModified
       title: FileDto
-    FolderDto:
-      properties:
-        type:
-          type: string
-          const: folder
-          title: Type
-          default: folder
-        name:
-          type: string
-          title: Name
-        path:
-          type: string
-          title: Path
-      type: object
-      required:
-      - name
-      - path
-      title: FolderDto
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    FilesListResponseDto:
-      properties:
-        data:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/FileDto'
-            - $ref: '#/components/schemas/FolderDto'
-            discriminator:
-              propertyName: type
-              mapping:
-                file: '#/components/schemas/FileDto'
-                folder: '#/components/schemas/FolderDto'
-          type: array
-          title: Data
-        nextContinuationToken:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Nextcontinuationtoken
-      type: object
-      required:
-      - data
-      title: FilesListResponseDto
-    GenerateSignedCookiesCommand:
-      properties:
-        workspaceId:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: 'null'
-          title: Workspaceid
-          description: Must be set to access files within workspace
-      type: object
-      required:
-      - workspaceId
-      title: GenerateSignedCookiesCommand
-    Body_upload_file_api_v1_files__file_path__put:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_upload_file_api_v1_files__file_path__put
-    StringErrorResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: StringErrorResponse
-    UploadFileResponse:
-      properties:
-        filePath:
-          type: string
-          title: Filepath
-        contentType:
-          type: string
-          title: Contenttype
-      type: object
-      required:
-      - filePath
-      - contentType
-      title: UploadFileResponse
   securitySchemes:
     Bearer:
       type: http

@@ -66,7 +66,7 @@ maintainers:
   email: info@apis.io
 apis:
 - aid: askui:askui-access-tokens-api
-  name: AskUI access-tokens API
+  name: AskUI Access Tokens API
   description: The access-tokens API from AskUI — 6 operation(s) for access-tokens.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -84,7 +84,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-agent-executions-api
-  name: AskUI agent-executions API
+  name: AskUI Agent Executions API
   description: The agent-executions API from AskUI — 2 operation(s) for agent-executions.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -102,7 +102,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-agents-api
-  name: AskUI agents API
+  name: AskUI Agents API
   description: The agents API from AskUI — 3 operation(s) for agents.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -120,7 +120,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-analytics-api
-  name: AskUI analytics API
+  name: AskUI Analytics API
   description: The analytics API from AskUI — 1 operation(s) for analytics.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -138,7 +138,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-auth-api
-  name: AskUI auth API
+  name: AskUI Auth API
   description: The auth API from AskUI — 2 operation(s) for auth.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -156,7 +156,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-billing-api
-  name: AskUI billing API
+  name: AskUI Billing API
   description: The billing API from AskUI — 4 operation(s) for billing.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -174,7 +174,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-dashboard-api
-  name: AskUI dashboard API
+  name: AskUI Dashboard API
   description: The dashboard API from AskUI — 1 operation(s) for dashboard.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -192,7 +192,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-files-api
-  name: AskUI files API
+  name: AskUI Files API
   description: The files API from AskUI — 3 operation(s) for files.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -210,7 +210,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-invites-api
-  name: AskUI invites API
+  name: AskUI Invites API
   description: The invites API from AskUI — 3 operation(s) for invites.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -228,7 +228,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-runner-jobs-api
-  name: AskUI runner-jobs API
+  name: AskUI Runner Jobs API
   description: The runner-jobs API from AskUI — 3 operation(s) for runner-jobs.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -246,7 +246,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-runs-api
-  name: AskUI runs API
+  name: AskUI Runs API
   description: The runs API from AskUI — 1 operation(s) for runs.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -264,7 +264,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-schedules-api
-  name: AskUI schedules API
+  name: AskUI Schedules API
   description: The schedules API from AskUI — 2 operation(s) for schedules.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -282,7 +282,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-tools-api
-  name: AskUI tools API
+  name: AskUI Tools API
   description: The tools API from AskUI — 1 operation(s) for tools.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -300,7 +300,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-workspace-memberships-api
-  name: AskUI workspace-memberships API
+  name: AskUI Workspace Memberships API
   description: The workspace-memberships API from AskUI — 3 operation(s) for workspace-memberships.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
@@ -318,7 +318,7 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 - aid: askui:askui-workspaces-api
-  name: AskUI workspaces API
+  name: AskUI Workspaces API
   description: The workspaces API from AskUI — 2 operation(s) for workspaces.
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com

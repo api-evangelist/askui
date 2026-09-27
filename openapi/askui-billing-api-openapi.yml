@@ -167,18 +167,64 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ListPricesResponseDto:
+    CreateCustomerPortalSessionResponseDto:
       properties:
-        prices:
-          items:
-            $ref: '#/components/schemas/PriceItemDto'
-          type: array
-          title: Prices
+        sessionUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Sessionurl
       type: object
       required:
-      - prices
-      title: ListPricesResponseDto
-      description: Response containing all available prices.
+      - sessionUrl
+      title: CreateCustomerPortalSessionResponseDto
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateCheckoutSessionCommand:
+      properties:
+        priceId:
+          type: string
+          title: Priceid
+        returnUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Returnurl
+      type: object
+      required:
+      - priceId
+      - returnUrl
+      title: CreateCheckoutSessionCommand
     CreateCheckoutSessionResponseDto:
       properties:
         sessionUrl:
@@ -191,6 +237,18 @@ components:
       required:
       - sessionUrl
       title: CreateCheckoutSessionResponseDto
+    CreateCustomerPortalSessionRequestDto:
+      properties:
+        returnUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Returnurl
+      type: object
+      required:
+      - returnUrl
+      title: CreateCustomerPortalSessionRequestDto
     PriceItemDto:
       properties:
         id:
@@ -225,60 +283,6 @@ components:
       - productAllowedUsage
       title: PriceItemDto
       description: Single price entry returned to the frontend.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    CreateCustomerPortalSessionRequestDto:
-      properties:
-        returnUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Returnurl
-      type: object
-      required:
-      - returnUrl
-      title: CreateCustomerPortalSessionRequestDto
-    CreateCustomerPortalSessionResponseDto:
-      properties:
-        sessionUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Sessionurl
-      type: object
-      required:
-      - sessionUrl
-      title: CreateCustomerPortalSessionResponseDto
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     SubscriptionItemDto:
       properties:
         productAllowedUsage:
@@ -289,22 +293,18 @@ components:
       - productAllowedUsage
       title: SubscriptionItemDto
       description: Subscription item with only the requested fields
-    CreateCheckoutSessionCommand:
+    ListPricesResponseDto:
       properties:
-        priceId:
-          type: string
-          title: Priceid
-        returnUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Returnurl
+        prices:
+          items:
+            $ref: '#/components/schemas/PriceItemDto'
+          type: array
+          title: Prices
       type: object
       required:
-      - priceId
-      - returnUrl
-      title: CreateCheckoutSessionCommand
+      - prices
+      title: ListPricesResponseDto
+      description: Response containing all available prices.
     GetSubscriptionResponseDto:
       properties:
         currentPeriodStart:

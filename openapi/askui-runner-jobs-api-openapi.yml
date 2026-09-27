@@ -122,12 +122,16 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    RunnerHost:
+    RunnerJobStatus:
       type: string
       enum:
-      - SELF
-      - ASKUI
-      title: RunnerHost
+      - PENDING
+      - RUNNING
+      - PASSED
+      - FAILED
+      - CANCELED
+      - MAX_RETRIES_EXCEEDED
+      title: RunnerJobStatus
     PingRunnerJobResponseDto:
       properties:
         visible:
@@ -163,15 +167,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     LeaseRunnerJobResponseDtoData:
       properties:
         credentials:
@@ -208,29 +203,21 @@ components:
       - workflows_api_url
       - inference_api_url
       title: LeaseRunnerJobResponseDtoData
-    CompleteRunnerJobRequestDto:
+    HTTPValidationError:
       properties:
-        status:
-          type: string
-          enum:
-          - CANCELED
-          - FAILED
-          - PASSED
-          title: Status
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - status
-      title: CompleteRunnerJobRequestDto
-    RunnerJobStatus:
+      title: HTTPValidationError
+    RunnerHost:
       type: string
       enum:
-      - PENDING
-      - RUNNING
-      - PASSED
-      - FAILED
-      - CANCELED
-      - MAX_RETRIES_EXCEEDED
-      title: RunnerJobStatus
+      - SELF
+      - ASKUI
+      title: RunnerHost
     LeaseRunnerJobResponseDto:
       properties:
         id:
@@ -263,6 +250,19 @@ components:
       - tries
       - data
       title: LeaseRunnerJobResponseDto
+    CompleteRunnerJobRequestDto:
+      properties:
+        status:
+          type: string
+          enum:
+          - CANCELED
+          - FAILED
+          - PASSED
+          title: Status
+      type: object
+      required:
+      - status
+      title: CompleteRunnerJobRequestDto
     LeaseRunnerJobResponseDtoDataCredentials:
       properties:
         workspace_id:

@@ -31,6 +31,21 @@ paths:
       - Basic: []
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserTraits:
+      properties: {}
+      additionalProperties: true
+      type: object
+      title: UserTraits
+      description: Type for user traits sent to Segment.
     ValidationError:
       properties:
         loc:
@@ -52,21 +67,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    UserTraits:
-      properties: {}
-      additionalProperties: true
-      type: object
-      title: UserTraits
-      description: Type for user traits sent to Segment.
     IdentifyCommand:
       properties:
         anonymousId:

@@ -123,6 +123,20 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    GetJobResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        status:
+          type: string
+          title: Status
+          description: The status of the job. Can be `pending`, `completed` etc.
+      type: object
+      required:
+      - id
+      - status
+      title: GetJobResponse
     StringErrorResponse:
       properties:
         detail:
@@ -145,20 +159,6 @@ components:
       - jobId
       - jobStatus
       title: SendVerificationEmailResponse
-    GetJobResponse:
-      properties:
-        id:
-          type: string
-          title: Id
-        status:
-          type: string
-          title: Status
-          description: The status of the job. Can be `pending`, `completed` etc.
-      type: object
-      required:
-      - id
-      - status
-      title: GetJobResponse
   securitySchemes:
     Bearer:
       type: http
