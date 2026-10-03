@@ -278,90 +278,6 @@ paths:
       - Basic: []
 components:
   schemas:
-    GenerateSignedCookiesCommand:
-      properties:
-        workspaceId:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: 'null'
-          title: Workspaceid
-          description: Must be set to access files within workspace
-      type: object
-      required:
-      - workspaceId
-      title: GenerateSignedCookiesCommand
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_upload_file_api_v1_files__file_path__put:
-      properties:
-        file:
-          type: string
-          format: binary
-          title: File
-      type: object
-      required:
-      - file
-      title: Body_upload_file_api_v1_files__file_path__put
-    FolderDto:
-      properties:
-        type:
-          type: string
-          const: folder
-          title: Type
-          default: folder
-        name:
-          type: string
-          title: Name
-        path:
-          type: string
-          title: Path
-      type: object
-      required:
-      - name
-      - path
-      title: FolderDto
-    UploadFileResponse:
-      properties:
-        filePath:
-          type: string
-          title: Filepath
-        contentType:
-          type: string
-          title: Contenttype
-      type: object
-      required:
-      - filePath
-      - contentType
-      title: UploadFileResponse
     FilesListResponseDto:
       properties:
         data:
@@ -385,15 +301,60 @@ components:
       required:
       - data
       title: FilesListResponseDto
-    StringErrorResponse:
+    FolderDto:
       properties:
-        detail:
+        type:
           type: string
-          title: Detail
+          const: folder
+          title: Type
+          default: folder
+        name:
+          type: string
+          title: Name
+        path:
+          type: string
+          title: Path
       type: object
       required:
-      - detail
-      title: StringErrorResponse
+      - name
+      - path
+      title: FolderDto
+    GenerateSignedCookiesCommand:
+      properties:
+        workspaceId:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Workspaceid
+          description: Must be set to access files within workspace
+      type: object
+      required:
+      - workspaceId
+      title: GenerateSignedCookiesCommand
+    UploadFileResponse:
+      properties:
+        filePath:
+          type: string
+          title: Filepath
+        contentType:
+          type: string
+          title: Contenttype
+      type: object
+      required:
+      - filePath
+      - contentType
+      title: UploadFileResponse
+    Body_upload_file_api_v1_files__file_path__put:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_v1_files__file_path__put
     FileDto:
       properties:
         type:
@@ -429,6 +390,45 @@ components:
       - size
       - lastModified
       title: FileDto
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
   securitySchemes:
     Bearer:
       type: http

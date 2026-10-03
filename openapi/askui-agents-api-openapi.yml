@@ -182,82 +182,89 @@ paths:
       - Basic: []
 components:
   schemas:
-    JsonSchema:
+    AgentUpdateCommand:
       properties:
-        title:
-          type: string
-          pattern: ^[a-zA-Z0-9_-]+$
-          title: Title
-          default: DataToExtract
+        name:
+          anyOf:
+          - type: string
+            pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
+            description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
+          - type: 'null'
+          title: Name
         description:
-          type: string
+          anyOf:
+          - type: string
+            maxLength: 1024
+            default: ''
+          - type: 'null'
           title: Description
-          default: ''
+        status:
+          anyOf:
+          - type: string
+            enum:
+            - ACTIVE
+            - ARCHIVED
+          - type: 'null'
+          title: Status
+        emailTrigger:
+          anyOf:
+          - $ref: '#/components/schemas/EmailAgentTriggerUpdate'
+          - type: 'null'
+        autoConfirm:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Autoconfirm
+      type: object
+      title: AgentUpdateCommand
+    DataDestinationAskUiWorkflow:
+      properties:
         type:
           type: string
-          const: object
+          const: ASKUI_WORKFLOW
           title: Type
-          default: object
-        properties:
-          additionalProperties:
-            additionalProperties: true
-            type: object
-          type: object
-          minProperties: 1
-          title: Properties
-        required:
+          default: ASKUI_WORKFLOW
+        host:
+          $ref: '#/components/schemas/AskUiRunnerHost'
+        runnerTags:
           items:
             type: string
           type: array
-          title: Required
+          title: Runnertags
+        workflows:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Workflows
       type: object
       required:
-      - properties
-      title: JsonSchema
-    EmailAgentTrigger:
+      - host
+      - runnerTags
+      - workflows
+      title: DataDestinationAskUiWorkflow
+    AgentsListResponse:
       properties:
-        active:
+        data:
+          items:
+            $ref: '#/components/schemas/Agent'
+          type: array
+          title: Data
+        hasMore:
           type: boolean
-          title: Active
-          description: If false, no emails can be send to trigger agent.
-          default: true
-        allowedSenders:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-          title: Allowedsenders
-          description: The email addresses that are allowed to send emails to trigger the agent. If empty, no emails can be send to trigger agent.
-        email:
-          type: string
-          pattern: ^[a-zA-Z0-9-_.+]+@.*$
-          title: Email
-          description: 'The email address of the agent to send emails to to trigger the agent. The email address must be unique for each agent. The domain of the email address is fixed. The local part of the email address must be between 1 and 64 characters long and can only contain the following characters: a-z, A-Z, 0-9, -, _, . and +.'
+          title: Hasmore
+          description: Whether there are more agents that match the query that were not included in this response.
+          default: false
+        totalCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Totalcount
+          description: The total number of agents that match the query, only accurate up to 100.
       type: object
       required:
-      - email
-      title: EmailAgentTrigger
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - data
+      title: AgentsListResponse
     DataDestinationWebhookCreate:
       properties:
         type:
@@ -280,15 +287,87 @@ components:
       required:
       - url
       title: DataDestinationWebhookCreate
-    HTTPValidationError:
+    DataDestinationWebhook:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        type:
+          type: string
+          const: WEBHOOK
+          title: Type
+          default: WEBHOOK
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+          title: Headers
       type: object
-      title: HTTPValidationError
+      required:
+      - url
+      - headers
+      title: DataDestinationWebhook
+    EmailAgentTriggerUpdate:
+      properties:
+        active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Active
+        allowedSenders:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            uniqueItems: true
+          - type: 'null'
+          title: Allowedsenders
+        localPart:
+          anyOf:
+          - type: string
+            pattern: ^[a-zA-Z0-9-_.+]+$
+          - type: 'null'
+          title: Localpart
+      type: object
+      title: EmailAgentTriggerUpdate
+    AgentTemplate:
+      properties:
+        id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9-_.]{0,64}$
+          title: Id
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
+          title: Name
+          description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
+        description:
+          type: string
+          maxLength: 1024
+          title: Description
+          default: ''
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        lastModified:
+          type: string
+          format: date-time
+          title: Lastmodified
+      type: object
+      required:
+      - id
+      - name
+      - url
+      - lastModified
+      title: AgentTemplate
     AgentCreateCommand:
       properties:
         name:
@@ -370,76 +449,15 @@ components:
           title: Workflows
       type: object
       title: DataDestinationAskUiWorkflowCreate
-    AgentTemplate:
+    HTTPValidationError:
       properties:
-        id:
-          type: string
-          maxLength: 64
-          minLength: 1
-          pattern: ^[a-zA-Z0-9-_.]{0,64}$
-          title: Id
-        name:
-          type: string
-          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
-          title: Name
-          description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
-        description:
-          type: string
-          maxLength: 1024
-          title: Description
-          default: ''
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-        lastModified:
-          type: string
-          format: date-time
-          title: Lastmodified
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - name
-      - url
-      - lastModified
-      title: AgentTemplate
-    AgentUpdateCommand:
-      properties:
-        name:
-          anyOf:
-          - type: string
-            pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
-            description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-            maxLength: 1024
-            default: ''
-          - type: 'null'
-          title: Description
-        status:
-          anyOf:
-          - type: string
-            enum:
-            - ACTIVE
-            - ARCHIVED
-          - type: 'null'
-          title: Status
-        emailTrigger:
-          anyOf:
-          - $ref: '#/components/schemas/EmailAgentTriggerUpdate'
-          - type: 'null'
-        autoConfirm:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Autoconfirm
-      type: object
-      title: AgentUpdateCommand
+      title: HTTPValidationError
     EmailAgentTriggerCreate:
       properties:
         active:
@@ -463,117 +481,88 @@ components:
           description: Defaults to a unique email string if not provided.
       type: object
       title: EmailAgentTriggerCreate
-    ListAgentTemplatesResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentTemplate'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: ListAgentTemplatesResponse
     AskUiRunnerHost:
       type: string
       enum:
       - SELF
       - ASKUI
       title: AskUiRunnerHost
-    DataDestinationAskUiWorkflow:
+    JsonSchema:
       properties:
+        title:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]+$
+          title: Title
+          default: DataToExtract
+        description:
+          type: string
+          title: Description
+          default: ''
         type:
           type: string
-          const: ASKUI_WORKFLOW
+          const: object
           title: Type
-          default: ASKUI_WORKFLOW
-        host:
-          $ref: '#/components/schemas/AskUiRunnerHost'
-        runnerTags:
+          default: object
+        properties:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+          type: object
+          minProperties: 1
+          title: Properties
+        required:
           items:
             type: string
           type: array
-          title: Runnertags
-        workflows:
-          items:
-            type: string
-          type: array
-          minItems: 1
-          title: Workflows
+          title: Required
       type: object
       required:
-      - host
-      - runnerTags
-      - workflows
-      title: DataDestinationAskUiWorkflow
-    AgentsListResponse:
+      - properties
+      title: JsonSchema
+    ValidationError:
       properties:
-        data:
+        loc:
           items:
-            $ref: '#/components/schemas/Agent'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Data
-        hasMore:
-          type: boolean
-          title: Hasmore
-          description: Whether there are more agents that match the query that were not included in this response.
-          default: false
-        totalCount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Totalcount
-          description: The total number of agents that match the query, only accurate up to 100.
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - data
-      title: AgentsListResponse
-    EmailAgentTriggerUpdate:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    EmailAgentTrigger:
       properties:
         active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Active
+          description: If false, no emails can be send to trigger agent.
+          default: true
         allowedSenders:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            uniqueItems: true
-          - type: 'null'
-          title: Allowedsenders
-        localPart:
-          anyOf:
-          - type: string
-            pattern: ^[a-zA-Z0-9-_.+]+$
-          - type: 'null'
-          title: Localpart
-      type: object
-      title: EmailAgentTriggerUpdate
-    DataDestinationWebhook:
-      properties:
-        type:
-          type: string
-          const: WEBHOOK
-          title: Type
-          default: WEBHOOK
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-        headers:
-          additionalProperties:
+          items:
             type: string
-          type: object
-          title: Headers
+          type: array
+          uniqueItems: true
+          title: Allowedsenders
+          description: The email addresses that are allowed to send emails to trigger the agent. If empty, no emails can be send to trigger agent.
+        email:
+          type: string
+          pattern: ^[a-zA-Z0-9-_.+]+@.*$
+          title: Email
+          description: 'The email address of the agent to send emails to to trigger the agent. The email address must be unique for each agent. The domain of the email address is fixed. The local part of the email address must be between 1 and 64 characters long and can only contain the following characters: a-z, A-Z, 0-9, -, _, . and +.'
       type: object
       required:
-      - url
-      - headers
-      title: DataDestinationWebhook
+      - email
+      title: EmailAgentTrigger
     Agent:
       properties:
         id:
@@ -645,6 +634,17 @@ components:
       - dataDestinations
       - workspaceId
       title: Agent
+    ListAgentTemplatesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentTemplate'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ListAgentTemplatesResponse
   securitySchemes:
     Bearer:
       type: http

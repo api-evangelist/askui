@@ -217,6 +217,55 @@ components:
       - expiresAt
       - workspaceName
       title: InviteResponse
+    ListInvitesResponse:
+      properties:
+        invites:
+          items:
+            $ref: '#/components/schemas/InviteResponse'
+          type: array
+          title: Invites
+      type: object
+      required:
+      - invites
+      title: ListInvitesResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    InviteStatus:
+      type: string
+      enum:
+      - pending
+      - accepted
+      - declined
+      - revoked
+      - expired
+      title: InviteStatus
+    WorkspacePrivilege:
+      type: string
+      enum:
+      - ROLE_WORKSPACE_OWNER
+      - ROLE_WORKSPACE_ADMIN
+      - ROLE_WORKSPACE_MEMBER
+      title: WorkspacePrivilege
+    CreateInviteCommand:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        privilege:
+          $ref: '#/components/schemas/WorkspacePrivilege'
+      type: object
+      required:
+      - email
+      - privilege
+      title: CreateInviteCommand
     ValidationError:
       properties:
         loc:
@@ -238,22 +287,14 @@ components:
       - msg
       - type
       title: ValidationError
-    WorkspacePrivilege:
-      type: string
-      enum:
-      - ROLE_WORKSPACE_OWNER
-      - ROLE_WORKSPACE_ADMIN
-      - ROLE_WORKSPACE_MEMBER
-      title: WorkspacePrivilege
-    HTTPValidationError:
+    ProcessWorkspaceInviteCommand:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        action:
+          $ref: '#/components/schemas/InviteActionEnum'
       type: object
-      title: HTTPValidationError
+      required:
+      - action
+      title: ProcessWorkspaceInviteCommand
     ListUserInvitesResponse:
       properties:
         invites:
@@ -265,53 +306,12 @@ components:
       required:
       - invites
       title: ListUserInvitesResponse
-    CreateInviteCommand:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-        privilege:
-          $ref: '#/components/schemas/WorkspacePrivilege'
-      type: object
-      required:
-      - email
-      - privilege
-      title: CreateInviteCommand
     InviteActionEnum:
       type: string
       enum:
       - accept
       - decline
       title: InviteActionEnum
-    ProcessWorkspaceInviteCommand:
-      properties:
-        action:
-          $ref: '#/components/schemas/InviteActionEnum'
-      type: object
-      required:
-      - action
-      title: ProcessWorkspaceInviteCommand
-    InviteStatus:
-      type: string
-      enum:
-      - pending
-      - accepted
-      - declined
-      - revoked
-      - expired
-      title: InviteStatus
-    ListInvitesResponse:
-      properties:
-        invites:
-          items:
-            $ref: '#/components/schemas/InviteResponse'
-          type: array
-          title: Invites
-      type: object
-      required:
-      - invites
-      title: ListInvitesResponse
   securitySchemes:
     Bearer:
       type: http

@@ -83,6 +83,38 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    SendVerificationEmailCommand:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: SendVerificationEmailCommand
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SendVerificationEmailResponse:
+      properties:
+        jobId:
+          type: string
+          title: Jobid
+        jobStatus:
+          type: string
+          title: Jobstatus
+      type: object
+      required:
+      - jobId
+      - jobStatus
+      title: SendVerificationEmailResponse
     ValidationError:
       properties:
         loc:
@@ -104,25 +136,6 @@ components:
       - msg
       - type
       title: ValidationError
-    SendVerificationEmailCommand:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-      type: object
-      required:
-      - email
-      title: SendVerificationEmailCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     GetJobResponse:
       properties:
         id:
@@ -146,19 +159,6 @@ components:
       required:
       - detail
       title: StringErrorResponse
-    SendVerificationEmailResponse:
-      properties:
-        jobId:
-          type: string
-          title: Jobid
-        jobStatus:
-          type: string
-          title: Jobstatus
-      type: object
-      required:
-      - jobId
-      - jobStatus
-      title: SendVerificationEmailResponse
   securitySchemes:
     Bearer:
       type: http

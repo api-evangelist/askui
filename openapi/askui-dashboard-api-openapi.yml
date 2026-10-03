@@ -106,18 +106,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UsageEventsAggregateResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AggregationResult'
-          type: array
-          title: Data
-          description: Aggregated usage data
-      type: object
-      required:
-      - data
-      title: UsageEventsAggregateResponse
     AggregationResult:
       properties:
         workspaceId:
@@ -149,6 +137,15 @@ components:
       - count
       - userEmail
       title: AggregationResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -170,15 +167,18 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    UsageEventsAggregateResponse:
       properties:
-        detail:
+        data:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/AggregationResult'
           type: array
-          title: Detail
+          title: Data
+          description: Aggregated usage data
       type: object
-      title: HTTPValidationError
+      required:
+      - data
+      title: UsageEventsAggregateResponse
     StringErrorResponse:
       properties:
         detail:

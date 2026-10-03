@@ -76,6 +76,16 @@ components:
       - filePaths
       - dataSchema
       title: ExtractDataCommand
+    ExtractDataResponse:
+      properties:
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - data
+      title: ExtractDataResponse
     JsonSchema:
       properties:
         title:
@@ -117,16 +127,6 @@ components:
       required:
       - detail
       title: StringErrorResponse
-    ExtractDataResponse:
-      properties:
-        data:
-          additionalProperties: true
-          type: object
-          title: Data
-      type: object
-      required:
-      - data
-      title: ExtractDataResponse
   securitySchemes:
     Bearer:
       type: http

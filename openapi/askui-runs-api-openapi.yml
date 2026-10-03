@@ -37,136 +37,39 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
+    RunStatus:
+      type: string
+      enum:
+      - UPCOMING
+      - PENDING
+      - RUNNING
+      - SKIPPED
+      - SKIPPED_NOTHING_TO_RUN
+      - PASSED_NOT_YET_REPORTED
+      - FAILED_NOT_YET_REPORTED
+      - PASSED
+      - FAILED
+      - CANCELED
+      - SUSPENDED
+      title: RunStatus
+    ScheduleStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - SUSPENDED
+      - ENDED
+      title: ScheduleStatus
+    ListRunsResponseDto:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    RunnerAssignment:
-      properties:
-        ids:
-          items:
-            type: string
-          type: array
-          title: Ids
-        host:
-          $ref: '#/components/schemas/RunnerHost'
-        tags:
-          items:
-            type: string
-          type: array
-          title: Tags
-      type: object
-      required:
-      - host
-      title: RunnerAssignment
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    RunTemplate:
-      properties:
-        workspace_id:
-          type: string
-          title: Workspace Id
-        workflows:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Workflows
-        runner_assignment:
-          $ref: '#/components/schemas/RunnerAssignment'
         data:
-          additionalProperties: true
-          type: object
+          items:
+            $ref: '#/components/schemas/RunResponseDto'
+          type: array
           title: Data
       type: object
       required:
-      - workspace_id
-      - runner_assignment
-      title: RunTemplate
-    RunnerHost:
-      type: string
-      enum:
-      - SELF
-      - ASKUI
-      title: RunnerHost
-    RunResponseDto:
-      properties:
-        version:
-          type: string
-          title: Version
-        id:
-          type: string
-          title: Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        name:
-          type: string
-          title: Name
-        status:
-          $ref: '#/components/schemas/RunStatus'
-          default: UPCOMING
-        to_be_started_at:
-          type: string
-          format: date-time
-          title: To Be Started At
-        started_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Started At
-        schedule_id:
-          type: string
-          title: Schedule Id
-        template:
-          $ref: '#/components/schemas/RunTemplate'
-        ended_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Ended At
-        'no':
-          type: integer
-          title: 'No'
-        schedule:
-          $ref: '#/components/schemas/ScheduleReponseDto'
-      type: object
-      required:
-      - name
-      - to_be_started_at
-      - schedule_id
-      - template
-      - 'no'
-      - schedule
-      title: RunResponseDto
+      - data
+      title: ListRunsResponseDto
     ScheduleReponseDto:
       properties:
         version:
@@ -223,39 +126,136 @@ components:
       - started_at
       - run_template
       title: ScheduleReponseDto
-    RunStatus:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    RunResponseDto:
+      properties:
+        version:
+          type: string
+          title: Version
+        id:
+          type: string
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        name:
+          type: string
+          title: Name
+        status:
+          $ref: '#/components/schemas/RunStatus'
+          default: UPCOMING
+        to_be_started_at:
+          type: string
+          format: date-time
+          title: To Be Started At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        schedule_id:
+          type: string
+          title: Schedule Id
+        template:
+          $ref: '#/components/schemas/RunTemplate'
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+        'no':
+          type: integer
+          title: 'No'
+        schedule:
+          $ref: '#/components/schemas/ScheduleReponseDto'
+      type: object
+      required:
+      - name
+      - to_be_started_at
+      - schedule_id
+      - template
+      - 'no'
+      - schedule
+      title: RunResponseDto
+    RunnerHost:
       type: string
       enum:
-      - UPCOMING
-      - PENDING
-      - RUNNING
-      - SKIPPED
-      - SKIPPED_NOTHING_TO_RUN
-      - PASSED_NOT_YET_REPORTED
-      - FAILED_NOT_YET_REPORTED
-      - PASSED
-      - FAILED
-      - CANCELED
-      - SUSPENDED
-      title: RunStatus
-    ListRunsResponseDto:
+      - SELF
+      - ASKUI
+      title: RunnerHost
+    ValidationError:
       properties:
-        data:
+        loc:
           items:
-            $ref: '#/components/schemas/RunResponseDto'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    RunTemplate:
+      properties:
+        workspace_id:
+          type: string
+          title: Workspace Id
+        workflows:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Workflows
+        runner_assignment:
+          $ref: '#/components/schemas/RunnerAssignment'
+        data:
+          additionalProperties: true
+          type: object
           title: Data
       type: object
       required:
-      - data
-      title: ListRunsResponseDto
-    ScheduleStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - SUSPENDED
-      - ENDED
-      title: ScheduleStatus
+      - workspace_id
+      - runner_assignment
+      title: RunTemplate
+    RunnerAssignment:
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+          title: Ids
+        host:
+          $ref: '#/components/schemas/RunnerHost'
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+      type: object
+      required:
+      - host
+      title: RunnerAssignment
   securitySchemes:
     Bearer:
       type: http
