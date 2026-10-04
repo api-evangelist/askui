@@ -336,6 +336,9 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/askui-capability-edges.yml
+    name: AskUI Business Capability Map
 # --- Developer surface / ergonomics ---
 - type: DeveloperPortal
   url: https://docs.askui.com
