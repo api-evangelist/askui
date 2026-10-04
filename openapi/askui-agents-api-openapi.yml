@@ -182,41 +182,28 @@ paths:
       - Basic: []
 components:
   schemas:
-    AgentUpdateCommand:
+    AgentsListResponse:
       properties:
-        name:
+        data:
+          items:
+            $ref: '#/components/schemas/Agent'
+          type: array
+          title: Data
+        hasMore:
+          type: boolean
+          title: Hasmore
+          description: Whether there are more agents that match the query that were not included in this response.
+          default: false
+        totalCount:
           anyOf:
-          - type: string
-            pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
-            description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
+          - type: integer
           - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-            maxLength: 1024
-            default: ''
-          - type: 'null'
-          title: Description
-        status:
-          anyOf:
-          - type: string
-            enum:
-            - ACTIVE
-            - ARCHIVED
-          - type: 'null'
-          title: Status
-        emailTrigger:
-          anyOf:
-          - $ref: '#/components/schemas/EmailAgentTriggerUpdate'
-          - type: 'null'
-        autoConfirm:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Autoconfirm
+          title: Totalcount
+          description: The total number of agents that match the query, only accurate up to 100.
       type: object
-      title: AgentUpdateCommand
+      required:
+      - data
+      title: AgentsListResponse
     DataDestinationAskUiWorkflow:
       properties:
         type:
@@ -243,326 +230,6 @@ components:
       - runnerTags
       - workflows
       title: DataDestinationAskUiWorkflow
-    AgentsListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Agent'
-          type: array
-          title: Data
-        hasMore:
-          type: boolean
-          title: Hasmore
-          description: Whether there are more agents that match the query that were not included in this response.
-          default: false
-        totalCount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Totalcount
-          description: The total number of agents that match the query, only accurate up to 100.
-      type: object
-      required:
-      - data
-      title: AgentsListResponse
-    DataDestinationWebhookCreate:
-      properties:
-        type:
-          type: string
-          const: WEBHOOK
-          title: Type
-          default: WEBHOOK
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-        headers:
-          additionalProperties:
-            type: string
-          type: object
-          title: Headers
-      type: object
-      required:
-      - url
-      title: DataDestinationWebhookCreate
-    DataDestinationWebhook:
-      properties:
-        type:
-          type: string
-          const: WEBHOOK
-          title: Type
-          default: WEBHOOK
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-        headers:
-          additionalProperties:
-            type: string
-          type: object
-          title: Headers
-      type: object
-      required:
-      - url
-      - headers
-      title: DataDestinationWebhook
-    EmailAgentTriggerUpdate:
-      properties:
-        active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Active
-        allowedSenders:
-          anyOf:
-          - items:
-              type: string
-            type: array
-            uniqueItems: true
-          - type: 'null'
-          title: Allowedsenders
-        localPart:
-          anyOf:
-          - type: string
-            pattern: ^[a-zA-Z0-9-_.+]+$
-          - type: 'null'
-          title: Localpart
-      type: object
-      title: EmailAgentTriggerUpdate
-    AgentTemplate:
-      properties:
-        id:
-          type: string
-          maxLength: 64
-          minLength: 1
-          pattern: ^[a-zA-Z0-9-_.]{0,64}$
-          title: Id
-        name:
-          type: string
-          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
-          title: Name
-          description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
-        description:
-          type: string
-          maxLength: 1024
-          title: Description
-          default: ''
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-        lastModified:
-          type: string
-          format: date-time
-          title: Lastmodified
-      type: object
-      required:
-      - id
-      - name
-      - url
-      - lastModified
-      title: AgentTemplate
-    AgentCreateCommand:
-      properties:
-        name:
-          type: string
-          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
-          title: Name
-          description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
-        description:
-          type: string
-          maxLength: 1024
-          title: Description
-          default: ''
-        dataSchema:
-          anyOf:
-          - $ref: '#/components/schemas/JsonSchema'
-          - type: 'null'
-          description: The JSON schema of the data that the agent is going to extract from documents uploaded. The schema must comply with Draft 2020-12. The schema (root) must be an object with at least one property. The size of the schema must not exceed 15 MB.
-        autoConfirm:
-          type: boolean
-          title: Autoconfirm
-          description: If true, the agent will automatically confirm the data extracted, i.e., no review is necessary.
-          default: false
-        dataDestinations:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/DataDestinationAskUiWorkflowCreate'
-            - $ref: '#/components/schemas/DataDestinationWebhookCreate'
-            discriminator:
-              propertyName: type
-              mapping:
-                ASKUI_WORKFLOW: '#/components/schemas/DataDestinationAskUiWorkflowCreate'
-                WEBHOOK: '#/components/schemas/DataDestinationWebhookCreate'
-          type: array
-          title: Datadestinations
-        parentId:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: 'null'
-          title: Parentid
-          description: The ID of an agent that this agent is created from, i.e., of the previous version of this agent. Parent is going to be archived as part of the creation of the new (active) agent.
-        emailTrigger:
-          $ref: '#/components/schemas/EmailAgentTriggerCreate'
-        workspaceId:
-          type: string
-          format: uuid4
-          title: Workspaceid
-        templateId:
-          type: string
-          pattern: ^[a-zA-Z0-9-_.]{1,64}$
-          title: Templateid
-          description: The ID of the template to copy files from.
-      type: object
-      required:
-      - name
-      - workspaceId
-      - templateId
-      title: AgentCreateCommand
-    DataDestinationAskUiWorkflowCreate:
-      properties:
-        type:
-          type: string
-          const: ASKUI_WORKFLOW
-          title: Type
-          default: ASKUI_WORKFLOW
-        host:
-          $ref: '#/components/schemas/AskUiRunnerHost'
-          default: ASKUI
-        runnerTags:
-          items:
-            type: string
-          type: array
-          title: Runnertags
-        workflows:
-          items:
-            type: string
-          type: array
-          minItems: 1
-          title: Workflows
-      type: object
-      title: DataDestinationAskUiWorkflowCreate
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    EmailAgentTriggerCreate:
-      properties:
-        active:
-          type: boolean
-          title: Active
-          description: If false, no emails can be send to trigger agent.
-          default: true
-        allowedSenders:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-          title: Allowedsenders
-          description: The email addresses that are allowed to send emails to trigger the agent. If empty, no emails can be send to trigger agent.
-        localPart:
-          anyOf:
-          - type: string
-            pattern: ^[a-zA-Z0-9-_.+]+$
-          - type: 'null'
-          title: Localpart
-          description: Defaults to a unique email string if not provided.
-      type: object
-      title: EmailAgentTriggerCreate
-    AskUiRunnerHost:
-      type: string
-      enum:
-      - SELF
-      - ASKUI
-      title: AskUiRunnerHost
-    JsonSchema:
-      properties:
-        title:
-          type: string
-          pattern: ^[a-zA-Z0-9_-]+$
-          title: Title
-          default: DataToExtract
-        description:
-          type: string
-          title: Description
-          default: ''
-        type:
-          type: string
-          const: object
-          title: Type
-          default: object
-        properties:
-          additionalProperties:
-            additionalProperties: true
-            type: object
-          type: object
-          minProperties: 1
-          title: Properties
-        required:
-          items:
-            type: string
-          type: array
-          title: Required
-      type: object
-      required:
-      - properties
-      title: JsonSchema
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    EmailAgentTrigger:
-      properties:
-        active:
-          type: boolean
-          title: Active
-          description: If false, no emails can be send to trigger agent.
-          default: true
-        allowedSenders:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-          title: Allowedsenders
-          description: The email addresses that are allowed to send emails to trigger the agent. If empty, no emails can be send to trigger agent.
-        email:
-          type: string
-          pattern: ^[a-zA-Z0-9-_.+]+@.*$
-          title: Email
-          description: 'The email address of the agent to send emails to to trigger the agent. The email address must be unique for each agent. The domain of the email address is fixed. The local part of the email address must be between 1 and 64 characters long and can only contain the following characters: a-z, A-Z, 0-9, -, _, . and +.'
-      type: object
-      required:
-      - email
-      title: EmailAgentTrigger
     Agent:
       properties:
         id:
@@ -634,6 +301,29 @@ components:
       - dataDestinations
       - workspaceId
       title: Agent
+    EmailAgentTriggerUpdate:
+      properties:
+        active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Active
+        allowedSenders:
+          anyOf:
+          - items:
+              type: string
+            type: array
+            uniqueItems: true
+          - type: 'null'
+          title: Allowedsenders
+        localPart:
+          anyOf:
+          - type: string
+            pattern: ^[a-zA-Z0-9-_.+]+$
+          - type: 'null'
+          title: Localpart
+      type: object
+      title: EmailAgentTriggerUpdate
     ListAgentTemplatesResponse:
       properties:
         data:
@@ -645,6 +335,316 @@ components:
       required:
       - data
       title: ListAgentTemplatesResponse
+    DataDestinationWebhook:
+      properties:
+        type:
+          type: string
+          const: WEBHOOK
+          title: Type
+          default: WEBHOOK
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+          title: Headers
+      type: object
+      required:
+      - url
+      - headers
+      title: DataDestinationWebhook
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AgentCreateCommand:
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
+          title: Name
+          description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
+        description:
+          type: string
+          maxLength: 1024
+          title: Description
+          default: ''
+        dataSchema:
+          anyOf:
+          - $ref: '#/components/schemas/JsonSchema'
+          - type: 'null'
+          description: The JSON schema of the data that the agent is going to extract from documents uploaded. The schema must comply with Draft 2020-12. The schema (root) must be an object with at least one property. The size of the schema must not exceed 15 MB.
+        autoConfirm:
+          type: boolean
+          title: Autoconfirm
+          description: If true, the agent will automatically confirm the data extracted, i.e., no review is necessary.
+          default: false
+        dataDestinations:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/DataDestinationAskUiWorkflowCreate'
+            - $ref: '#/components/schemas/DataDestinationWebhookCreate'
+            discriminator:
+              propertyName: type
+              mapping:
+                ASKUI_WORKFLOW: '#/components/schemas/DataDestinationAskUiWorkflowCreate'
+                WEBHOOK: '#/components/schemas/DataDestinationWebhookCreate'
+          type: array
+          title: Datadestinations
+        parentId:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Parentid
+          description: The ID of an agent that this agent is created from, i.e., of the previous version of this agent. Parent is going to be archived as part of the creation of the new (active) agent.
+        emailTrigger:
+          $ref: '#/components/schemas/EmailAgentTriggerCreate'
+        workspaceId:
+          type: string
+          format: uuid4
+          title: Workspaceid
+        templateId:
+          type: string
+          pattern: ^[a-zA-Z0-9-_.]{1,64}$
+          title: Templateid
+          description: The ID of the template to copy files from.
+      type: object
+      required:
+      - name
+      - workspaceId
+      - templateId
+      title: AgentCreateCommand
+    AgentUpdateCommand:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
+            description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
+          - type: 'null'
+          title: Name
+        description:
+          anyOf:
+          - type: string
+            maxLength: 1024
+            default: ''
+          - type: 'null'
+          title: Description
+        status:
+          anyOf:
+          - type: string
+            enum:
+            - ACTIVE
+            - ARCHIVED
+          - type: 'null'
+          title: Status
+        emailTrigger:
+          anyOf:
+          - $ref: '#/components/schemas/EmailAgentTriggerUpdate'
+          - type: 'null'
+        autoConfirm:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Autoconfirm
+      type: object
+      title: AgentUpdateCommand
+    AgentTemplate:
+      properties:
+        id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          pattern: ^[a-zA-Z0-9-_.]{0,64}$
+          title: Id
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9]([a-zA-Z0-9-_. ]{0,62}[a-zA-Z0-9])?$
+          title: Name
+          description: 'The name of the agent. The name must only contain the following characters: a-z, A-Z, 0-9, -, _, and space. The name must not be empty. The name must start and end with a letter or a number. The name must not be longer than 64 characters.'
+        description:
+          type: string
+          maxLength: 1024
+          title: Description
+          default: ''
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        lastModified:
+          type: string
+          format: date-time
+          title: Lastmodified
+      type: object
+      required:
+      - id
+      - name
+      - url
+      - lastModified
+      title: AgentTemplate
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    DataDestinationAskUiWorkflowCreate:
+      properties:
+        type:
+          type: string
+          const: ASKUI_WORKFLOW
+          title: Type
+          default: ASKUI_WORKFLOW
+        host:
+          $ref: '#/components/schemas/AskUiRunnerHost'
+          default: ASKUI
+        runnerTags:
+          items:
+            type: string
+          type: array
+          title: Runnertags
+        workflows:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Workflows
+      type: object
+      title: DataDestinationAskUiWorkflowCreate
+    DataDestinationWebhookCreate:
+      properties:
+        type:
+          type: string
+          const: WEBHOOK
+          title: Type
+          default: WEBHOOK
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+          title: Headers
+      type: object
+      required:
+      - url
+      title: DataDestinationWebhookCreate
+    AskUiRunnerHost:
+      type: string
+      enum:
+      - SELF
+      - ASKUI
+      title: AskUiRunnerHost
+    JsonSchema:
+      properties:
+        title:
+          type: string
+          pattern: ^[a-zA-Z0-9_-]+$
+          title: Title
+          default: DataToExtract
+        description:
+          type: string
+          title: Description
+          default: ''
+        type:
+          type: string
+          const: object
+          title: Type
+          default: object
+        properties:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+          type: object
+          minProperties: 1
+          title: Properties
+        required:
+          items:
+            type: string
+          type: array
+          title: Required
+      type: object
+      required:
+      - properties
+      title: JsonSchema
+    EmailAgentTriggerCreate:
+      properties:
+        active:
+          type: boolean
+          title: Active
+          description: If false, no emails can be send to trigger agent.
+          default: true
+        allowedSenders:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          title: Allowedsenders
+          description: The email addresses that are allowed to send emails to trigger the agent. If empty, no emails can be send to trigger agent.
+        localPart:
+          anyOf:
+          - type: string
+            pattern: ^[a-zA-Z0-9-_.+]+$
+          - type: 'null'
+          title: Localpart
+          description: Defaults to a unique email string if not provided.
+      type: object
+      title: EmailAgentTriggerCreate
+    EmailAgentTrigger:
+      properties:
+        active:
+          type: boolean
+          title: Active
+          description: If false, no emails can be send to trigger agent.
+          default: true
+        allowedSenders:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+          title: Allowedsenders
+          description: The email addresses that are allowed to send emails to trigger the agent. If empty, no emails can be send to trigger agent.
+        email:
+          type: string
+          pattern: ^[a-zA-Z0-9-_.+]+@.*$
+          title: Email
+          description: 'The email address of the agent to send emails to to trigger the agent. The email address must be unique for each agent. The domain of the email address is fixed. The local part of the email address must be between 1 and 64 characters long and can only contain the following characters: a-z, A-Z, 0-9, -, _, . and +.'
+      type: object
+      required:
+      - email
+      title: EmailAgentTrigger
   securitySchemes:
     Bearer:
       type: http

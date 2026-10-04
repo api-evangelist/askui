@@ -83,38 +83,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    SendVerificationEmailCommand:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-      type: object
-      required:
-      - email
-      title: SendVerificationEmailCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SendVerificationEmailResponse:
-      properties:
-        jobId:
-          type: string
-          title: Jobid
-        jobStatus:
-          type: string
-          title: Jobstatus
-      type: object
-      required:
-      - jobId
-      - jobStatus
-      title: SendVerificationEmailResponse
     ValidationError:
       properties:
         loc:
@@ -136,6 +104,47 @@ components:
       - msg
       - type
       title: ValidationError
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
+    SendVerificationEmailResponse:
+      properties:
+        jobId:
+          type: string
+          title: Jobid
+        jobStatus:
+          type: string
+          title: Jobstatus
+      type: object
+      required:
+      - jobId
+      - jobStatus
+      title: SendVerificationEmailResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SendVerificationEmailCommand:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: SendVerificationEmailCommand
     GetJobResponse:
       properties:
         id:
@@ -150,15 +159,6 @@ components:
       - id
       - status
       title: GetJobResponse
-    StringErrorResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: StringErrorResponse
   securitySchemes:
     Bearer:
       type: http

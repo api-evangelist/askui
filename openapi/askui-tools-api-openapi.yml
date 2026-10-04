@@ -60,32 +60,6 @@ paths:
       - Basic: []
 components:
   schemas:
-    ExtractDataCommand:
-      properties:
-        filePaths:
-          items:
-            type: string
-          type: array
-          minItems: 1
-          title: Filepaths
-          description: 'List of file paths (or file path prefixes to be more specifically) to extract data from. If is no file at the specified paths or no files whose paths have the specified path as a prefix, the path is ignored. Only the following content types are supported: {''message/rfc822'', ''application/pdf'', ''image/webp'', ''image/png'', ''image/jpg'', ''text/plain'', ''image/gif'', ''image/jpeg''}. Files of other content types are ignored. A maximum of 1 000 files can be passed to the extraction. IMPORTANT: A file path may match multiple files so the supported number of file paths may be lower.'
-        dataSchema:
-          $ref: '#/components/schemas/JsonSchema'
-      type: object
-      required:
-      - filePaths
-      - dataSchema
-      title: ExtractDataCommand
-    ExtractDataResponse:
-      properties:
-        data:
-          additionalProperties: true
-          type: object
-          title: Data
-      type: object
-      required:
-      - data
-      title: ExtractDataResponse
     JsonSchema:
       properties:
         title:
@@ -127,6 +101,32 @@ components:
       required:
       - detail
       title: StringErrorResponse
+    ExtractDataResponse:
+      properties:
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - data
+      title: ExtractDataResponse
+    ExtractDataCommand:
+      properties:
+        filePaths:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Filepaths
+          description: 'List of file paths (or file path prefixes to be more specifically) to extract data from. If is no file at the specified paths or no files whose paths have the specified path as a prefix, the path is ignored. Only the following content types are supported: {''message/rfc822'', ''application/pdf'', ''image/webp'', ''image/png'', ''image/jpg'', ''text/plain'', ''image/gif'', ''image/jpeg''}. Files of other content types are ignored. A maximum of 1 000 files can be passed to the extraction. IMPORTANT: A file path may match multiple files so the supported number of file paths may be lower.'
+        dataSchema:
+          $ref: '#/components/schemas/JsonSchema'
+      type: object
+      required:
+      - filePaths
+      - dataSchema
+      title: ExtractDataCommand
   securitySchemes:
     Bearer:
       type: http

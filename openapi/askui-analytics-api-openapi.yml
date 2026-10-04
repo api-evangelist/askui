@@ -31,19 +31,6 @@ paths:
       - Basic: []
 components:
   schemas:
-    IdentifyCommand:
-      properties:
-        anonymousId:
-          type: string
-          format: uuid4
-          title: Anonymousid
-        traits:
-          $ref: '#/components/schemas/UserTraits'
-      type: object
-      required:
-      - anonymousId
-      - traits
-      title: IdentifyCommand
     ValidationError:
       properties:
         loc:
@@ -65,6 +52,12 @@ components:
       - msg
       - type
       title: ValidationError
+    UserTraits:
+      properties: {}
+      additionalProperties: true
+      type: object
+      title: UserTraits
+      description: Type for user traits sent to Segment.
     HTTPValidationError:
       properties:
         detail:
@@ -74,12 +67,19 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    UserTraits:
-      properties: {}
-      additionalProperties: true
+    IdentifyCommand:
+      properties:
+        anonymousId:
+          type: string
+          format: uuid4
+          title: Anonymousid
+        traits:
+          $ref: '#/components/schemas/UserTraits'
       type: object
-      title: UserTraits
-      description: Type for user traits sent to Segment.
+      required:
+      - anonymousId
+      - traits
+      title: IdentifyCommand
   securitySchemes:
     Bearer:
       type: http

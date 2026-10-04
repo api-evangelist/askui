@@ -41,7 +41,7 @@
     "askui-workspace-service-openapi-original.json: declared missing tag: tools",
     "askui-workspace-service-openapi-original.json: declared missing tag: workspace-memberships",
     "askui-workspace-service-openapi-original.json: declared missing tag: workspaces",
-    "apis.yml register: already-registered"
+    "apis.yml register: unparseable-skip"
   ],
   "skipped": [
     "askui-access-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -167,110 +167,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    CreateCheckoutSessionResponseDto:
-      properties:
-        sessionUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Sessionurl
-      type: object
-      required:
-      - sessionUrl
-      title: CreateCheckoutSessionResponseDto
-    CreateCustomerPortalSessionResponseDto:
-      properties:
-        sessionUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Sessionurl
-      type: object
-      required:
-      - sessionUrl
-      title: CreateCustomerPortalSessionResponseDto
-    SubscriptionItemDto:
-      properties:
-        productAllowedUsage:
-          type: integer
-          title: Productallowedusage
-      type: object
-      required:
-      - productAllowedUsage
-      title: SubscriptionItemDto
-      description: Subscription item with only the requested fields
-    CreateCheckoutSessionCommand:
-      properties:
-        priceId:
-          type: string
-          title: Priceid
-        returnUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Returnurl
-      type: object
-      required:
-      - priceId
-      - returnUrl
-      title: CreateCheckoutSessionCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CreateCustomerPortalSessionRequestDto:
-      properties:
-        returnUrl:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Returnurl
-      type: object
-      required:
-      - returnUrl
-      title: CreateCustomerPortalSessionRequestDto
-    ListPricesResponseDto:
-      properties:
-        prices:
-          items:
-            $ref: '#/components/schemas/PriceItemDto'
-          type: array
-          title: Prices
-      type: object
-      required:
-      - prices
-      title: ListPricesResponseDto
-      description: Response containing all available prices.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     PriceItemDto:
       properties:
         id:
@@ -305,6 +201,22 @@ components:
       - productAllowedUsage
       title: PriceItemDto
       description: Single price entry returned to the frontend.
+    CreateCheckoutSessionCommand:
+      properties:
+        priceId:
+          type: string
+          title: Priceid
+        returnUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Returnurl
+      type: object
+      required:
+      - priceId
+      - returnUrl
+      title: CreateCheckoutSessionCommand
     GetSubscriptionResponseDto:
       properties:
         currentPeriodStart:
@@ -331,6 +243,94 @@ components:
       - currentPeriodEnd
       title: GetSubscriptionResponseDto
       description: Simplified response DTO with only the requested fields
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ListPricesResponseDto:
+      properties:
+        prices:
+          items:
+            $ref: '#/components/schemas/PriceItemDto'
+          type: array
+          title: Prices
+      type: object
+      required:
+      - prices
+      title: ListPricesResponseDto
+      description: Response containing all available prices.
+    CreateCustomerPortalSessionRequestDto:
+      properties:
+        returnUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Returnurl
+      type: object
+      required:
+      - returnUrl
+      title: CreateCustomerPortalSessionRequestDto
+    SubscriptionItemDto:
+      properties:
+        productAllowedUsage:
+          type: integer
+          title: Productallowedusage
+      type: object
+      required:
+      - productAllowedUsage
+      title: SubscriptionItemDto
+      description: Subscription item with only the requested fields
+    CreateCustomerPortalSessionResponseDto:
+      properties:
+        sessionUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Sessionurl
+      type: object
+      required:
+      - sessionUrl
+      title: CreateCustomerPortalSessionResponseDto
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateCheckoutSessionResponseDto:
+      properties:
+        sessionUrl:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Sessionurl
+      type: object
+      required:
+      - sessionUrl
+      title: CreateCheckoutSessionResponseDto
   securitySchemes:
     Bearer:
       type: http

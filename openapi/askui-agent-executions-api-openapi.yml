@@ -184,22 +184,6 @@ paths:
           description: Could not deliver data to destination
 components:
   schemas:
-    AgentExecutionStateCanceled:
-      properties:
-        status:
-          type: string
-          const: CANCELED
-          title: Status
-          description: The agent execution was canceled by the user.
-          default: CANCELED
-        dataExtracted:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Dataextracted
-      type: object
-      title: AgentExecutionStateCanceled
     Body_create_agent_execution_api_v1_agent_executions_post:
       properties:
         input_files:
@@ -214,62 +198,6 @@ components:
       required:
       - input_files
       title: Body_create_agent_execution_api_v1_agent_executions_post
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    AgentExecutionConfirm:
-      properties:
-        status:
-          type: string
-          const: CONFIRMED
-          title: Status
-          default: CONFIRMED
-        dataConfirmed:
-          additionalProperties: true
-          type: object
-          minProperties: 1
-          title: Dataconfirmed
-      type: object
-      required:
-      - dataConfirmed
-      title: AgentExecutionConfirm
-    WebhookResponse:
-      properties:
-        statusCode:
-          type: integer
-          title: Statuscode
-        headers:
-          additionalProperties:
-            type: string
-          type: object
-          title: Headers
-        body:
-          type: string
-          title: Body
-      type: object
-      required:
-      - statusCode
-      - headers
-      - body
-      title: WebhookResponse
     AgentExecution:
       properties:
         id:
@@ -316,124 +244,6 @@ components:
       - workspaceId
       - state
       title: AgentExecution
-    AgentExecutionStatePendingDataExtraction:
-      properties:
-        status:
-          type: string
-          const: PENDING_DATA_EXTRACTION
-          title: Status
-          description: The agent has all inputs at hand and is about to or already extracting data from inputs. An agent may stay in this state in failure cases, e.g., if data extraction fails.
-          default: PENDING_DATA_EXTRACTION
-      type: object
-      title: AgentExecutionStatePendingDataExtraction
-    DataDestinationDeliveryAskUiWorkflow:
-      properties:
-        type:
-          type: string
-          const: ASKUI_WORKFLOW
-          title: Type
-          default: ASKUI_WORKFLOW
-        scheduleId:
-          type: string
-          title: Scheduleid
-      type: object
-      required:
-      - scheduleId
-      title: DataDestinationDeliveryAskUiWorkflow
-    AgentExecutionUpdateCommand:
-      properties:
-        state:
-          oneOf:
-          - $ref: '#/components/schemas/AgentExecutionPendingReview'
-          - $ref: '#/components/schemas/AgentExecutionCancel'
-          - $ref: '#/components/schemas/AgentExecutionConfirm'
-          - $ref: '#/components/schemas/workspaces__use_cases__agent_executions__update_agent_execution__AgentExecutionStateDeliveredToDestination'
-          title: State
-          discriminator:
-            propertyName: status
-            mapping:
-              CANCELED: '#/components/schemas/AgentExecutionCancel'
-              CONFIRMED: '#/components/schemas/AgentExecutionConfirm'
-              DELIVERED_TO_DESTINATION: '#/components/schemas/AgentExecutionStateDeliveredToDestination-Input'
-              PENDING_REVIEW: '#/components/schemas/AgentExecutionPendingReview'
-      type: object
-      required:
-      - state
-      title: AgentExecutionUpdateCommand
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AgentExecutionsListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentExecution'
-          type: array
-          title: Data
-        hasMore:
-          type: boolean
-          title: Hasmore
-          description: Whether there are more agent executions that match the query that were not included in this response.
-          default: false
-        totalCount:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Totalcount
-          description: The total number of agent executions that match the query, only accurate up to 100.
-      type: object
-      required:
-      - data
-      title: AgentExecutionsListResponse
-    AgentExecutionCancel:
-      properties:
-        status:
-          type: string
-          const: CANCELED
-          title: Status
-          default: CANCELED
-      type: object
-      title: AgentExecutionCancel
-    workspaces__use_cases__agent_executions__update_agent_execution__AgentExecutionStateDeliveredToDestination:
-      properties:
-        status:
-          type: string
-          const: DELIVERED_TO_DESTINATION
-          title: Status
-          default: DELIVERED_TO_DESTINATION
-        deliveries:
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/DataDestinationDeliveryAskUiWorkflow'
-            - $ref: '#/components/schemas/DataDestinationDeliveryWebhook'
-            discriminator:
-              propertyName: type
-              mapping:
-                ASKUI_WORKFLOW: '#/components/schemas/DataDestinationDeliveryAskUiWorkflow'
-                WEBHOOK: '#/components/schemas/DataDestinationDeliveryWebhook'
-          type: array
-          title: Deliveries
-      type: object
-      title: AgentExecutionStateDeliveredToDestination
-    DataDestinationDeliveryWebhook:
-      properties:
-        type:
-          type: string
-          const: WEBHOOK
-          title: Type
-          default: WEBHOOK
-        response:
-          $ref: '#/components/schemas/WebhookResponse'
-      type: object
-      required:
-      - response
-      title: DataDestinationDeliveryWebhook
     workspaces__domain__entities__AgentExecutionStateDeliveredToDestination:
       properties:
         status:
@@ -467,6 +277,106 @@ components:
       - dataExtracted
       - dataConfirmed
       title: AgentExecutionStateDeliveredToDestination
+    AgentExecutionUpdateCommand:
+      properties:
+        state:
+          oneOf:
+          - $ref: '#/components/schemas/AgentExecutionPendingReview'
+          - $ref: '#/components/schemas/AgentExecutionCancel'
+          - $ref: '#/components/schemas/AgentExecutionConfirm'
+          - $ref: '#/components/schemas/workspaces__use_cases__agent_executions__update_agent_execution__AgentExecutionStateDeliveredToDestination'
+          title: State
+          discriminator:
+            propertyName: status
+            mapping:
+              CANCELED: '#/components/schemas/AgentExecutionCancel'
+              CONFIRMED: '#/components/schemas/AgentExecutionConfirm'
+              DELIVERED_TO_DESTINATION: '#/components/schemas/AgentExecutionStateDeliveredToDestination-Input'
+              PENDING_REVIEW: '#/components/schemas/AgentExecutionPendingReview'
+      type: object
+      required:
+      - state
+      title: AgentExecutionUpdateCommand
+    AgentExecutionPendingReview:
+      properties:
+        status:
+          type: string
+          const: PENDING_REVIEW
+          title: Status
+          default: PENDING_REVIEW
+        dataExtracted:
+          additionalProperties: true
+          type: object
+          minProperties: 1
+          title: Dataextracted
+      type: object
+      required:
+      - dataExtracted
+      title: AgentExecutionPendingReview
+    AgentExecutionStatePendingDataExtraction:
+      properties:
+        status:
+          type: string
+          const: PENDING_DATA_EXTRACTION
+          title: Status
+          description: The agent has all inputs at hand and is about to or already extracting data from inputs. An agent may stay in this state in failure cases, e.g., if data extraction fails.
+          default: PENDING_DATA_EXTRACTION
+      type: object
+      title: AgentExecutionStatePendingDataExtraction
+    AgentExecutionConfirm:
+      properties:
+        status:
+          type: string
+          const: CONFIRMED
+          title: Status
+          default: CONFIRMED
+        dataConfirmed:
+          additionalProperties: true
+          type: object
+          minProperties: 1
+          title: Dataconfirmed
+      type: object
+      required:
+      - dataConfirmed
+      title: AgentExecutionConfirm
+    AgentExecutionsListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentExecution'
+          type: array
+          title: Data
+        hasMore:
+          type: boolean
+          title: Hasmore
+          description: Whether there are more agent executions that match the query that were not included in this response.
+          default: false
+        totalCount:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Totalcount
+          description: The total number of agent executions that match the query, only accurate up to 100.
+      type: object
+      required:
+      - data
+      title: AgentExecutionsListResponse
+    AgentExecutionStateCanceled:
+      properties:
+        status:
+          type: string
+          const: CANCELED
+          title: Status
+          description: The agent execution was canceled by the user.
+          default: CANCELED
+        dataExtracted:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Dataextracted
+      type: object
+      title: AgentExecutionStateCanceled
     AgentExecutionStateConfirmed:
       properties:
         status:
@@ -490,32 +400,45 @@ components:
       - dataExtracted
       - dataConfirmed
       title: AgentExecutionStateConfirmed
-    AgentExecutionStatePendingInputs:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    workspaces__use_cases__agent_executions__update_agent_execution__AgentExecutionStateDeliveredToDestination:
       properties:
         status:
           type: string
-          const: PENDING_INPUTS
+          const: DELIVERED_TO_DESTINATION
           title: Status
-          description: The agent is waiting for inputs, e.g., files to be uploaded. An agent may stay in this state in failure cases, e.g., if file upload fails.
-          default: PENDING_INPUTS
+          default: DELIVERED_TO_DESTINATION
+        deliveries:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/DataDestinationDeliveryAskUiWorkflow'
+            - $ref: '#/components/schemas/DataDestinationDeliveryWebhook'
+            discriminator:
+              propertyName: type
+              mapping:
+                ASKUI_WORKFLOW: '#/components/schemas/DataDestinationDeliveryAskUiWorkflow'
+                WEBHOOK: '#/components/schemas/DataDestinationDeliveryWebhook'
+          type: array
+          title: Deliveries
       type: object
-      title: AgentExecutionStatePendingInputs
-    AgentExecutionPendingReview:
+      title: AgentExecutionStateDeliveredToDestination
+    AgentExecutionCancel:
       properties:
         status:
           type: string
-          const: PENDING_REVIEW
+          const: CANCELED
           title: Status
-          default: PENDING_REVIEW
-        dataExtracted:
-          additionalProperties: true
-          type: object
-          minProperties: 1
-          title: Dataextracted
+          default: CANCELED
       type: object
-      required:
-      - dataExtracted
-      title: AgentExecutionPendingReview
+      title: AgentExecutionCancel
     AgentExecutionStatePendingReview:
       properties:
         status:
@@ -533,6 +456,83 @@ components:
       required:
       - dataExtracted
       title: AgentExecutionStatePendingReview
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    DataDestinationDeliveryWebhook:
+      properties:
+        type:
+          type: string
+          const: WEBHOOK
+          title: Type
+          default: WEBHOOK
+        response:
+          $ref: '#/components/schemas/WebhookResponse'
+      type: object
+      required:
+      - response
+      title: DataDestinationDeliveryWebhook
+    AgentExecutionStatePendingInputs:
+      properties:
+        status:
+          type: string
+          const: PENDING_INPUTS
+          title: Status
+          description: The agent is waiting for inputs, e.g., files to be uploaded. An agent may stay in this state in failure cases, e.g., if file upload fails.
+          default: PENDING_INPUTS
+      type: object
+      title: AgentExecutionStatePendingInputs
+    WebhookResponse:
+      properties:
+        statusCode:
+          type: integer
+          title: Statuscode
+        headers:
+          additionalProperties:
+            type: string
+          type: object
+          title: Headers
+        body:
+          type: string
+          title: Body
+      type: object
+      required:
+      - statusCode
+      - headers
+      - body
+      title: WebhookResponse
+    DataDestinationDeliveryAskUiWorkflow:
+      properties:
+        type:
+          type: string
+          const: ASKUI_WORKFLOW
+          title: Type
+          default: ASKUI_WORKFLOW
+        scheduleId:
+          type: string
+          title: Scheduleid
+      type: object
+      required:
+      - scheduleId
+      title: DataDestinationDeliveryAskUiWorkflow
   securitySchemes:
     Bearer:
       type: http
