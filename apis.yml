@@ -48,7 +48,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-10-06'
 tags:
 - Company
 - Test Automation
@@ -89,7 +89,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - agent-executions
+  - Agent Executions
   tags_raw:
   - agent-executions
   properties:
@@ -233,7 +233,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - runner-jobs
+  - Runner Jobs
   tags_raw:
   - runner-jobs
   properties:
@@ -305,7 +305,7 @@ apis:
   humanURL: https://docs.askui.com/04-reference/07-workspace-service
   baseURL: https://workspaces.askui.com
   tags:
-  - workspace-memberships
+  - Workspace Memberships
   tags_raw:
   - workspace-memberships
   properties:
@@ -336,6 +336,10 @@ apis:
   - type: DataModel
     url: data-model/askui-data-model.yml
 common:
+- url: https://www.askui.com/blog/index.html
+  type: Blog
+- url: https://www.askui.com/rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/askui-capability-edges.yml
   name: AskUI Business Capability Map
