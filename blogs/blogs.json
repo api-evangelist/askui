@@ -1,0 +1,28 @@
+{
+  "repo": "askui",
+  "feeds": [
+    {
+      "source": "https://www.askui.com/blog/index.html",
+      "feed_url": "https://www.askui.com/blog/index.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://www.askui.com/blog",
+      "feed_url": "https://www.askui.com/blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://www.askui.com/rss.xml",
+      "feed_url": "https://www.askui.com/rss.xml",
+      "title": "",
+      "saved": 1,
+      "method": "feed"
+    }
+  ],
+  "post_count": 1,
+  "fetched": "2026-10-10T13:15:00Z"
+}
