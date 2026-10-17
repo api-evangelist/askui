@@ -122,6 +122,27 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     LeaseRunnerJobResponseDto:
       properties:
         id:
@@ -154,6 +175,25 @@ components:
       - tries
       - data
       title: LeaseRunnerJobResponseDto
+    RunnerHost:
+      type: string
+      enum:
+      - SELF
+      - ASKUI
+      title: RunnerHost
+    CompleteRunnerJobRequestDto:
+      properties:
+        status:
+          type: string
+          enum:
+          - CANCELED
+          - FAILED
+          - PASSED
+          title: Status
+      type: object
+      required:
+      - status
+      title: CompleteRunnerJobRequestDto
     PingRunnerJobResponseDto:
       properties:
         visible:
@@ -168,33 +208,38 @@ components:
       - visible
       - cancel_job
       title: PingRunnerJobResponseDto
-    ValidationError:
+    LeaseRunnerJobResponseDtoDataCredentials:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        workspace_id:
           type: string
-          title: Message
-        type:
+          title: Workspace Id
+        access_token:
           type: string
-          title: Error Type
+          title: Access Token
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    RunnerHost:
+      - workspace_id
+      - access_token
+      title: LeaseRunnerJobResponseDtoDataCredentials
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    RunnerJobStatus:
       type: string
       enum:
-      - SELF
-      - ASKUI
-      title: RunnerHost
+      - PENDING
+      - RUNNING
+      - PASSED
+      - FAILED
+      - CANCELED
+      - MAX_RETRIES_EXCEEDED
+      title: RunnerJobStatus
     LeaseRunnerJobResponseDtoData:
       properties:
         credentials:
@@ -231,51 +276,6 @@ components:
       - workflows_api_url
       - inference_api_url
       title: LeaseRunnerJobResponseDtoData
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    LeaseRunnerJobResponseDtoDataCredentials:
-      properties:
-        workspace_id:
-          type: string
-          title: Workspace Id
-        access_token:
-          type: string
-          title: Access Token
-      type: object
-      required:
-      - workspace_id
-      - access_token
-      title: LeaseRunnerJobResponseDtoDataCredentials
-    RunnerJobStatus:
-      type: string
-      enum:
-      - PENDING
-      - RUNNING
-      - PASSED
-      - FAILED
-      - CANCELED
-      - MAX_RETRIES_EXCEEDED
-      title: RunnerJobStatus
-    CompleteRunnerJobRequestDto:
-      properties:
-        status:
-          type: string
-          enum:
-          - CANCELED
-          - FAILED
-          - PASSED
-          title: Status
-      type: object
-      required:
-      - status
-      title: CompleteRunnerJobRequestDto
   securitySchemes:
     Bearer:
       type: http

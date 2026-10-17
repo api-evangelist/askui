@@ -170,83 +170,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    InviteStatus:
-      type: string
-      enum:
-      - pending
-      - accepted
-      - declined
-      - revoked
-      - expired
-      title: InviteStatus
-    ListInvitesResponse:
-      properties:
-        invites:
-          items:
-            $ref: '#/components/schemas/InviteResponse'
-          type: array
-          title: Invites
-      type: object
-      required:
-      - invites
-      title: ListInvitesResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    InviteActionEnum:
-      type: string
-      enum:
-      - accept
-      - decline
-      title: InviteActionEnum
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ProcessWorkspaceInviteCommand:
-      properties:
-        action:
-          $ref: '#/components/schemas/InviteActionEnum'
-      type: object
-      required:
-      - action
-      title: ProcessWorkspaceInviteCommand
-    CreateInviteCommand:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-        privilege:
-          $ref: '#/components/schemas/WorkspacePrivilege'
-      type: object
-      required:
-      - email
-      - privilege
-      title: CreateInviteCommand
     InviteResponse:
       properties:
         id:
@@ -301,6 +224,65 @@ components:
       - ROLE_WORKSPACE_ADMIN
       - ROLE_WORKSPACE_MEMBER
       title: WorkspacePrivilege
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    InviteActionEnum:
+      type: string
+      enum:
+      - accept
+      - decline
+      title: InviteActionEnum
+    ProcessWorkspaceInviteCommand:
+      properties:
+        action:
+          $ref: '#/components/schemas/InviteActionEnum'
+      type: object
+      required:
+      - action
+      title: ProcessWorkspaceInviteCommand
+    CreateInviteCommand:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        privilege:
+          $ref: '#/components/schemas/WorkspacePrivilege'
+      type: object
+      required:
+      - email
+      - privilege
+      title: CreateInviteCommand
+    ListInvitesResponse:
+      properties:
+        invites:
+          items:
+            $ref: '#/components/schemas/InviteResponse'
+          type: array
+          title: Invites
+      type: object
+      required:
+      - invites
+      title: ListInvitesResponse
     ListUserInvitesResponse:
       properties:
         invites:
@@ -312,6 +294,24 @@ components:
       required:
       - invites
       title: ListUserInvitesResponse
+    InviteStatus:
+      type: string
+      enum:
+      - pending
+      - accepted
+      - declined
+      - revoked
+      - expired
+      title: InviteStatus
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     Bearer:
       type: http

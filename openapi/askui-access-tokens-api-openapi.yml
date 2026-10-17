@@ -392,17 +392,47 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    LookupWorkspaceAccessTokenResponseDto:
+    StringErrorResponse:
       properties:
-        accessTokenId:
+        detail:
           type: string
-          format: uuid4
-          title: Accesstokenid
+          title: Detail
       type: object
       required:
-      - accessTokenId
-      title: LookupWorkspaceAccessTokenResponseDto
-    CreateWorkspaceAccessTokenRequestDto:
+      - detail
+      title: StringErrorResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LookupWorkspaceAccessTokenCommand:
+      properties:
+        accessToken:
+          type: string
+          minLength: 1
+          title: Accesstoken
+      type: object
+      required:
+      - accessToken
+      title: LookupWorkspaceAccessTokenCommand
+    CreateSubjectAccessTokenCommand:
       properties:
         name:
           type: string
@@ -418,19 +448,16 @@ components:
       type: object
       required:
       - name
-      title: CreateWorkspaceAccessTokenRequestDto
-    CreateWorkspaceAccessTokenResponseDto:
+      title: CreateSubjectAccessTokenCommand
+    HTTPValidationError:
       properties:
-        privateToken:
-          $ref: '#/components/schemas/AccessTokenResponseDto'
-        tokenString:
-          type: string
-          title: Tokenstring
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - privateToken
-      - tokenString
-      title: CreateWorkspaceAccessTokenResponseDto
+      title: HTTPValidationError
     SubjectAccessTokenResponseDto:
       properties:
         id:
@@ -459,72 +486,18 @@ components:
       - expiresAt
       - creatorId
       title: SubjectAccessTokenResponseDto
-    CreateSubjectAccessTokenResponseDto:
+    CreateWorkspaceAccessTokenResponseDto:
       properties:
-        token:
-          $ref: '#/components/schemas/SubjectAccessTokenResponseDto'
+        privateToken:
+          $ref: '#/components/schemas/AccessTokenResponseDto'
         tokenString:
           type: string
           title: Tokenstring
       type: object
       required:
-      - token
+      - privateToken
       - tokenString
-      title: CreateSubjectAccessTokenResponseDto
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    StringErrorResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: StringErrorResponse
-    AccessTokenResponseDto:
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-          title: Createdat
-        id:
-          type: string
-          format: uuid4
-          title: Id
-        name:
-          type: string
-          title: Name
-        expiresAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expiresat
-      type: object
-      required:
-      - id
-      - name
-      title: AccessTokenResponseDto
+      title: CreateWorkspaceAccessTokenResponseDto
     ListAccessTokenResponseDto:
       properties:
         id:
@@ -550,15 +523,6 @@ components:
       - name
       - createdAt
       title: ListAccessTokenResponseDto
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ListSubjectAccessTokensResponseDto:
       properties:
         data:
@@ -570,27 +534,7 @@ components:
       required:
       - data
       title: ListSubjectAccessTokensResponseDto
-    LookupWorkspaceAccessTokenCommand:
-      properties:
-        accessToken:
-          type: string
-          minLength: 1
-          title: Accesstoken
-      type: object
-      required:
-      - accessToken
-      title: LookupWorkspaceAccessTokenCommand
-    LookupAccessTokenResponseDto:
-      properties:
-        accessTokenId:
-          type: string
-          format: uuid4
-          title: Accesstokenid
-      type: object
-      required:
-      - accessTokenId
-      title: LookupAccessTokenResponseDto
-    CreateSubjectAccessTokenCommand:
+    CreateWorkspaceAccessTokenRequestDto:
       properties:
         name:
           type: string
@@ -606,7 +550,7 @@ components:
       type: object
       required:
       - name
-      title: CreateSubjectAccessTokenCommand
+      title: CreateWorkspaceAccessTokenRequestDto
     LookupAccessTokenCommand:
       properties:
         accessToken:
@@ -617,6 +561,62 @@ components:
       required:
       - accessToken
       title: LookupAccessTokenCommand
+    CreateSubjectAccessTokenResponseDto:
+      properties:
+        token:
+          $ref: '#/components/schemas/SubjectAccessTokenResponseDto'
+        tokenString:
+          type: string
+          title: Tokenstring
+      type: object
+      required:
+      - token
+      - tokenString
+      title: CreateSubjectAccessTokenResponseDto
+    LookupAccessTokenResponseDto:
+      properties:
+        accessTokenId:
+          type: string
+          format: uuid4
+          title: Accesstokenid
+      type: object
+      required:
+      - accessTokenId
+      title: LookupAccessTokenResponseDto
+    AccessTokenResponseDto:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          title: Createdat
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        expiresAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expiresat
+      type: object
+      required:
+      - id
+      - name
+      title: AccessTokenResponseDto
+    LookupWorkspaceAccessTokenResponseDto:
+      properties:
+        accessTokenId:
+          type: string
+          format: uuid4
+          title: Accesstokenid
+      type: object
+      required:
+      - accessTokenId
+      title: LookupWorkspaceAccessTokenResponseDto
   securitySchemes:
     Bearer:
       type: http

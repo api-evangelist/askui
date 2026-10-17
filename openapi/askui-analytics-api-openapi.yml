@@ -52,12 +52,6 @@ components:
       - msg
       - type
       title: ValidationError
-    UserTraits:
-      properties: {}
-      additionalProperties: true
-      type: object
-      title: UserTraits
-      description: Type for user traits sent to Segment.
     HTTPValidationError:
       properties:
         detail:
@@ -80,6 +74,12 @@ components:
       - anonymousId
       - traits
       title: IdentifyCommand
+    UserTraits:
+      properties: {}
+      additionalProperties: true
+      type: object
+      title: UserTraits
+      description: Type for user traits sent to Segment.
   securitySchemes:
     Bearer:
       type: http

@@ -106,6 +106,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    StringErrorResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: StringErrorResponse
     ValidationError:
       properties:
         loc:
@@ -127,24 +136,6 @@ components:
       - msg
       - type
       title: ValidationError
-    StringErrorResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: StringErrorResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     AggregationResult:
       properties:
         workspaceId:
@@ -176,6 +167,15 @@ components:
       - count
       - userEmail
       title: AggregationResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     UsageEventsAggregateResponse:
       properties:
         data:
