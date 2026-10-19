@@ -1,0 +1,12 @@
+{
+ "url": "https://workspaces.askui.com/openapi.json",
+ "requested_url": "https://workspaces.askui.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 96716,
+ "sha256": "0ae992486c3cf2564c24ee08493c92ac55272b2f1d7aa8c2606eb34866e4a92e",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
